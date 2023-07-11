@@ -1,0 +1,36 @@
+x-ide-panel-projectinfo .menu item *, x-tpl_projectinfo_item li {
+	cursor: default;
+}
+
+x-ide-panel-projectinfo > * {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+x-ide-panel-projectinfo > * > div[name="projectList"] {
+	display: block;
+	flex: 1;
+}
+
+x-ide-panel-projectinfo > * > div[name="projectList"] > * {
+	display: block;
+	padding: 10px;
+}
+
+x-ide-panel-projectinfo .control span {
+	margin-right: 5px;
+}
+
+x-ide-panel-projectinfo .control button {
+	vertical-align: middle;
+}
+
+x-ide-panel-projectinfo ul[name="tree"] {
+	margin: 10px 0;
+}
+
+x-ide-panel-projectinfo li i {
+	vertical-align: middle;
+	margin-right: 3px;
+}

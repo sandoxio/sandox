@@ -1,0 +1,157 @@
+.ico {
+	display: inline-block;
+	background-size: cover;
+}
+
+.icoQuiet .ico, .ico.icoQuiet {
+	opacity: 0.6;
+}
+
+/**Colors*/
+/*
+.ico.white {
+	filter: brightness(0) invert(1) brightness(100%);
+}
+.ico.gray {
+	filter: invert(22%) sepia(4%) saturate(10%) hue-rotate(45deg) brightness(103%) contrast(88%);
+}
+*/
+
+/**Hover colors*/
+/*
+.ico.whiteHover:hover {
+	filter: brightness(0) invert(1) brightness(70%);
+}
+
+.ico.blueHover:hover {
+	filter: invert(35%) sepia(19%) saturate(4417%) hue-rotate(186deg) brightness(98%) contrast(83%);
+}
+
+.ico.warnHover:hover {
+	filter: invert(28%) sepia(96%) saturate(6757%) hue-rotate(356deg) brightness(93%) contrast(120%);
+}
+*/
+
+/**Icons*/
+.ico.arrowUp {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/arrowUp.svg");
+}
+
+.ico.arrowDown {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/arrowDown.svg");
+}
+
+.ico.eye {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/eye.svg");
+}
+
+.ico.eyeoff {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/eyeoff.svg");
+}
+
+.ico.settings {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/settings.svg");
+}
+
+.ico.fx {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/fx.svg");
+}
+
+.ico.focus {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/focus.svg");
+}
+
+.ico.goal {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/goal.svg");
+}
+
+.ico.focusAuto {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/focusAuto.svg");
+}
+
+.ico.delete {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/delete.svg");
+}
+
+.ico.remove {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/remove.svg");
+}
+
+.ico.collapse {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/collapse.svg");
+}
+
+.ico.heart {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/heart.svg");
+}
+
+.ico.windowMax {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/windowMax.svg");
+}
+
+
+.ico.run {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/run.svg");
+}
+
+.ico.createNew {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/createNew.svg");
+}
+
+.ico.hammer {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/hammer.svg");
+}
+
+.ico.search {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/search.svg");
+}
+
+.ico.threeDots {
+	width: 12px;
+	height: 12px;
+	background-image: url("../img/ico/three-dots.svg");
+}
+
+
+/** Files */
+.ico.file_code {
+	width: 14px;
+	height: 14px;
+	background-image: url("../img/ico/file_code.svg");
+}

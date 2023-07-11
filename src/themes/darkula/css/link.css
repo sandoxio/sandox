@@ -1,0 +1,28 @@
+.link {
+	color: var(--active-text-color);
+	cursor: pointer;
+}
+.link:hover {
+	color: var(--active-text-color-hover);
+}
+
+.link.dashed {
+	text-underline-mode: dashed;
+}
+
+.link.dashed {
+	text-underline-mode: underline;
+}
+
+.action {
+	color: var(--text-color);
+	cursor: default;
+}
+
+.action:hover {
+	color: var(--element-text-color);
+}
+
+.actionHover {
+	cursor: default;
+}

@@ -1,0 +1,31 @@
+<template name="Tpl_projectInfo">
+	<div class="menu">
+		<item name="build">
+			<i class="ico hammer actionHover"></i><span class="actionHover" onclick="self.build();">Build</span>
+		</item>
+	</div>
+
+	<div name="projectInfo"></div>
+</template>
+
+
+<template name="Tpl_projectInfo_item">
+	<div class="control">
+		<span name="projectName">{{name}}</span>
+	</div>
+	<ul name="tree"></ul>
+</template>
+
+
+<template name="Tpl_noProject">
+	<div class="menu">
+		<item name="build">
+			<i class="ico white createNew"></i><span class="blueHover" onclick="self.create();">Create</span>
+		</item>
+		<item name="build">
+			<i class="ico white run"></i><span class="blueHover" onclick="self.open();">Open</span>
+		</item>
+	</div>
+</template>
+
+

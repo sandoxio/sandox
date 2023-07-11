@@ -1,0 +1,47 @@
+x-panels-panel {
+	display: block;
+	position: relative;
+}
+
+x-panels-panel x-panels-panelsplitter {
+	position: absolute;
+	background: gray;
+}
+
+x-panels-panel x-panels-panelsplitter:not(:hover) {
+	opacity: 0;
+}
+
+x-panels-panel x-panels-panelsplitter:hover {
+	opacity: 0.5;
+}
+
+x-panels-panel x-panels-panelsplitter.top {
+	cursor: row-resize;
+	top: -3px;
+	height: 5px;
+	width: 100%;
+}
+
+x-panels-panel x-panels-panelsplitter.bottom {
+	cursor: row-resize;
+	bottom: -4px;
+	height: 6px;
+	width: 100%;
+}
+
+x-panels-panel x-panels-panelsplitter.left {
+	cursor: col-resize;
+	left: -4px;
+	top: 0;
+	width: 6px;
+	height: 100%;
+}
+
+x-panels-panel x-panels-panelsplitter.right {
+	cursor: col-resize;
+	right: -4px;
+	top: 0;
+	width: 6px;
+	height: 100%;
+}

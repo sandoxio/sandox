@@ -1,0 +1,30 @@
+button {
+	background: var(--active-element-bg-color);
+	color: var(--element-text-color);
+	border: var(--element-border);
+	border-radius: var(--element-border-radius);
+	font-size: 12px;
+	outline: none;
+	padding: 1px 4px;
+	box-sizing: border-box;
+}
+
+button.big {
+	padding: 5px 15px;
+}
+
+button.main {
+	background: var(--element-bg-color-selected);
+	border: 1px solid #268ce4;
+}
+
+button.main:hover {
+	background: var(--active-text-color);
+}
+
+button[disabled] {
+	background: var(--element-bg-color);
+	border: var(--element-border);
+	box-sizing: border-box;
+	opacity: 0.5;
+}

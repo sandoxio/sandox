@@ -1,0 +1,51 @@
+x-tab {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+x-tab x-tpl_head * {
+	cursor: default;
+}
+
+x-tab div.tabs {
+	display: block;
+	background: var(--head-background);
+}
+
+x-tab div.tabs > * {
+	display: inline-block;
+	padding: 3px 10px;
+	border-bottom: 3px solid var(--head-background);
+}
+
+x-tab div.tabs > * > * {
+	vertical-align: middle;
+}
+
+x-tab div.tabs > html-fragment:not(.selected):hover {
+	background: var(--element-bg-color-hover);
+	border-bottom: 1px solid var(--active-element-bg-color);
+	padding-bottom: 5px;
+}
+
+x-tab div.tabs > *.selected {
+	background: var(--active-element-bg-color);
+	border-bottom: 3px solid var(--element-bg-color-selected);
+}
+
+x-tab > div.content {
+	display: block;
+	flex: 1;
+	position: relative;
+}
+
+x-tab > div.content > * {
+	position: absolute;
+	max-width: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow: auto;
+}

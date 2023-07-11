@@ -1,0 +1,11 @@
+i.ico {
+	filter: brightness(0) invert(1) brightness(100%);
+}
+
+.ico.actionHover:hover {
+	filter: invert(35%) sepia(19%) saturate(4417%) hue-rotate(186deg) brightness(98%) contrast(83%);
+}
+
+.ico.errorHover:hover {
+	filter: invert(28%) sepia(96%) saturate(6757%) hue-rotate(356deg) brightness(93%) contrast(120%);
+}

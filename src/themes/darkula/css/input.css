@@ -1,0 +1,14 @@
+input, textarea {
+	background: var(--input-bg-color);
+	color: var(--element-text-color);
+	border: var(--input-border);
+	border-radius: var(--element-border-radius);
+	font-size: 12px;
+	outline: none;
+	padding: 1px 4px;
+	box-sizing: border-box;
+}
+
+input:disabled, textarea:disabled {
+	opacity: 0.5;
+}

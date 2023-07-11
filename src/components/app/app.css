@@ -1,0 +1,10 @@
+x-tpl_wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+}
+
+x-menu {
+	display: none;		/*This is future plans*/
+}

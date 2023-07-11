@@ -1,0 +1,11 @@
+select {
+	background: var(--element-bg-color);
+	border: var(--element-border);
+	border-radius: var(--element-border-radius);
+	outline: none;
+	color: var(--element-text-color);
+}
+
+select option {
+
+}

@@ -1,0 +1,97 @@
+x-panelspace {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+x-panelspace > * {
+	width: 100%;
+	height: 100%;
+}
+
+/**Panels*/
+x-panelspace x-panels-panel[name="left"] {
+	border-right: 1px solid #444;
+}
+
+x-panelspace x-panels-panel[name="leftContent"] {
+	border-right: 1px solid #444;
+	position: relative;
+}
+
+x-panelspace x-panels-panel[name="right"] {
+	border-left: 1px solid #444;
+}
+
+x-panelspace x-panels-panel[name="rightContent"] {
+	border-left: 1px solid #444;
+	position: relative;
+}
+
+x-panelspace x-panels-panel[name="top"] {
+	border-bottom: 1px solid #444;
+}
+
+x-panelspace x-panels-panel[name="topContent"] {
+	border-bottom: 1px solid #444;
+	position: relative;
+}
+
+x-panelspace x-panels-panel[name="bottom"] {
+	border-top: 1px solid #444;
+}
+
+x-panelspace x-panels-panel[name="bottomContent"] {
+	border-top: 1px solid #444;
+	position: relative;
+}
+
+x-panels-panel > x-draggable {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+x-panelspace x-panels-panel x-draggable[orientation="horizontal"] x-panelspace-paneltile {
+	display: block;
+	margin: 2px 10px;
+}
+
+x-panelspace x-panels-panel x-draggable[orientation="verticalLeft"] x-panelspace-paneltile,
+x-panelspace x-panels-panel x-draggable[orientation="verticalRight"] x-panelspace-paneltile {
+	display: block;
+	margin: 10px 2px;
+}
+
+x-panelspace x-panels-panel x-draggable x-draggable-item.active {
+	background: var(--active-element-bg-color);
+}
+
+
+/** Panel menu */
+x-panelspace x-panels-panel .menu {
+	background: var(--element-bg-color-hover);
+	border-bottom: var(--element-bg-color);
+	height: 24px;
+	padding-left: 5px;
+	box-sizing: border-box;
+}
+
+x-panelspace x-panels-panel .menu > item {
+	margin-right: 5px;
+	display: inline-block;
+	margin-top: 1px;
+	height: 22px;
+	padding: 3px;
+	box-sizing: border-box;
+}
+
+x-panelspace x-panels-panel .menu > item:hover {
+	background: var(--element-bg-color);
+	border-radius: var(--element-border-radius);
+}
+
+x-panelspace x-panels-panel .menu > item > * {
+	vertical-align: middle;
+	display: inline-block;
+}

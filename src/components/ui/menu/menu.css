@@ -1,0 +1,59 @@
+x-menu {
+	display: block;
+	margin: 0;
+	padding: 0;
+	background: var(--element-bg-color);
+	width: 100%;
+	white-space: nowrap;
+}
+
+x-menu x-menu-item {
+	position: relative;
+	display: inline-block;
+
+	font-size: 12px;
+	cursor: default;
+}
+
+x-menu x-menu-item > div {
+	padding: 6px 10px 4px;
+}
+
+x-menu x-menu-item.expanded {
+	background: var(--element-bg-color-selected);
+}
+
+x-menu x-menu-item submenu {
+	display: none;
+}
+
+x-menu x-menu-item.expanded submenu {
+	position: absolute;
+	z-index: 10000;
+	display: block;
+	top: 24px;
+	left: 0;
+	width: 200px;
+	background: var(--element-bg-color);
+	border: var(--element-border);
+}
+
+x-menu x-menu-item submenu x-menu-item {
+	display: block;
+}
+
+
+x-menu x-menu-item submenu x-menu-item:hover {
+	background: var(--element-bg-color-selected);
+}
+
+x-menu x-menu-item submenu x-menu-item span {
+	display: block;
+}
+
+.line {
+	display: block;
+	height: 1px;
+	width: 100%;
+	background-color: #323232;
+}

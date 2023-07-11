@@ -1,0 +1,112 @@
+/* ------------------------------------------------------------------------------------------
+* Editor Search Form
+* --------------------------------------------------------------------------------------- */
+.ace_search {
+	background-color: var(--body-bg-color);
+	color: var(--text-color);
+	overflow: hidden;
+	margin: 0;
+	padding: 0 0 4px 4px;
+	white-space: normal;
+}
+
+.ace_search_form, .ace_replace_form {
+	margin-top: 4px;
+	overflow: hidden;
+}
+
+/*no match*/
+.ace_search_form.ace_nomatch > .ace_search_counter {
+	color: red;
+}
+.ace_search_form.empty > i, .ace_search_form.empty > .ace_searchbtn, .ace_replace_form.empty > .ace_searchbtn {
+	opacity: 0.5;
+}
+
+.ace_search_form .ace_searchbtn {
+	width: 43px;
+}
+
+.ace_search_form > * {
+	vertical-align: middle;
+}
+
+.ace_search_field {
+	background: var(--input-bg-color);
+	color: var(--element-text-color);
+	border: var(--input-border);
+	border-radius: var(--element-border-radius);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 22px;
+	outline: 0;
+	padding: 0 7px;
+	margin: 0;
+}
+
+.ace_search_form .ace_search_field {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	width: 250px;
+}
+
+.ace_search_form > i {
+	margin-right: 10px;
+}
+
+.ace_searchbtn, .ace_replacebtn {
+	margin-right: 5px;
+}
+
+.ace_replace_form .ace_search_field {
+	width: 338px;
+	margin-right: 10px;
+}
+
+.ace_replace_form .ace_searchbtn {
+	width: 80px;
+}
+
+
+.ace_button {
+	background: var(--input-bg-color);
+	color: var(--element-text-color);
+	border: var(--input-border);
+	display: inline-block;
+	cursor: pointer;
+	user-select: none;
+	overflow: hidden;
+	box-sizing: border-box;
+	vertical-align: middle;
+	height: 22px;
+	width: 22px;
+	text-align: center;
+	line-height: 20px;
+}
+
+.ace_button {
+	border-left: 0;
+}
+
+.ace_button:hover {
+	opacity: 1;
+}
+
+.ace_button.checked {
+	color: var(--active-text-color);
+	opacity: 1;
+}
+
+.ace_search_counter {
+	width: 80px;
+	display: inline-block;
+	text-align: center;
+}
+
+.ace_searchbtn_close {
+	cursor: pointer;
+	display: block;
+	float: right;
+	margin: 6px 6px 0 0;
+}

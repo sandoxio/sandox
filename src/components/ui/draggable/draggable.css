@@ -1,0 +1,41 @@
+x-draggable x-draggable-item, .x-draggable-phantom {
+	display: inline-block;
+	box-sizing: border-box;
+	cursor: default;
+	user-select: none;
+	vertical-align: top;
+}
+
+x-draggable x-draggable-item {
+}
+
+.x-draggable-phantom {
+	pointer-events: none;
+	position: fixed;
+	z-index: 1000000;
+}
+
+.x-draggable-spacer {
+	vertical-align: top;
+}
+
+x-draggable[orientation="horizontal"] .x-draggable-spacer {
+	display: inline-block;
+}
+
+x-draggable[orientation="verticalLeft"] .x-draggable-spacer, x-draggable[orientation="verticalRight"] .x-draggable-spacer {
+	display: block;
+}
+
+x-draggable[orientation="horizontal"] x-draggable-item, .x-draggable-phantom-horizontal {
+}
+
+x-draggable[orientation="verticalLeft"] x-draggable-item, .x-draggable-phantom-verticalLeft,
+x-draggable[orientation="verticalRight"] x-draggable-item, .x-draggable-phantom-verticalRight {
+	writing-mode: vertical-rl;
+	white-space: nowrap;
+}
+
+x-draggable[orientation="verticalLeft"] x-draggable-item, .x-draggable-phantom-verticalLeft {
+	transform: rotate(180deg);
+}

@@ -1,0 +1,35 @@
+:root {
+	--bg-color: #444;
+	--text-color: #bbb;
+	--active-text-color: #2597ed;
+	--active-text-color-hover: #549bff;
+	--textDescription-text-color: #686868;
+
+	--element-bg-color: #444;
+	--element-bg-color-hover: #262833;
+	--element-bg-color-selected: #2373c4;
+	--element-border-color: #686868;
+	--element-border: 1px solid var(--element-border-color);
+	--element-border-radius: 2px;
+	--element-text-color: #eee;
+	--element-text-color-hover: #eee;
+
+	--input-bg-color: #282a36;
+	--input-border-color: #333;
+	--input-border-width: 1px;
+	--input-border: var(--input-border-width) solid var(--input-border-color);
+
+	--active-element-bg-color: #555;
+	--inactive-element-text-color: #aaa;
+
+	--head-background: #444;
+	--head-color: #ccc;
+
+	--body-bg-color: #202025;
+
+	--space-bg-color: #101019;
+	--space-border: 1px solid #444;
+
+	--warning-text-color: #ff0000;
+}
+
