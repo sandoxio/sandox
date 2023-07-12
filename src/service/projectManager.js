@@ -9,6 +9,9 @@ class Project {
 	}
 
 	build() {
+		//open console
+		busEvent.fire("panelOpen", "console");
+
 		const code = this.model.data.struct.files['app.js'];
 		new Function("__log, __error", `setTimeout(() => {const console={log: __log}; try {${code}} catch(e) {__error(e+"")}  }, 0);`)(
 			(msg) => {
@@ -57,10 +60,13 @@ const projectManager = new (class ProjectManager {
 	open(projData) {
 		//console.log('[IdeProject] opening:', projectId);
 		return new Promise(resolve => {
+			alert("This functionality will be implemented in ms3");
+			/*
 			this.project = new Project(projData);
 			busEvent.fire('projectChange', this.project);
 			busEvent.fire('logAdd', 'The project was opened');
 			resolve(this.project);
+			 */
 		});
 	}
 
@@ -77,6 +83,11 @@ const projectManager = new (class ProjectManager {
 		});
 	}
 })();
+
+busEvent.on("projectCreate", () => {
+	busEvent.fire("panelOpen", "projectInfo");
+	projectManager.create();
+});
 
 
 export default projectManager;

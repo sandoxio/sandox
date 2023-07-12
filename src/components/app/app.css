@@ -4,7 +4,3 @@ x-tpl_wrapper {
 	justify-content: center;
 	height: 100%;
 }
-
-x-menu {
-	display: none;		/*This is future plans*/
-}

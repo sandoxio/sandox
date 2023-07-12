@@ -25,7 +25,6 @@ class IdePanelProjectInfo extends HTMLElement {
 			console.log('[ProjectInfo] init project:', projectManager.project);
 			let $wrapper = new Tpl_projectInfo({}, {
 				build: () => {
-					busEvent.fire("panelOpen", "console");
 					projectManager.project.build();
 				}
 			});
@@ -50,7 +49,7 @@ class IdePanelProjectInfo extends HTMLElement {
 		} else {
 			let $noProject = new Tpl_noProject({}, {
 				open() {
-					alert('//TODO');
+					projectManager.open();
 				},
 				create() {
 					//popup create

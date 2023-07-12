@@ -1,8 +1,10 @@
 import theme from "../../themes/darkula/theme.js";
+
 theme.install();
 
 import {Tpl_wrapper} from "./app.html";
 import css from "./app.css";
+
 css.install();
 
 import {} from "../ui/panelspace/panelspace.js";
@@ -14,13 +16,13 @@ import IdePanelConsole from "../panels/console/console.js";
 import IdePanelFind from "../panels/find/find.js";
 
 import IdeTabContentCode from "../tabContents/code/code.js";
+import IdeTabContentSettings from "../tabContents/settings/settings.js";
 
 import {} from "../ui/menu/menu.js";
 import Tab from "../ui/tab/tab.js";
 
 import projectManager from "../../service/projectManager.js";
 import busEvent from "../../service/busEvent.js";
-
 
 
 const App = class {
@@ -33,42 +35,65 @@ const App = class {
 						{
 							title: 'Create project',
 							action: () => {
+								busEvent.fire("projectCreate");
 							}
 						},
-						{title: 'Open project'},
-						{title: 'Close project'},
-						{title: 'Export project'},
-						{title: 'Settings'},
+						{
+							title: 'Open project',
+							action: () => {
+								alert("This functionality will be implemented in ms3");
+							}
+						},
+						{
+							title: 'Close project',
+							action: () => {
+								alert("This functionality will be implemented in ms3");
+							}
+						},
+						{
+							title: 'Export project',
+							action: () => {
+								alert("This functionality will be implemented in ms3");
+							}
+						},
+						{
+							title: 'Settings',
+							action: () => {
+								busEvent.fire("settingsOpen");
+							}
+						},
 					]
 				},
-				{
-					title: 'Edit',
-					childNodes: [
-						{
-							title: 'Cut',
-							action: () => {}
-						},
-						{
-							title: 'Copy',
-							action: () => {}
-						},
-						{
-							title: 'Paste',
-							action: () => {}
-						},
-						{
-							title: 'Delete',
-							action: () => {}
-						}
-					]
-				},
+				/*				{
+									title: 'Edit',
+									childNodes: [
+										{
+											title: 'Cut',
+											action: () => {}
+										},
+										{
+											title: 'Copy',
+											action: () => {}
+										},
+										{
+											title: 'Paste',
+											action: () => {}
+										},
+										{
+											title: 'Delete',
+											action: () => {}
+										}
+									]
+								},*/
 				{
 					title: 'Build',
 					childNodes: [
 						{
 							title: 'Build project',
 							action: () => {
-								projectManager.project.build();
+								if (projectManager.project) {
+									projectManager.project.build();
+								}
 							}
 						}
 					]
@@ -76,8 +101,18 @@ const App = class {
 				{
 					title: 'Help',
 					childNodes: [
-						{title: 'Getting Started'},
-						{title: 'Learn IDE Features'},
+						{
+							title: 'Getting Started',
+							action: () => {
+								alert("This functionality will be implemented in future");
+							}
+						},
+						{
+							title: 'Learn IDE Features',
+							action: () => {
+								alert("This functionality will be implemented in future");
+							}
+						},
 					]
 				}
 			]
@@ -126,6 +161,10 @@ const App = class {
 			this.$panelSpace.panelSelect(panelName);
 		});
 
+		busEvent.on("settingsOpen", () => {
+			this.settingsOpen();
+		});
+
 		//console.log("this.$panelSpace:", this.$panelSpace);
 	}
 
@@ -135,7 +174,6 @@ const App = class {
 			console.log('open tab pid:', tabPid);
 			this.$tabs.select(tabPid);
 		} else {
-
 			let $tabContent = new IdeTabContentCode(filename);
 			this.$tabs.create(tabPid, filename, $tabContent);
 
@@ -149,6 +187,16 @@ const App = class {
 			});
 			//console.log('this.$tabs:', this, this.$tabs);
 			colorize($tabContent.isChanged);
+		}
+	}
+
+	settingsOpen() {
+		let tabPid = ':settings';
+		if (this.$tabs.isOpened(tabPid)) {
+			this.$tabs.select(tabPid);
+		} else {
+			let $tabContent = new IdeTabContentSettings();
+			this.$tabs.create(tabPid, 'IDE Settings', $tabContent);
 		}
 	}
 };

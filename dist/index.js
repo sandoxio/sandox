@@ -1,7 +1,26 @@
 (function () {
 	'use strict';
 
-	const rules$o = [{"selector":"button ","rule":"background: var(--active-element-bg-color);color: var(--element-text-color);border: var(--element-border);border-radius: var(--element-border-radius);font-size: 12px;outline: none;padding: 1px 4px;box-sizing: border-box;"},{"selector":"button.big ","rule":"padding: 5px 15px;"},{"selector":"button.main ","rule":"background: var(--element-bg-color-selected);border: 1px solid #268ce4;"},{"selector":"button.main:hover ","rule":"background: var(--active-text-color);"},{"selector":"button[disabled] ","rule":"background: var(--element-bg-color);border: var(--element-border);box-sizing: border-box;opacity: 0.5;"}];
+	const rules$p = [{"selector":"button ","rule":"background: var(--active-element-bg-color);color: var(--element-text-color);border: var(--element-border);border-radius: var(--element-border-radius);font-size: 12px;outline: none;padding: 1px 4px;box-sizing: border-box;"},{"selector":"button.big ","rule":"padding: 5px 15px;"},{"selector":"button.main ","rule":"background: var(--element-bg-color-selected);border: 1px solid #268ce4;"},{"selector":"button.main:hover ","rule":"background: var(--active-text-color);"},{"selector":"button[disabled] ","rule":"background: var(--element-bg-color);border: var(--element-border);box-sizing: border-box;opacity: 0.5;"}];
+				const css$q = {
+					install:() => {
+						let cssStyle = document.body.querySelector("style");
+						if (!cssStyle) {
+							cssStyle = document.createElement("style");
+							document.head.appendChild(cssStyle);
+						}
+						const cssStyleSheet = cssStyle.sheet;
+						rules$p.forEach(ruleCfg => {
+							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
+							//console.log('rule:', ruleCfg.rule);
+							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
+						});
+						//files.push.apply(files, data.files);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/button.css]:', rules);
+					}
+				};
+
+	const rules$o = [{"selector":"html, body ","rule":"width: 100%;height: 100%;padding:0;margin: 0;background: rgb(16, 16, 25);color:white;Font-Family: Arial, Serif, serif;overflow: hidden;"},{"selector":"body, div, span, th, td ","rule":"font-size: 12px;"},{"selector":"body.cursorResizeRow ","rule":"cursor: row-resize;"},{"selector":"body.cursorResizeCol ","rule":"cursor: col-resize;"}];
 				const css$p = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -16,11 +35,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/button.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/html.css]:', rules);
 					}
 				};
 
-	const rules$n = [{"selector":"html, body ","rule":"width: 100%;height: 100%;padding:0;margin: 0;background: rgb(16, 16, 25);color:white;Font-Family: Arial, Serif, serif;overflow: hidden;"},{"selector":"body, div, span, th, td ","rule":"font-size: 12px;"},{"selector":"body.cursorResizeRow ","rule":"cursor: row-resize;"},{"selector":"body.cursorResizeCol ","rule":"cursor: col-resize;"}];
+	const rules$n = [{"selector":"input, textarea ","rule":"background: var(--input-bg-color);color: var(--element-text-color);border: var(--input-border);border-radius: var(--element-border-radius);font-size: 12px;outline: none;padding: 1px 4px;box-sizing: border-box;"},{"selector":"input:disabled, textarea:disabled ","rule":"opacity: 0.5;"}];
 				const css$o = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -35,11 +54,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/html.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/input.css]:', rules);
 					}
 				};
 
-	const rules$m = [{"selector":"input, textarea ","rule":"background: var(--input-bg-color);color: var(--element-text-color);border: var(--input-border);border-radius: var(--element-border-radius);font-size: 12px;outline: none;padding: 1px 4px;box-sizing: border-box;"},{"selector":"input:disabled, textarea:disabled ","rule":"opacity: 0.5;"}];
+	const rules$m = [{"selector":"table ","rule":"color: var(--text-color);"}];
 				const css$n = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -54,11 +73,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/input.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/table.css]:', rules);
 					}
 				};
 
-	const rules$l = [{"selector":"table ","rule":"color: var(--text-color);"}];
+	const rules$l = [{"selector":".link ","rule":"color: var(--active-text-color);cursor: pointer;"},{"selector":".link:hover ","rule":"color: var(--active-text-color-hover);"},{"selector":".link.dashed ","rule":"text-underline-mode: dashed;"},{"selector":".link.dashed ","rule":"text-underline-mode: underline;"},{"selector":".action ","rule":"color: var(--text-color);cursor: default;"},{"selector":".action:hover ","rule":"color: var(--element-text-color);"},{"selector":".actionHover ","rule":"cursor: default;"}];
 				const css$m = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -73,11 +92,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/table.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/link.css]:', rules);
 					}
 				};
 
-	const rules$k = [{"selector":".link ","rule":"color: var(--active-text-color);cursor: pointer;"},{"selector":".link:hover ","rule":"color: var(--active-text-color-hover);"},{"selector":".link.dashed ","rule":"text-underline-mode: dashed;"},{"selector":".link.dashed ","rule":"text-underline-mode: underline;"},{"selector":".action ","rule":"color: var(--text-color);cursor: default;"},{"selector":".action:hover ","rule":"color: var(--element-text-color);"},{"selector":".actionHover ","rule":"cursor: default;"}];
+	const rules$k = [{"selector":"html ","rule":"scrollbar-face-color: #000;scrollbar-base-color: #646464;scrollbar-3dlight-color: #646464;scrollbar-highlight-color: #646464;scrollbar-track-color: #646464;scrollbar-arrow-color: #646464;scrollbar-shadow-color: #646464;scrollbar-dark-shadow-color: #646464;"},{"selector":"::-webkit-scrollbar ","rule":"width: 8px;height: 3px;"},{"selector":"::-webkit-scrollbar-button ","rule":"background-color: #666;height: 1px;"},{"selector":"::-webkit-scrollbar-track ","rule":"background-color: #000;"},{"selector":"::-webkit-scrollbar-track-piece ","rule":"background-color: #646464;"},{"selector":"::-webkit-scrollbar-thumb ","rule":"height: 50px;background-color: var(--space-bg-color);border-radius: 3px;border-left: 1px solid #646464"},{"selector":"::-webkit-scrollbar-corner ","rule":"background-color: #646464;"},{"selector":"::-webkit-resizer ","rule":"background-color: #666;"}];
 				const css$l = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -92,11 +111,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/link.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/scrollbar.css]:', rules);
 					}
 				};
 
-	const rules$j = [{"selector":"html ","rule":"scrollbar-face-color: #000;scrollbar-base-color: #646464;scrollbar-3dlight-color: #646464;scrollbar-highlight-color: #646464;scrollbar-track-color: #646464;scrollbar-arrow-color: #646464;scrollbar-shadow-color: #646464;scrollbar-dark-shadow-color: #646464;"},{"selector":"::-webkit-scrollbar ","rule":"width: 8px;height: 3px;"},{"selector":"::-webkit-scrollbar-button ","rule":"background-color: #666;height: 1px;"},{"selector":"::-webkit-scrollbar-track ","rule":"background-color: #000;"},{"selector":"::-webkit-scrollbar-track-piece ","rule":"background-color: #646464;"},{"selector":"::-webkit-scrollbar-thumb ","rule":"height: 50px;background-color: var(--space-bg-color);border-radius: 3px;border-left: 1px solid #646464"},{"selector":"::-webkit-scrollbar-corner ","rule":"background-color: #646464;"},{"selector":"::-webkit-resizer ","rule":"background-color: #666;"}];
+	const rules$j = [{"selector":"select ","rule":"background: var(--element-bg-color);border: var(--element-border);border-radius: var(--element-border-radius);outline: none;color: var(--element-text-color);"},{"selector":"select option ","rule":""}];
 				const css$k = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -111,11 +130,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/scrollbar.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/select.css]:', rules);
 					}
 				};
 
-	const rules$i = [{"selector":"select ","rule":"background: var(--element-bg-color);border: var(--element-border);border-radius: var(--element-border-radius);outline: none;color: var(--element-text-color);"},{"selector":"select option ","rule":""}];
+	const rules$i = [{"selector":".error ","rule":"color: red;"}];
 				const css$j = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -130,11 +149,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/select.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/text.css]:', rules);
 					}
 				};
 
-	const rules$h = [{"selector":".error ","rule":"color: red;"}];
+	const rules$h = [{"selector":":root ","rule":"--bg-color: #444;--text-color: #bbb;--active-text-color: #2597ed;--active-text-color-hover: #549bff;--textDescription-text-color: #686868;--element-bg-color: #444;--element-bg-color-hover: #262833;--element-bg-color-selected: #2373c4;--element-border-color: #686868;--element-border: 1px solid var(--element-border-color);--element-border-radius: 2px;--element-text-color: #eee;--element-text-color-hover: #eee;--input-bg-color: #282a36;--input-border-color: #333;--input-border-width: 1px;--input-border: var(--input-border-width) solid var(--input-border-color);--active-element-bg-color: #555;--inactive-element-text-color: #aaa;--head-background: #444;--head-color: #ccc;--body-bg-color: #202025;--space-bg-color: #101019;--space-border: 1px solid #444;--warning-text-color: #ff0000;"}];
 				const css$i = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -149,11 +168,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/text.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/vars.css]:', rules);
 					}
 				};
 
-	const rules$g = [{"selector":":root ","rule":"--bg-color: #444;--text-color: #bbb;--active-text-color: #2597ed;--active-text-color-hover: #549bff;--textDescription-text-color: #686868;--element-bg-color: #444;--element-bg-color-hover: #262833;--element-bg-color-selected: #2373c4;--element-border-color: #686868;--element-border: 1px solid var(--element-border-color);--element-border-radius: 2px;--element-text-color: #eee;--element-text-color-hover: #eee;--input-bg-color: #282a36;--input-border-color: #333;--input-border-width: 1px;--input-border: var(--input-border-width) solid var(--input-border-color);--active-element-bg-color: #555;--inactive-element-text-color: #aaa;--head-background: #444;--head-color: #ccc;--body-bg-color: #202025;--space-bg-color: #101019;--space-border: 1px solid #444;--warning-text-color: #ff0000;"}];
+	const rules$g = [{"selector":"i.ico ","rule":"filter: brightness(0) invert(1) brightness(100%);"},{"selector":".ico.actionHover:hover ","rule":"filter: invert(35%) sepia(19%) saturate(4417%) hue-rotate(186deg) brightness(98%) contrast(83%);"},{"selector":".ico.errorHover:hover ","rule":"filter: invert(28%) sepia(96%) saturate(6757%) hue-rotate(356deg) brightness(93%) contrast(120%);"}];
 				const css$h = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -168,11 +187,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/vars.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/themes/darkula/css/ico.css]:', rules);
 					}
 				};
 
-	const rules$f = [{"selector":"i.ico ","rule":"filter: brightness(0) invert(1) brightness(100%);"},{"selector":".ico.actionHover:hover ","rule":"filter: invert(35%) sepia(19%) saturate(4417%) hue-rotate(186deg) brightness(98%) contrast(83%);"},{"selector":".ico.errorHover:hover ","rule":"filter: invert(28%) sepia(96%) saturate(6757%) hue-rotate(356deg) brightness(93%) contrast(120%);"}];
+	const rules$f = [{"selector":".ico ","rule":"display: inline-block;background-size: cover;"},{"selector":".icoQuiet .ico, .ico.icoQuiet ","rule":"opacity: 0.6;"},{"selector":".ico.arrowUp ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 96 96\"><path d=\"M52,83.999V21.655l21.172,21.172c1.562,1.562,4.094,1.562,5.656,0c1.562-1.562,1.562-4.095,0-5.657l-28-28c-1.562-1.562-4.095-1.562-5.656,0l-28,28C16.391,37.951,16,38.974,16,39.999c0,1.023,0.391,2.047,1.172,2.828c1.562,1.562,4.095,1.562,5.656,0L44,21.655v62.344c0,2.209,1.791,4,4,4S52,86.208,52,83.999z\"/></svg>');"},{"selector":".ico.arrowDown ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 96 96\"><path d=\"M44,12v62.344L22.828,53.172c-1.562-1.562-4.094-1.562-5.656,0c-1.562,1.562-1.562,4.095,0,5.657l28,28c1.562,1.562,4.095,1.562,5.656,0l28-28C79.609,58.048,80,57.024,80,56c0-1.023-0.391-2.047-1.172-2.828c-1.562-1.562-4.095-1.562-5.656,0L52,74.344V12c0-2.208-1.791-4-4-4S44,9.791,44,12z\"/></svg>');"},{"selector":".ico.eye ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M21.87,11.5c-.64-1.11-4.16-6.68-10.14-6.5C6.2,5.14,3,10,2.13,11.5a1,1,0,0,0,0,1c.63,1.09,4,6.5,9.89,6.5h.25c5.53-.14,8.74-5,9.6-6.5A1,1,0,0,0,21.87,11.5ZM12.22,17c-4.31.1-7.12-3.59-8-5,1-1.61,3.61-4.9,7.61-5,4.29-.11,7.11,3.59,8,5C18.8,13.61,16.22,16.9,12.22,17Z\"/><path d=\"M12,8.5A3.5,3.5,0,1,0,15.5,12,3.5,3.5,0,0,0,12,8.5Zm0,5A1.5,1.5,0,1,1,13.5,12,1.5,1.5,0,0,1,12,13.5Z\"/></svg>');"},{"selector":".ico.eyeoff ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M4.71,3.29A1,1,0,0,0,3.29,4.71l5.63,5.63a3.5,3.5,0,0,0,4.74,4.74l5.63,5.63a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42ZM12,13.5A1.5,1.5,0,0,1,10.5,12s0-.05,0-.07l1.56,1.56Z\"/><path d=\"M12.22,17c-4.3.1-7.12-3.59-8-5A13.7,13.7,0,0,1,6.46,9.28L5,7.87A15.89,15.89,0,0,0,2.13,11.5a1,1,0,0,0,0,1c.63,1.09,4,6.5,9.89,6.5h.25a9.48,9.48,0,0,0,3.23-.67l-1.58-1.58A7.74,7.74,0,0,1,12.22,17Z\"/><path d=\"M21.87,11.5C21.23,10.39,17.7,4.82,11.73,5a9.48,9.48,0,0,0-3.23.67l1.58,1.58A7.74,7.74,0,0,1,11.78,7c4.29-.11,7.11,3.59,8,5a13.7,13.7,0,0,1-2.29,2.72L19,16.13a15.89,15.89,0,0,0,2.91-3.63A1,1,0,0,0,21.87,11.5Z\"/></svg>');"},{"selector":".ico.settings ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-12 -12 200 200\"><path d=\"M173.145,73.91c-0.413-2.722-2.29-4.993-4.881-5.912l-13.727-4.881c-0.812-2.3-1.733-4.536-2.754-6.699l6.247-13.146c1.179-2.479,0.899-5.411-0.729-7.628c-5.265-7.161-11.556-13.452-18.698-18.693c-2.219-1.629-5.141-1.906-7.625-0.724l-13.138,6.242c-2.163-1.021-4.402-1.94-6.704-2.752l-4.883-13.729c-0.919-2.586-3.184-4.458-5.9-4.876c-9.65-1.483-16.792-1.483-26.457,0c-2.713,0.418-4.981,2.29-5.9,4.876l-4.883,13.729c-2.302,0.812-4.541,1.731-6.702,2.752l-13.143-6.242c-2.479-1.181-5.406-0.904-7.623,0.724c-7.142,5.241-13.433,11.532-18.698,18.693c-1.629,2.217-1.908,5.148-0.729,7.628l6.247,13.146c-1.021,2.159-1.94,4.4-2.754,6.699L5.982,68.003c-2.589,0.919-4.463,3.189-4.879,5.907c-0.749,4.92-1.099,9.115-1.099,13.219c0,4.098,0.35,8.299,1.099,13.219c0.413,2.722,2.29,4.993,4.881,5.912l13.727,4.881c0.814,2.304,1.736,4.541,2.754,6.704l-6.247,13.141c-1.179,2.479-0.899,5.411,0.727,7.623c5.258,7.156,11.549,13.447,18.7,18.698c2.217,1.629,5.144,1.911,7.625,0.724l13.138-6.242c2.163,1.021,4.402,1.94,6.704,2.752l4.883,13.729c0.919,2.586,3.184,4.458,5.9,4.876c4.828,0.744,9.154,1.104,13.228,1.104c4.074,0,8.401-0.36,13.228-1.104c2.715-0.418,4.981-2.29,5.9-4.876l4.883-13.729c2.302-0.812,4.541-1.731,6.704-2.752l13.138,6.242c2.484,1.186,5.411,0.904,7.628-0.724c7.159-5.26,13.45-11.551,18.698-18.698c1.626-2.212,1.906-5.144,0.727-7.623l-6.247-13.141c1.021-2.163,1.942-4.405,2.754-6.704l13.727-4.881c2.591-0.919,4.468-3.189,4.881-5.912c0.749-4.92,1.099-9.12,1.099-13.219S173.894,78.829,173.145,73.91z M158.949,93.72l-12.878,4.58c-2.251,0.797-3.982,2.625-4.66,4.92c-1.15,3.889-2.664,7.569-4.504,10.943c-1.142,2.1-1.213,4.619-0.187,6.777l5.841,12.285c-2.822,3.389-5.943,6.515-9.337,9.334l-12.283-5.834c-2.161-1.036-4.672-0.953-6.775,0.185c-3.379,1.838-7.061,3.35-10.953,4.502c-2.29,0.676-4.118,2.406-4.917,4.657l-4.582,12.883c-4.677,0.476-8.503,0.476-13.18,0l-4.582-12.883c-0.8-2.246-2.628-3.982-4.917-4.657c-3.894-1.152-7.579-2.664-10.953-4.502c-2.103-1.147-4.619-1.22-6.775-0.185l-12.283,5.839c-3.391-2.825-6.512-5.946-9.337-9.339l5.841-12.285c1.026-2.159,0.955-4.677-0.187-6.777c-1.835-3.364-3.35-7.049-4.504-10.948c-0.678-2.29-2.411-4.118-4.66-4.915l-12.878-4.58c-0.243-2.343-0.36-4.502-0.36-6.592s0.117-4.244,0.36-6.587l12.881-4.584c2.248-0.797,3.979-2.625,4.657-4.915c1.152-3.889,2.667-7.574,4.504-10.953c1.142-2.095,1.213-4.619,0.187-6.772l-5.841-12.285c2.827-3.393,5.948-6.519,9.337-9.339l12.288,5.839c2.151,1.036,4.677,0.953,6.775-0.185c3.372-1.838,7.054-3.35,10.948-4.502c2.29-0.676,4.118-2.411,4.917-4.657l4.582-12.883c4.633-0.481,8.466-0.481,13.18,0l4.582,12.883c0.8,2.246,2.628,3.982,4.917,4.657c3.894,1.152,7.579,2.664,10.953,4.502c2.103,1.147,4.614,1.22,6.775,0.185l12.283-5.839c3.389,2.82,6.51,5.946,9.337,9.339l-5.841,12.285c-1.026,2.154-0.955,4.677,0.187,6.772c1.843,3.389,3.357,7.069,4.504,10.948c0.678,2.295,2.409,4.123,4.66,4.92l12.878,4.58c0.243,2.343,0.36,4.502,0.36,6.592S159.192,91.377,158.949,93.72z\"/><path d=\"M87.124,50.802c-19.062,0-34.571,15.508-34.571,34.571s15.508,34.571,34.571,34.571s34.571-15.508,34.571-34.571S106.186,50.802,87.124,50.802z M87.124,105.009c-10.827,0-19.636-8.809-19.636-19.636s8.809-19.636,19.636-19.636s19.636,8.809,19.636,19.636S97.951,105.009,87.124,105.009z\"/></svg>');"},{"selector":".ico.fx ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"1 1 22 22\"><path d=\"M12.42,5.29C11.32,5.19 10.35,6 10.25,7.11L10,10H12.82V12H9.82L9.38,17.07C9.18,19.27 7.24,20.9 5.04,20.7C3.79,20.59 2.66,19.9 2,18.83L3.5,17.33C3.83,18.38 4.96,18.97 6,18.63C6.78,18.39 7.33,17.7 7.4,16.89L7.82,12H4.82V10H8L8.27,6.93C8.46,4.73 10.39,3.1 12.6,3.28C13.86,3.39 15,4.09 15.66,5.17L14.16,6.67C13.91,5.9 13.23,5.36 12.42,5.29M22,13.65L20.59,12.24L17.76,15.07L14.93,12.24L13.5,13.65L16.35,16.5L13.5,19.31L14.93,20.72L17.76,17.89L20.59,20.72L22,19.31L19.17,16.5L22,13.65Z\"/></svg>');"},{"selector":".ico.focus ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 24 24\"><path d=\"M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M19,19H15V21H19A2,2 0 0,0 21,19V15H19M19,3H15V5H19V9H21V5A2,2 0 0,0 19,3M5,5H9V3H5A2,2 0 0,0 3,5V9H5M5,15H3V19A2,2 0 0,0 5,21H9V19H5V15Z\"/></svg>');"},{"selector":".ico.goal ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"M16,28A12,12,0,1,1,28,16,12,12,0,0,1,16,28ZM16,6A10,10,0,1,0,26,16,10,10,0,0,0,16,6Z\"/><rect height=\"7\" width=\"2\" x=\"15\" y=\"24\"/><rect height=\"7\" width=\"2\" x=\"15\" y=\"1\"/><rect height=\"2\" width=\"7\" x=\"24\" y=\"15\"/><rect height=\"2\" width=\"7\" x=\"1\" y=\"15\"/><path d=\"M16,20a4,4,0,1,1,4-4A4,4,0,0,1,16,20Zm0-6a2,2,0,1,0,2,2A2,2,0,0,0,16,14Z\"/></svg>');"},{"selector":".ico.focusAuto ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 24 24\"><path d=\"M19 19H15V21H19C20.1 21 21 20.1 21 19V15H19M19 3H15V5H19V9H21V5C21 3.9 20.1 3 19 3M5 5H9V3H5C3.9 3 3 3.9 3 5V9H5M5 15H3V19C3 20.1 3.9 21 5 21H9V19H5V15M8 7C6.9 7 6 7.9 6 9V17H8V13H10V17H12V9C12 7.9 11.1 7 10 7H8M8 9H10V11H8V9M13 7V17H15V13H17V11H15V9H18V7H13Z\"/></svg>');"},{"selector":".ico.delete ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z\"/></svg>');"},{"selector":".ico.remove ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-18 8 124 124\"><path d=\"M75.6,44.8v73c0,3.4-2.8,6.2-6.2,6.2H21.3c-3.4,0-6.2-2.8-6.2-6.2v-73H75.6L75.6,44.8z M59.9,52.9v62.8h3.6V52.9H59.9  L59.9,52.9z M43.6,52.9v62.8h3.6V52.9H43.6L43.6,52.9z M27.3,52.9v62.8h3.6V52.9H27.3L27.3,52.9z M31.3,27.9v-5.2  c0-3.3,2.6-5.9,5.9-5.9h16.4c3.3,0,5.9,2.6,5.9,5.9v5.2h18.1c3.4,0,6.2,2.8,6.2,6.2v4.3H7V34c0-3.4,2.8-6.2,6.2-6.2H31.3L31.3,27.9z   M37.2,20.8c-1,0-1.8,0.8-1.8,1.8v5.2h20.1v-5.2c0-1-0.8-1.8-1.8-1.8H37.2L37.2,20.8z\"/></svg>');"},{"selector":".ico.collapse ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M19.92,12.08L12,20L4.08,12.08L5.5,10.67L11,16.17V2H13V16.17L18.5,10.66L19.92,12.08M12,20H2V22H22V20H12Z\"/></svg>');"},{"selector":".ico.heart ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-43 -45 620 620\"><path d=\"M533.333,186.54c0,44.98-19.385,85.432-50.256,113.46h0.256L316.667,466.667C300,483.333,283.333,500,266.667,500c-16.667,0-33.333-16.667-50-33.333L50,300h0.255C19.384,271.972,0,231.52,0,186.54C0,101.926,68.593,33.333,153.206,33.333c44.98,0,85.432,19.384,113.46,50.255c28.028-30.871,68.48-50.255,113.46-50.255C464.74,33.333,533.333,101.926,533.333,186.54z\"/></svg>');"},{"selector":".ico.windowMax ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-1 -1 14 14\"><path fill=\"none\" stroke=\"currentColor\"  d=\"M10.5 8.5V10c0 .3-.2.5-.5.5H2c-.3 0-.5-.2-.5-.5V2c0-.3.2-.5.5-.5h1.5M6 6l4-4m-3.5-.5H10c.3 0 .5.2.5.5v3.5\"/></svg>');"},{"selector":".ico.run ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M31.356,25.677l38.625,22.3c1.557,0.899,1.557,3.147,0,4.046l-38.625,22.3c-1.557,0.899-3.504-0.225-3.504-2.023V27.7   C27.852,25.902,29.798,24.778,31.356,25.677z\"/><path d=\"M69.981,47.977l-38.625-22.3c-0.233-0.134-0.474-0.21-0.716-0.259l37.341,21.559c1.557,0.899,1.557,3.147,0,4.046   l-38.625,22.3c-0.349,0.201-0.716,0.288-1.078,0.301c0.656,0.938,1.961,1.343,3.078,0.699l38.625-22.3   C71.538,51.124,71.538,48.876,69.981,47.977z\"/><path d=\"M31.356,25.677l38.625,22.3c1.557,0.899,1.557,3.147,0,4.046   l-38.625,22.3c-1.557,0.899-3.504-0.225-3.504-2.023V27.7C27.852,25.902,29.798,24.778,31.356,25.677z\"/></svg>');"},{"selector":".ico.createNew ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-40 -40 642 642\"><path d=\"M63.648,506.736h220.32v50.186H29.376c-4.488,0-8.16-1.531-11.016-4.59c-2.856-3.062-4.284-6.834-4.284-11.322V149.94v-29.988v-1.836h0.612c0-0.816,0.408-1.632,1.224-2.448L130.968,2.448V0.612h3.672C135.048,0.204,135.456,0,135.864,0h29.376l1.224,0.612H391.68c4.485,0,8.16,1.428,11.016,4.284c2.856,2.856,4.284,6.528,4.284,11.016v170.136h-49.572V50.184h-186.66v99.756c0,4.08-1.836,6.12-5.508,6.12H63.648V506.736z M534.889,353.125H429.624V247.248c0-5.304-2.649-7.956-7.956-7.956h-74.052c-5.304,0-7.956,2.652-7.956,7.956v105.877H233.784c-5.304,0-7.956,2.648-7.956,7.955v74.053c0,5.303,2.652,7.955,7.956,7.955H339.66v105.877c0,5.303,2.652,7.955,7.956,7.955h74.052c5.307,0,7.956-2.652,7.956-7.955V443.088H534.89c5.304,0,7.956-2.652,7.956-7.955V361.08C542.845,355.775,540.192,353.125,534.889,353.125z\"/></svg>');"},{"selector":".ico.hammer ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><path d=\"M30.651,23.538l25.24,24.346l-6.577,6.577l-23.969,-25.617l5.306,-5.306Zm-7.208,3.403l5.306,-5.305c0,0 -2.695,-2.056 -2.447,-3.34c0.248,-1.285 0.809,-3.1 4.711,-4.711c3.903,-1.611 7.543,-1.757 7.543,-1.757l0.131,-1.758c0,0 -8.969,-1.356 -13.707,0.327c-4.738,1.684 -10.097,8.02 -10.097,8.02c0,0 0.935,3.064 -0.667,4.666c-1.601,1.601 -3.754,-0.245 -3.754,-0.245l-2.456,3.118l6.197,6.197l3.112,-2.461c0,0 -1.472,-2.207 -0.017,-3.528c3.132,-2.842 6.145,0.777 6.145,0.777Z\"/></svg>');"},{"selector":".ico.search ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z\"/></svg>');"},{"selector":".ico.threeDots ","rule":"width: 12px;height: 12px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 612 612\"><path d=\"M55.636,250.364C24.907,250.364,0,275.27,0,306c0,30.73,24.907,55.636,55.636,55.636S111.273,336.73,111.273,306\t\t\t\tC111.273,275.27,86.366,250.364,55.636,250.364z M315.273,250.364c-30.73,0-55.636,24.907-55.636,55.636\t\t\t\tc0,30.729,24.907,55.636,55.636,55.636c30.729,0,55.636-24.905,55.636-55.636C370.909,275.27,346.003,250.364,315.273,250.364z\t\t\t\t M556.364,250.364c-30.73,0-55.636,24.907-55.636,55.636c0,30.729,24.906,55.636,55.636,55.636\t\t\t\tC587.093,361.636,612,336.73,612,306C612,275.27,587.093,250.364,556.364,250.364z\"/></svg>');"},{"selector":".ico.file_code ","rule":"width: 14px;height: 14px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M34.521,20.547H12.688c-0.827,0-1.5-0.673-1.5-1.5s0.673-1.5,1.5-1.5h21.834c0.827,0,1.5,0.673,1.5,1.5S35.348,20.547,34.521,20.547z\"/><path d=\"M34.521,27.713H12.688c-0.827,0-1.5-0.673-1.5-1.5s0.673-1.5,1.5-1.5h21.834c0.827,0,1.5,0.673,1.5,1.5C36.021,27.041,35.348,27.713,34.521,27.713z\"/><path d=\"M31.542,34.88H15.667c-0.827,0-1.5-0.673-1.5-1.5s0.673-1.5,1.5-1.5h15.875c0.827,0,1.5,0.673,1.5,1.5S32.369,34.88,31.542,34.88z\"/><path d=\"M40.783,8.692l-7.639-7.31C32.346,0.619,30.804,0,29.699,0H7.774c-1.104,0-2,0.896-2,2v44c0,1.104,0.896,2,2,2h32.453c1.104,0,2-0.896,2-2V12.075C42.228,10.971,41.581,9.456,40.783,8.692z M37.968,41.092c0,1.104-0.896,2-2,2H11.806c-1.104,0-2-0.896-2-2V5.776c0-1.104,0.896-2,2-2h16.518c1.104,0,2,0.896,2,2v3.321c0,1.104,0.896,2,2,2h3.645c1.104,0,2,0.896,2,2V41.092z\"/></svg>');"}];
 				const css$g = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -187,31 +206,13 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/themes/darkula/css/ico.css]:', rules);
-					}
-				};
-
-	const rules$e = [{"selector":".ico ","rule":"display: inline-block;background-size: cover;"},{"selector":".icoQuiet .ico, .ico.icoQuiet ","rule":"opacity: 0.6;"},{"selector":".ico.arrowUp ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 96 96\"><path d=\"M52,83.999V21.655l21.172,21.172c1.562,1.562,4.094,1.562,5.656,0c1.562-1.562,1.562-4.095,0-5.657l-28-28c-1.562-1.562-4.095-1.562-5.656,0l-28,28C16.391,37.951,16,38.974,16,39.999c0,1.023,0.391,2.047,1.172,2.828c1.562,1.562,4.095,1.562,5.656,0L44,21.655v62.344c0,2.209,1.791,4,4,4S52,86.208,52,83.999z\"/></svg>');"},{"selector":".ico.arrowDown ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 96 96\"><path d=\"M44,12v62.344L22.828,53.172c-1.562-1.562-4.094-1.562-5.656,0c-1.562,1.562-1.562,4.095,0,5.657l28,28c1.562,1.562,4.095,1.562,5.656,0l28-28C79.609,58.048,80,57.024,80,56c0-1.023-0.391-2.047-1.172-2.828c-1.562-1.562-4.095-1.562-5.656,0L52,74.344V12c0-2.208-1.791-4-4-4S44,9.791,44,12z\"/></svg>');"},{"selector":".ico.eye ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M21.87,11.5c-.64-1.11-4.16-6.68-10.14-6.5C6.2,5.14,3,10,2.13,11.5a1,1,0,0,0,0,1c.63,1.09,4,6.5,9.89,6.5h.25c5.53-.14,8.74-5,9.6-6.5A1,1,0,0,0,21.87,11.5ZM12.22,17c-4.31.1-7.12-3.59-8-5,1-1.61,3.61-4.9,7.61-5,4.29-.11,7.11,3.59,8,5C18.8,13.61,16.22,16.9,12.22,17Z\"/><path d=\"M12,8.5A3.5,3.5,0,1,0,15.5,12,3.5,3.5,0,0,0,12,8.5Zm0,5A1.5,1.5,0,1,1,13.5,12,1.5,1.5,0,0,1,12,13.5Z\"/></svg>');"},{"selector":".ico.eyeoff ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M4.71,3.29A1,1,0,0,0,3.29,4.71l5.63,5.63a3.5,3.5,0,0,0,4.74,4.74l5.63,5.63a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42ZM12,13.5A1.5,1.5,0,0,1,10.5,12s0-.05,0-.07l1.56,1.56Z\"/><path d=\"M12.22,17c-4.3.1-7.12-3.59-8-5A13.7,13.7,0,0,1,6.46,9.28L5,7.87A15.89,15.89,0,0,0,2.13,11.5a1,1,0,0,0,0,1c.63,1.09,4,6.5,9.89,6.5h.25a9.48,9.48,0,0,0,3.23-.67l-1.58-1.58A7.74,7.74,0,0,1,12.22,17Z\"/><path d=\"M21.87,11.5C21.23,10.39,17.7,4.82,11.73,5a9.48,9.48,0,0,0-3.23.67l1.58,1.58A7.74,7.74,0,0,1,11.78,7c4.29-.11,7.11,3.59,8,5a13.7,13.7,0,0,1-2.29,2.72L19,16.13a15.89,15.89,0,0,0,2.91-3.63A1,1,0,0,0,21.87,11.5Z\"/></svg>');"},{"selector":".ico.settings ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-12 -12 200 200\"><path d=\"M173.145,73.91c-0.413-2.722-2.29-4.993-4.881-5.912l-13.727-4.881c-0.812-2.3-1.733-4.536-2.754-6.699l6.247-13.146c1.179-2.479,0.899-5.411-0.729-7.628c-5.265-7.161-11.556-13.452-18.698-18.693c-2.219-1.629-5.141-1.906-7.625-0.724l-13.138,6.242c-2.163-1.021-4.402-1.94-6.704-2.752l-4.883-13.729c-0.919-2.586-3.184-4.458-5.9-4.876c-9.65-1.483-16.792-1.483-26.457,0c-2.713,0.418-4.981,2.29-5.9,4.876l-4.883,13.729c-2.302,0.812-4.541,1.731-6.702,2.752l-13.143-6.242c-2.479-1.181-5.406-0.904-7.623,0.724c-7.142,5.241-13.433,11.532-18.698,18.693c-1.629,2.217-1.908,5.148-0.729,7.628l6.247,13.146c-1.021,2.159-1.94,4.4-2.754,6.699L5.982,68.003c-2.589,0.919-4.463,3.189-4.879,5.907c-0.749,4.92-1.099,9.115-1.099,13.219c0,4.098,0.35,8.299,1.099,13.219c0.413,2.722,2.29,4.993,4.881,5.912l13.727,4.881c0.814,2.304,1.736,4.541,2.754,6.704l-6.247,13.141c-1.179,2.479-0.899,5.411,0.727,7.623c5.258,7.156,11.549,13.447,18.7,18.698c2.217,1.629,5.144,1.911,7.625,0.724l13.138-6.242c2.163,1.021,4.402,1.94,6.704,2.752l4.883,13.729c0.919,2.586,3.184,4.458,5.9,4.876c4.828,0.744,9.154,1.104,13.228,1.104c4.074,0,8.401-0.36,13.228-1.104c2.715-0.418,4.981-2.29,5.9-4.876l4.883-13.729c2.302-0.812,4.541-1.731,6.704-2.752l13.138,6.242c2.484,1.186,5.411,0.904,7.628-0.724c7.159-5.26,13.45-11.551,18.698-18.698c1.626-2.212,1.906-5.144,0.727-7.623l-6.247-13.141c1.021-2.163,1.942-4.405,2.754-6.704l13.727-4.881c2.591-0.919,4.468-3.189,4.881-5.912c0.749-4.92,1.099-9.12,1.099-13.219S173.894,78.829,173.145,73.91z M158.949,93.72l-12.878,4.58c-2.251,0.797-3.982,2.625-4.66,4.92c-1.15,3.889-2.664,7.569-4.504,10.943c-1.142,2.1-1.213,4.619-0.187,6.777l5.841,12.285c-2.822,3.389-5.943,6.515-9.337,9.334l-12.283-5.834c-2.161-1.036-4.672-0.953-6.775,0.185c-3.379,1.838-7.061,3.35-10.953,4.502c-2.29,0.676-4.118,2.406-4.917,4.657l-4.582,12.883c-4.677,0.476-8.503,0.476-13.18,0l-4.582-12.883c-0.8-2.246-2.628-3.982-4.917-4.657c-3.894-1.152-7.579-2.664-10.953-4.502c-2.103-1.147-4.619-1.22-6.775-0.185l-12.283,5.839c-3.391-2.825-6.512-5.946-9.337-9.339l5.841-12.285c1.026-2.159,0.955-4.677-0.187-6.777c-1.835-3.364-3.35-7.049-4.504-10.948c-0.678-2.29-2.411-4.118-4.66-4.915l-12.878-4.58c-0.243-2.343-0.36-4.502-0.36-6.592s0.117-4.244,0.36-6.587l12.881-4.584c2.248-0.797,3.979-2.625,4.657-4.915c1.152-3.889,2.667-7.574,4.504-10.953c1.142-2.095,1.213-4.619,0.187-6.772l-5.841-12.285c2.827-3.393,5.948-6.519,9.337-9.339l12.288,5.839c2.151,1.036,4.677,0.953,6.775-0.185c3.372-1.838,7.054-3.35,10.948-4.502c2.29-0.676,4.118-2.411,4.917-4.657l4.582-12.883c4.633-0.481,8.466-0.481,13.18,0l4.582,12.883c0.8,2.246,2.628,3.982,4.917,4.657c3.894,1.152,7.579,2.664,10.953,4.502c2.103,1.147,4.614,1.22,6.775,0.185l12.283-5.839c3.389,2.82,6.51,5.946,9.337,9.339l-5.841,12.285c-1.026,2.154-0.955,4.677,0.187,6.772c1.843,3.389,3.357,7.069,4.504,10.948c0.678,2.295,2.409,4.123,4.66,4.92l12.878,4.58c0.243,2.343,0.36,4.502,0.36,6.592S159.192,91.377,158.949,93.72z\"/><path d=\"M87.124,50.802c-19.062,0-34.571,15.508-34.571,34.571s15.508,34.571,34.571,34.571s34.571-15.508,34.571-34.571S106.186,50.802,87.124,50.802z M87.124,105.009c-10.827,0-19.636-8.809-19.636-19.636s8.809-19.636,19.636-19.636s19.636,8.809,19.636,19.636S97.951,105.009,87.124,105.009z\"/></svg>');"},{"selector":".ico.fx ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"1 1 22 22\"><path d=\"M12.42,5.29C11.32,5.19 10.35,6 10.25,7.11L10,10H12.82V12H9.82L9.38,17.07C9.18,19.27 7.24,20.9 5.04,20.7C3.79,20.59 2.66,19.9 2,18.83L3.5,17.33C3.83,18.38 4.96,18.97 6,18.63C6.78,18.39 7.33,17.7 7.4,16.89L7.82,12H4.82V10H8L8.27,6.93C8.46,4.73 10.39,3.1 12.6,3.28C13.86,3.39 15,4.09 15.66,5.17L14.16,6.67C13.91,5.9 13.23,5.36 12.42,5.29M22,13.65L20.59,12.24L17.76,15.07L14.93,12.24L13.5,13.65L16.35,16.5L13.5,19.31L14.93,20.72L17.76,17.89L20.59,20.72L22,19.31L19.17,16.5L22,13.65Z\"/></svg>');"},{"selector":".ico.focus ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 24 24\"><path d=\"M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M19,19H15V21H19A2,2 0 0,0 21,19V15H19M19,3H15V5H19V9H21V5A2,2 0 0,0 19,3M5,5H9V3H5A2,2 0 0,0 3,5V9H5M5,15H3V19A2,2 0 0,0 5,21H9V19H5V15Z\"/></svg>');"},{"selector":".ico.goal ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"M16,28A12,12,0,1,1,28,16,12,12,0,0,1,16,28ZM16,6A10,10,0,1,0,26,16,10,10,0,0,0,16,6Z\"/><rect height=\"7\" width=\"2\" x=\"15\" y=\"24\"/><rect height=\"7\" width=\"2\" x=\"15\" y=\"1\"/><rect height=\"2\" width=\"7\" x=\"24\" y=\"15\"/><rect height=\"2\" width=\"7\" x=\"1\" y=\"15\"/><path d=\"M16,20a4,4,0,1,1,4-4A4,4,0,0,1,16,20Zm0-6a2,2,0,1,0,2,2A2,2,0,0,0,16,14Z\"/></svg>');"},{"selector":".ico.focusAuto ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 24 24\"><path d=\"M19 19H15V21H19C20.1 21 21 20.1 21 19V15H19M19 3H15V5H19V9H21V5C21 3.9 20.1 3 19 3M5 5H9V3H5C3.9 3 3 3.9 3 5V9H5M5 15H3V19C3 20.1 3.9 21 5 21H9V19H5V15M8 7C6.9 7 6 7.9 6 9V17H8V13H10V17H12V9C12 7.9 11.1 7 10 7H8M8 9H10V11H8V9M13 7V17H15V13H17V11H15V9H18V7H13Z\"/></svg>');"},{"selector":".ico.delete ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z\"/></svg>');"},{"selector":".ico.remove ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-18 8 124 124\"><path d=\"M75.6,44.8v73c0,3.4-2.8,6.2-6.2,6.2H21.3c-3.4,0-6.2-2.8-6.2-6.2v-73H75.6L75.6,44.8z M59.9,52.9v62.8h3.6V52.9H59.9  L59.9,52.9z M43.6,52.9v62.8h3.6V52.9H43.6L43.6,52.9z M27.3,52.9v62.8h3.6V52.9H27.3L27.3,52.9z M31.3,27.9v-5.2  c0-3.3,2.6-5.9,5.9-5.9h16.4c3.3,0,5.9,2.6,5.9,5.9v5.2h18.1c3.4,0,6.2,2.8,6.2,6.2v4.3H7V34c0-3.4,2.8-6.2,6.2-6.2H31.3L31.3,27.9z   M37.2,20.8c-1,0-1.8,0.8-1.8,1.8v5.2h20.1v-5.2c0-1-0.8-1.8-1.8-1.8H37.2L37.2,20.8z\"/></svg>');"},{"selector":".ico.collapse ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M19.92,12.08L12,20L4.08,12.08L5.5,10.67L11,16.17V2H13V16.17L18.5,10.66L19.92,12.08M12,20H2V22H22V20H12Z\"/></svg>');"},{"selector":".ico.heart ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-43 -45 620 620\"><path d=\"M533.333,186.54c0,44.98-19.385,85.432-50.256,113.46h0.256L316.667,466.667C300,483.333,283.333,500,266.667,500c-16.667,0-33.333-16.667-50-33.333L50,300h0.255C19.384,271.972,0,231.52,0,186.54C0,101.926,68.593,33.333,153.206,33.333c44.98,0,85.432,19.384,113.46,50.255c28.028-30.871,68.48-50.255,113.46-50.255C464.74,33.333,533.333,101.926,533.333,186.54z\"/></svg>');"},{"selector":".ico.windowMax ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-1 -1 14 14\"><path fill=\"none\" stroke=\"currentColor\"  d=\"M10.5 8.5V10c0 .3-.2.5-.5.5H2c-.3 0-.5-.2-.5-.5V2c0-.3.2-.5.5-.5h1.5M6 6l4-4m-3.5-.5H10c.3 0 .5.2.5.5v3.5\"/></svg>');"},{"selector":".ico.run ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><path d=\"M31.356,25.677l38.625,22.3c1.557,0.899,1.557,3.147,0,4.046l-38.625,22.3c-1.557,0.899-3.504-0.225-3.504-2.023V27.7   C27.852,25.902,29.798,24.778,31.356,25.677z\"/><path d=\"M69.981,47.977l-38.625-22.3c-0.233-0.134-0.474-0.21-0.716-0.259l37.341,21.559c1.557,0.899,1.557,3.147,0,4.046   l-38.625,22.3c-0.349,0.201-0.716,0.288-1.078,0.301c0.656,0.938,1.961,1.343,3.078,0.699l38.625-22.3   C71.538,51.124,71.538,48.876,69.981,47.977z\"/><path d=\"M31.356,25.677l38.625,22.3c1.557,0.899,1.557,3.147,0,4.046   l-38.625,22.3c-1.557,0.899-3.504-0.225-3.504-2.023V27.7C27.852,25.902,29.798,24.778,31.356,25.677z\"/></svg>');"},{"selector":".ico.createNew ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-40 -40 642 642\"><path d=\"M63.648,506.736h220.32v50.186H29.376c-4.488,0-8.16-1.531-11.016-4.59c-2.856-3.062-4.284-6.834-4.284-11.322V149.94v-29.988v-1.836h0.612c0-0.816,0.408-1.632,1.224-2.448L130.968,2.448V0.612h3.672C135.048,0.204,135.456,0,135.864,0h29.376l1.224,0.612H391.68c4.485,0,8.16,1.428,11.016,4.284c2.856,2.856,4.284,6.528,4.284,11.016v170.136h-49.572V50.184h-186.66v99.756c0,4.08-1.836,6.12-5.508,6.12H63.648V506.736z M534.889,353.125H429.624V247.248c0-5.304-2.649-7.956-7.956-7.956h-74.052c-5.304,0-7.956,2.652-7.956,7.956v105.877H233.784c-5.304,0-7.956,2.648-7.956,7.955v74.053c0,5.303,2.652,7.955,7.956,7.955H339.66v105.877c0,5.303,2.652,7.955,7.956,7.955h74.052c5.307,0,7.956-2.652,7.956-7.955V443.088H534.89c5.304,0,7.956-2.652,7.956-7.955V361.08C542.845,355.775,540.192,353.125,534.889,353.125z\"/></svg>');"},{"selector":".ico.hammer ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><path d=\"M30.651,23.538l25.24,24.346l-6.577,6.577l-23.969,-25.617l5.306,-5.306Zm-7.208,3.403l5.306,-5.305c0,0 -2.695,-2.056 -2.447,-3.34c0.248,-1.285 0.809,-3.1 4.711,-4.711c3.903,-1.611 7.543,-1.757 7.543,-1.757l0.131,-1.758c0,0 -8.969,-1.356 -13.707,0.327c-4.738,1.684 -10.097,8.02 -10.097,8.02c0,0 0.935,3.064 -0.667,4.666c-1.601,1.601 -3.754,-0.245 -3.754,-0.245l-2.456,3.118l6.197,6.197l3.112,-2.461c0,0 -1.472,-2.207 -0.017,-3.528c3.132,-2.842 6.145,0.777 6.145,0.777Z\"/></svg>');"},{"selector":".ico.search ","rule":"width: 16px;height: 16px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z\"/></svg>');"},{"selector":".ico.threeDots ","rule":"width: 12px;height: 12px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 612 612\"><path d=\"M55.636,250.364C24.907,250.364,0,275.27,0,306c0,30.73,24.907,55.636,55.636,55.636S111.273,336.73,111.273,306\t\t\t\tC111.273,275.27,86.366,250.364,55.636,250.364z M315.273,250.364c-30.73,0-55.636,24.907-55.636,55.636\t\t\t\tc0,30.729,24.907,55.636,55.636,55.636c30.729,0,55.636-24.905,55.636-55.636C370.909,275.27,346.003,250.364,315.273,250.364z\t\t\t\t M556.364,250.364c-30.73,0-55.636,24.907-55.636,55.636c0,30.729,24.906,55.636,55.636,55.636\t\t\t\tC587.093,361.636,612,336.73,612,306C612,275.27,587.093,250.364,556.364,250.364z\"/></svg>');"},{"selector":".ico.file_code ","rule":"width: 14px;height: 14px;background-image:url('data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M34.521,20.547H12.688c-0.827,0-1.5-0.673-1.5-1.5s0.673-1.5,1.5-1.5h21.834c0.827,0,1.5,0.673,1.5,1.5S35.348,20.547,34.521,20.547z\"/><path d=\"M34.521,27.713H12.688c-0.827,0-1.5-0.673-1.5-1.5s0.673-1.5,1.5-1.5h21.834c0.827,0,1.5,0.673,1.5,1.5C36.021,27.041,35.348,27.713,34.521,27.713z\"/><path d=\"M31.542,34.88H15.667c-0.827,0-1.5-0.673-1.5-1.5s0.673-1.5,1.5-1.5h15.875c0.827,0,1.5,0.673,1.5,1.5S32.369,34.88,31.542,34.88z\"/><path d=\"M40.783,8.692l-7.639-7.31C32.346,0.619,30.804,0,29.699,0H7.774c-1.104,0-2,0.896-2,2v44c0,1.104,0.896,2,2,2h32.453c1.104,0,2-0.896,2-2V12.075C42.228,10.971,41.581,9.456,40.783,8.692z M37.968,41.092c0,1.104-0.896,2-2,2H11.806c-1.104,0-2-0.896-2-2V5.776c0-1.104,0.896-2,2-2h16.518c1.104,0,2,0.896,2,2v3.321c0,1.104,0.896,2,2,2h3.645c1.104,0,2,0.896,2,2V41.092z\"/></svg>');"}];
-				const css$f = {
-					install:() => {
-						let cssStyle = document.body.querySelector("style");
-						if (!cssStyle) {
-							cssStyle = document.createElement("style");
-							document.head.appendChild(cssStyle);
-						}
-						const cssStyleSheet = cssStyle.sheet;
-						rules$e.forEach(ruleCfg => {
-							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
-							//console.log('rule:', ruleCfg.rule);
-							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
-						});
-						//files.push.apply(files, data.files);
 						//console.log('css installed [/srv/sandox/src/themes/darkula/css/icoImages.css]:', rules);
 					}
 				};
 
-	const css$e = {
+	const css$f = {
 		install: () => {
+			css$q.install();
 			css$p.install();
 			css$o.install();
 			css$n.install();
@@ -222,7 +223,6 @@
 			css$i.install();
 			css$h.install();
 			css$g.install();
-			css$f.install();
 		}
 	};
 
@@ -752,7 +752,26 @@
 					};
 					customElements.define('x-tpl_wrapper', Tpl_wrapper);
 
-	const rules$d = [{"selector":"x-tpl_wrapper ","rule":"display: flex;flex-direction: column;justify-content: center;height: 100%;"},{"selector":"x-menu ","rule":"display: none;"}];
+	const rules$e = [{"selector":"x-tpl_wrapper ","rule":"display: flex;flex-direction: column;justify-content: center;height: 100%;"}];
+				const css$e = {
+					install:() => {
+						let cssStyle = document.body.querySelector("style");
+						if (!cssStyle) {
+							cssStyle = document.createElement("style");
+							document.head.appendChild(cssStyle);
+						}
+						const cssStyleSheet = cssStyle.sheet;
+						rules$e.forEach(ruleCfg => {
+							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
+							//console.log('rule:', ruleCfg.rule);
+							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
+						});
+						//files.push.apply(files, data.files);
+						//console.log('css installed [/srv/sandox/src/components/app/app.css]:', rules);
+					}
+				};
+
+	const rules$d = [{"selector":"x-panelspace ","rule":"display: block;width: 100%;height: 100%;"},{"selector":"x-panelspace > * ","rule":"width: 100%;height: 100%;"},{"selector":"x-panelspace x-panels-panel[name='left'] ","rule":"border-right: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='leftContent'] ","rule":"border-right: 1px solid #444;position: relative;"},{"selector":"x-panelspace x-panels-panel[name='right'] ","rule":"border-left: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='rightContent'] ","rule":"border-left: 1px solid #444;position: relative;"},{"selector":"x-panelspace x-panels-panel[name='top'] ","rule":"border-bottom: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='topContent'] ","rule":"border-bottom: 1px solid #444;position: relative;"},{"selector":"x-panelspace x-panels-panel[name='bottom'] ","rule":"border-top: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='bottomContent'] ","rule":"border-top: 1px solid #444;position: relative;"},{"selector":"x-panels-panel > x-draggable ","rule":"display: block;width: 100%;height: 100%;"},{"selector":"x-panelspace x-panels-panel x-draggable[orientation='horizontal'] x-panelspace-paneltile ","rule":"display: block;margin: 2px 10px;"},{"selector":"x-panelspace x-panels-panel x-draggable[orientation='verticalLeft'] x-panelspace-paneltile,x-panelspace x-panels-panel x-draggable[orientation='verticalRight'] x-panelspace-paneltile ","rule":"display: block;margin: 10px 2px;"},{"selector":"x-panelspace x-panels-panel x-draggable x-draggable-item.active ","rule":"background: var(--active-element-bg-color);"},{"selector":"x-panelspace x-panels-panel .menu ","rule":"background: var(--element-bg-color-hover);border-bottom: var(--element-bg-color);height: 24px;padding-left: 5px;box-sizing: border-box;"},{"selector":"x-panelspace x-panels-panel .menu > item ","rule":"margin-right: 5px;display: inline-block;margin-top: 1px;height: 22px;padding: 3px;box-sizing: border-box;"},{"selector":"x-panelspace x-panels-panel .menu > item:hover ","rule":"background: var(--element-bg-color);border-radius: var(--element-border-radius);"},{"selector":"x-panelspace x-panels-panel .menu > item > * ","rule":"vertical-align: middle;display: inline-block;"}];
 				const css$d = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -767,11 +786,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/components/app/app.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/components/ui/panelspace/panelspace.css]:', rules);
 					}
 				};
 
-	const rules$c = [{"selector":"x-panelspace ","rule":"display: block;width: 100%;height: 100%;"},{"selector":"x-panelspace > * ","rule":"width: 100%;height: 100%;"},{"selector":"x-panelspace x-panels-panel[name='left'] ","rule":"border-right: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='leftContent'] ","rule":"border-right: 1px solid #444;position: relative;"},{"selector":"x-panelspace x-panels-panel[name='right'] ","rule":"border-left: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='rightContent'] ","rule":"border-left: 1px solid #444;position: relative;"},{"selector":"x-panelspace x-panels-panel[name='top'] ","rule":"border-bottom: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='topContent'] ","rule":"border-bottom: 1px solid #444;position: relative;"},{"selector":"x-panelspace x-panels-panel[name='bottom'] ","rule":"border-top: 1px solid #444;"},{"selector":"x-panelspace x-panels-panel[name='bottomContent'] ","rule":"border-top: 1px solid #444;position: relative;"},{"selector":"x-panels-panel > x-draggable ","rule":"display: block;width: 100%;height: 100%;"},{"selector":"x-panelspace x-panels-panel x-draggable[orientation='horizontal'] x-panelspace-paneltile ","rule":"display: block;margin: 2px 10px;"},{"selector":"x-panelspace x-panels-panel x-draggable[orientation='verticalLeft'] x-panelspace-paneltile,x-panelspace x-panels-panel x-draggable[orientation='verticalRight'] x-panelspace-paneltile ","rule":"display: block;margin: 10px 2px;"},{"selector":"x-panelspace x-panels-panel x-draggable x-draggable-item.active ","rule":"background: var(--active-element-bg-color);"},{"selector":"x-panelspace x-panels-panel .menu ","rule":"background: var(--element-bg-color-hover);border-bottom: var(--element-bg-color);height: 24px;padding-left: 5px;box-sizing: border-box;"},{"selector":"x-panelspace x-panels-panel .menu > item ","rule":"margin-right: 5px;display: inline-block;margin-top: 1px;height: 22px;padding: 3px;box-sizing: border-box;"},{"selector":"x-panelspace x-panels-panel .menu > item:hover ","rule":"background: var(--element-bg-color);border-radius: var(--element-border-radius);"},{"selector":"x-panelspace x-panels-panel .menu > item > * ","rule":"vertical-align: middle;display: inline-block;"}];
+	const rules$c = [{"selector":"x-panels ","rule":"display: grid;grid-gap: 0;height: 100%;width: 100%;"}];
 				const css$c = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -786,11 +805,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/components/ui/panelspace/panelspace.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/components/ui/panels/panels.css]:', rules);
 					}
 				};
 
-	const rules$b = [{"selector":"x-panels ","rule":"display: grid;grid-gap: 0;height: 100%;width: 100%;"}];
+	const rules$b = [{"selector":"x-panels-panel ","rule":"display: block;position: relative;"},{"selector":"x-panels-panel x-panels-panelsplitter ","rule":"position: absolute;background: gray;"},{"selector":"x-panels-panel x-panels-panelsplitter:not(:hover) ","rule":"opacity: 0;"},{"selector":"x-panels-panel x-panels-panelsplitter:hover ","rule":"opacity: 0.5;"},{"selector":"x-panels-panel x-panels-panelsplitter.top ","rule":"cursor: row-resize;top: -3px;height: 5px;width: 100%;"},{"selector":"x-panels-panel x-panels-panelsplitter.bottom ","rule":"cursor: row-resize;bottom: -4px;height: 6px;width: 100%;"},{"selector":"x-panels-panel x-panels-panelsplitter.left ","rule":"cursor: col-resize;left: -4px;top: 0;width: 6px;height: 100%;"},{"selector":"x-panels-panel x-panels-panelsplitter.right ","rule":"cursor: col-resize;right: -4px;top: 0;width: 6px;height: 100%;"}];
 				const css$b = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -805,30 +824,11 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/components/ui/panels/panels.css]:', rules);
-					}
-				};
-
-	const rules$a = [{"selector":"x-panels-panel ","rule":"display: block;position: relative;"},{"selector":"x-panels-panel x-panels-panelsplitter ","rule":"position: absolute;background: gray;"},{"selector":"x-panels-panel x-panels-panelsplitter:not(:hover) ","rule":"opacity: 0;"},{"selector":"x-panels-panel x-panels-panelsplitter:hover ","rule":"opacity: 0.5;"},{"selector":"x-panels-panel x-panels-panelsplitter.top ","rule":"cursor: row-resize;top: -3px;height: 5px;width: 100%;"},{"selector":"x-panels-panel x-panels-panelsplitter.bottom ","rule":"cursor: row-resize;bottom: -4px;height: 6px;width: 100%;"},{"selector":"x-panels-panel x-panels-panelsplitter.left ","rule":"cursor: col-resize;left: -4px;top: 0;width: 6px;height: 100%;"},{"selector":"x-panels-panel x-panels-panelsplitter.right ","rule":"cursor: col-resize;right: -4px;top: 0;width: 6px;height: 100%;"}];
-				const css$a = {
-					install:() => {
-						let cssStyle = document.body.querySelector("style");
-						if (!cssStyle) {
-							cssStyle = document.createElement("style");
-							document.head.appendChild(cssStyle);
-						}
-						const cssStyleSheet = cssStyle.sheet;
-						rules$a.forEach(ruleCfg => {
-							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
-							//console.log('rule:', ruleCfg.rule);
-							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
-						});
-						//files.push.apply(files, data.files);
 						//console.log('css installed [/srv/sandox/src/components/ui/panels/panel/panel.css]:', rules);
 					}
 				};
 
-	css$a.install();
+	css$b.install();
 
 
 	class Panel extends HTMLElement {
@@ -955,7 +955,7 @@
 
 	customElements.define('x-panels-panel', Panel);
 
-	css$b.install();
+	css$c.install();
 
 
 	/**
@@ -1192,8 +1192,8 @@
 
 	customElements.define('x-panels', Panels);
 
-	const rules$9 = [{"selector":"x-draggable x-draggable-item, .x-draggable-phantom ","rule":"display: inline-block;box-sizing: border-box;cursor: default;user-select: none;vertical-align: top;"},{"selector":"x-draggable x-draggable-item ","rule":""},{"selector":".x-draggable-phantom ","rule":"pointer-events: none;position: fixed;z-index: 1000000;"},{"selector":".x-draggable-spacer ","rule":"vertical-align: top;"},{"selector":"x-draggable[orientation='horizontal'] .x-draggable-spacer ","rule":"display: inline-block;"},{"selector":"x-draggable[orientation='verticalLeft'] .x-draggable-spacer, x-draggable[orientation='verticalRight'] .x-draggable-spacer ","rule":"display: block;"},{"selector":"x-draggable[orientation='horizontal'] x-draggable-item, .x-draggable-phantom-horizontal ","rule":""},{"selector":"x-draggable[orientation='verticalLeft'] x-draggable-item, .x-draggable-phantom-verticalLeft,x-draggable[orientation='verticalRight'] x-draggable-item, .x-draggable-phantom-verticalRight ","rule":"writing-mode: vertical-rl;white-space: nowrap;"},{"selector":"x-draggable[orientation='verticalLeft'] x-draggable-item, .x-draggable-phantom-verticalLeft ","rule":"transform: rotate(180deg);"}];
-				const css$9 = {
+	const rules$a = [{"selector":"x-draggable x-draggable-item, .x-draggable-phantom ","rule":"display: inline-block;box-sizing: border-box;cursor: default;user-select: none;vertical-align: top;"},{"selector":"x-draggable x-draggable-item ","rule":""},{"selector":".x-draggable-phantom ","rule":"pointer-events: none;position: fixed;z-index: 1000000;"},{"selector":".x-draggable-spacer ","rule":"vertical-align: top;"},{"selector":"x-draggable[orientation='horizontal'] .x-draggable-spacer ","rule":"display: inline-block;"},{"selector":"x-draggable[orientation='verticalLeft'] .x-draggable-spacer, x-draggable[orientation='verticalRight'] .x-draggable-spacer ","rule":"display: block;"},{"selector":"x-draggable[orientation='horizontal'] x-draggable-item, .x-draggable-phantom-horizontal ","rule":""},{"selector":"x-draggable[orientation='verticalLeft'] x-draggable-item, .x-draggable-phantom-verticalLeft,x-draggable[orientation='verticalRight'] x-draggable-item, .x-draggable-phantom-verticalRight ","rule":"writing-mode: vertical-rl;white-space: nowrap;"},{"selector":"x-draggable[orientation='verticalLeft'] x-draggable-item, .x-draggable-phantom-verticalLeft ","rule":"transform: rotate(180deg);"}];
+				const css$a = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
 						if (!cssStyle) {
@@ -1201,7 +1201,7 @@
 							document.head.appendChild(cssStyle);
 						}
 						const cssStyleSheet = cssStyle.sheet;
-						rules$9.forEach(ruleCfg => {
+						rules$a.forEach(ruleCfg => {
 							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
 							//console.log('rule:', ruleCfg.rule);
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
@@ -1399,7 +1399,7 @@
 		return (p && p !== b);
 	};
 
-	css$9.install();
+	css$a.install();
 
 	let Draggable = (() => {
 		let containersByGroup = {};
@@ -1629,7 +1629,7 @@
 
 	customElements.define('x-draggable-item', DraggableItem);
 
-	css$c.install();
+	css$d.install();
 
 	class PanelSpace extends HTMLElement {
 		$workspace;
@@ -1846,8 +1846,8 @@
 					};
 					customElements.define('x-tpl_noproject', Tpl_noProject);
 
-	const rules$8 = [{"selector":"x-ide-panel-projectinfo .menu item *, x-tpl_projectinfo_item li ","rule":"cursor: default;"},{"selector":"x-ide-panel-projectinfo > * ","rule":"display: flex;flex-direction: column;height: 100%;"},{"selector":"x-ide-panel-projectinfo > * > div[name='projectList'] ","rule":"display: block;flex: 1;"},{"selector":"x-ide-panel-projectinfo > * > div[name='projectList'] > * ","rule":"display: block;padding: 10px;"},{"selector":"x-ide-panel-projectinfo .control span ","rule":"margin-right: 5px;"},{"selector":"x-ide-panel-projectinfo .control button ","rule":"vertical-align: middle;"},{"selector":"x-ide-panel-projectinfo ul[name='tree'] ","rule":"margin: 10px 0;"},{"selector":"x-ide-panel-projectinfo li i ","rule":"vertical-align: middle;margin-right: 3px;"}];
-				const css$8 = {
+	const rules$9 = [{"selector":"x-ide-panel-projectinfo .menu item *, x-tpl_projectinfo_item li ","rule":"cursor: default;"},{"selector":"x-ide-panel-projectinfo > * ","rule":"display: flex;flex-direction: column;height: 100%;"},{"selector":"x-ide-panel-projectinfo > * > div[name='projectList'] ","rule":"display: block;flex: 1;"},{"selector":"x-ide-panel-projectinfo > * > div[name='projectList'] > * ","rule":"display: block;padding: 10px;"},{"selector":"x-ide-panel-projectinfo .control span ","rule":"margin-right: 5px;"},{"selector":"x-ide-panel-projectinfo .control button ","rule":"vertical-align: middle;"},{"selector":"x-ide-panel-projectinfo ul[name='tree'] ","rule":"margin: 10px 0;"},{"selector":"x-ide-panel-projectinfo li i ","rule":"vertical-align: middle;margin-right: 3px;"}];
+				const css$9 = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
 						if (!cssStyle) {
@@ -1855,7 +1855,7 @@
 							document.head.appendChild(cssStyle);
 						}
 						const cssStyleSheet = cssStyle.sheet;
-						rules$8.forEach(ruleCfg => {
+						rules$9.forEach(ruleCfg => {
 							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
 							//console.log('rule:', ruleCfg.rule);
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
@@ -1976,6 +1976,9 @@
 		}
 
 		build() {
+			//open console
+			busEvent.fire("panelOpen", "console");
+
 			const code = this.model.data.struct.files['app.js'];
 			new Function("__log, __error", `setTimeout(() => {const console={log: __log}; try {${code}} catch(e) {__error(e+"")}  }, 0);`)(
 				(msg) => {
@@ -2024,10 +2027,13 @@
 		open(projData) {
 			//console.log('[IdeProject] opening:', projectId);
 			return new Promise(resolve => {
+				alert("This functionality will be implemented in ms3");
+				/*
 				this.project = new Project(projData);
 				busEvent.fire('projectChange', this.project);
 				busEvent.fire('logAdd', 'The project was opened');
 				resolve(this.project);
+				 */
 			});
 		}
 
@@ -2045,8 +2051,13 @@
 		}
 	})();
 
-	const rules$7 = [{"selector":"x-aceeditor ","rule":"display: flex;flex-direction: column;height: 100%;border: var(--input-border);"}];
-				const css$7 = {
+	busEvent.on("projectCreate", () => {
+		busEvent.fire("panelOpen", "projectInfo");
+		projectManager.create();
+	});
+
+	const rules$8 = [{"selector":"x-aceeditor ","rule":"display: flex;flex-direction: column;height: 100%;border: var(--input-border);"}];
+				const css$8 = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
 						if (!cssStyle) {
@@ -2054,7 +2065,7 @@
 							document.head.appendChild(cssStyle);
 						}
 						const cssStyleSheet = cssStyle.sheet;
-						rules$7.forEach(ruleCfg => {
+						rules$8.forEach(ruleCfg => {
 							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
 							//console.log('rule:', ruleCfg.rule);
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
@@ -4238,8 +4249,8 @@
 	})();
 	}(extSearchbox));
 
-	const rules$6 = [{"selector":".ace_search ","rule":"background-color: var(--body-bg-color);color: var(--text-color);overflow: hidden;margin: 0;padding: 0 0 4px 4px;white-space: normal;"},{"selector":".ace_search_form, .ace_replace_form ","rule":"margin-top: 4px;overflow: hidden;"},{"selector":".ace_search_form.ace_nomatch > .ace_search_counter ","rule":"color: red;"},{"selector":".ace_search_form.empty > i, .ace_search_form.empty > .ace_searchbtn, .ace_replace_form.empty > .ace_searchbtn ","rule":"opacity: 0.5;"},{"selector":".ace_search_form .ace_searchbtn ","rule":"width: 43px;"},{"selector":".ace_search_form > * ","rule":"vertical-align: middle;"},{"selector":".ace_search_field ","rule":"background: var(--input-bg-color);color: var(--element-text-color);border: var(--input-border);border-radius: var(--element-border-radius);-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;height: 22px;outline: 0;padding: 0 7px;margin: 0;"},{"selector":".ace_search_form .ace_search_field ","rule":"border-top-right-radius: 0;border-bottom-right-radius: 0;width: 250px;"},{"selector":".ace_search_form > i ","rule":"margin-right: 10px;"},{"selector":".ace_searchbtn, .ace_replacebtn ","rule":"margin-right: 5px;"},{"selector":".ace_replace_form .ace_search_field ","rule":"width: 338px;margin-right: 10px;"},{"selector":".ace_replace_form .ace_searchbtn ","rule":"width: 80px;"},{"selector":".ace_button ","rule":"background: var(--input-bg-color);color: var(--element-text-color);border: var(--input-border);display: inline-block;cursor: pointer;user-select: none;overflow: hidden;box-sizing: border-box;vertical-align: middle;height: 22px;width: 22px;text-align: center;line-height: 20px;"},{"selector":".ace_button ","rule":"border-left: 0;"},{"selector":".ace_button:hover ","rule":"opacity: 1;"},{"selector":".ace_button.checked ","rule":"color: var(--active-text-color);opacity: 1;"},{"selector":".ace_search_counter ","rule":"width: 80px;display: inline-block;text-align: center;"},{"selector":".ace_searchbtn_close ","rule":"cursor: pointer;display: block;float: right;margin: 6px 6px 0 0;"}];
-				const css$6 = {
+	const rules$7 = [{"selector":".ace_search ","rule":"background-color: var(--body-bg-color);color: var(--text-color);overflow: hidden;margin: 0;padding: 0 0 4px 4px;white-space: normal;"},{"selector":".ace_search_form, .ace_replace_form ","rule":"margin-top: 4px;overflow: hidden;"},{"selector":".ace_search_form.ace_nomatch > .ace_search_counter ","rule":"color: red;"},{"selector":".ace_search_form.empty > i, .ace_search_form.empty > .ace_searchbtn, .ace_replace_form.empty > .ace_searchbtn ","rule":"opacity: 0.5;"},{"selector":".ace_search_form .ace_searchbtn ","rule":"width: 43px;"},{"selector":".ace_search_form > * ","rule":"vertical-align: middle;"},{"selector":".ace_search_field ","rule":"background: var(--input-bg-color);color: var(--element-text-color);border: var(--input-border);border-radius: var(--element-border-radius);-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;height: 22px;outline: 0;padding: 0 7px;margin: 0;"},{"selector":".ace_search_form .ace_search_field ","rule":"border-top-right-radius: 0;border-bottom-right-radius: 0;width: 250px;"},{"selector":".ace_search_form > i ","rule":"margin-right: 10px;"},{"selector":".ace_searchbtn, .ace_replacebtn ","rule":"margin-right: 5px;"},{"selector":".ace_replace_form .ace_search_field ","rule":"width: 338px;margin-right: 10px;"},{"selector":".ace_replace_form .ace_searchbtn ","rule":"width: 80px;"},{"selector":".ace_button ","rule":"background: var(--input-bg-color);color: var(--element-text-color);border: var(--input-border);display: inline-block;cursor: pointer;user-select: none;overflow: hidden;box-sizing: border-box;vertical-align: middle;height: 22px;width: 22px;text-align: center;line-height: 20px;"},{"selector":".ace_button ","rule":"border-left: 0;"},{"selector":".ace_button:hover ","rule":"opacity: 1;"},{"selector":".ace_button.checked ","rule":"color: var(--active-text-color);opacity: 1;"},{"selector":".ace_search_counter ","rule":"width: 80px;display: inline-block;text-align: center;"},{"selector":".ace_searchbtn_close ","rule":"cursor: pointer;display: block;float: right;margin: 6px 6px 0 0;"}];
+				const css$7 = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
 						if (!cssStyle) {
@@ -4247,7 +4258,7 @@
 							document.head.appendChild(cssStyle);
 						}
 						const cssStyleSheet = cssStyle.sheet;
-						rules$6.forEach(ruleCfg => {
+						rules$7.forEach(ruleCfg => {
 							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
 							//console.log('rule:', ruleCfg.rule);
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
@@ -4257,8 +4268,8 @@
 					}
 				};
 
+	css$8.install();
 	css$7.install();
-	css$6.install();
 
 
 	class AceEditor extends HTMLElement {
@@ -4438,7 +4449,7 @@
 
 	customElements.define('x-ide-code', IdeTabContentCode);
 
-	css$8.install();
+	css$9.install();
 
 	class IdePanelProjectInfo extends HTMLElement {
 		constructor() {
@@ -4456,7 +4467,6 @@
 				console.log('[ProjectInfo] init project:', projectManager.project);
 				let $wrapper = new Tpl_projectInfo({}, {
 					build: () => {
-						busEvent.fire("panelOpen", "console");
 						projectManager.project.build();
 					}
 				});
@@ -4481,7 +4491,7 @@
 			} else {
 				let $noProject = new Tpl_noProject({}, {
 					open() {
-						alert('//TODO');
+						projectManager.open();
 					},
 					create() {
 						//popup create
@@ -4541,8 +4551,8 @@
 					};
 					customElements.define('x-tpl_network', Tpl_network);
 
-	const rules$5 = [{"selector":"x-ide-panel-network ","rule":"display: block;padding: 10px;"}];
-				const css$5 = {
+	const rules$6 = [{"selector":"x-ide-panel-network ","rule":"display: block;padding: 10px;"}];
+				const css$6 = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
 						if (!cssStyle) {
@@ -4550,7 +4560,7 @@
 							document.head.appendChild(cssStyle);
 						}
 						const cssStyleSheet = cssStyle.sheet;
-						rules$5.forEach(ruleCfg => {
+						rules$6.forEach(ruleCfg => {
 							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
 							//console.log('rule:', ruleCfg.rule);
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
@@ -4560,7 +4570,7 @@
 					}
 				};
 
-	css$5.install();
+	css$6.install();
 
 
 	class IdePanelNetwork extends HTMLElement {
@@ -4582,8 +4592,8 @@
 					};
 					customElements.define('x-tpl_examples', Tpl_examples);
 
-	const rules$4 = [{"selector":"x-ide-panel-examples ","rule":"display: block;padding: 10px;"}];
-				const css$4 = {
+	const rules$5 = [{"selector":"x-ide-panel-examples ","rule":"display: block;padding: 10px;"}];
+				const css$5 = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
 						if (!cssStyle) {
@@ -4591,7 +4601,7 @@
 							document.head.appendChild(cssStyle);
 						}
 						const cssStyleSheet = cssStyle.sheet;
-						rules$4.forEach(ruleCfg => {
+						rules$5.forEach(ruleCfg => {
 							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
 							//console.log('rule:', ruleCfg.rule);
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
@@ -4601,7 +4611,7 @@
 					}
 				};
 
-	css$4.install();
+	css$5.install();
 
 
 	class IdePanelExamples extends HTMLElement {
@@ -4623,8 +4633,8 @@
 					};
 					customElements.define('x-tpl_console', Tpl_console);
 
-	const rules$3 = [{"selector":"x-ide-panel-console ","rule":"display: block;position: absolute;top: 0;bottom: 0;left: 0;right: 0;"},{"selector":"x-ide-panel-console div.menu ","rule":"text-align: right;"},{"selector":"x-ide-panel-console > * ","rule":"display: flex;flex-direction: column;height: 100%;"},{"selector":"x-ide-panel-console div[name='log'] ","rule":"display: block;flex: 1;overflow: auto;padding: 10px;box-sizing: border-box;"},{"selector":"x-ide-panel-console div[name='log'] > div ","rule":"display: table-row;margin-bottom: 10px;"},{"selector":"x-ide-panel-console div[name='log'] > div > * ","rule":"display: table-cell;"},{"selector":"x-ide-panel-console div[name='log'] > div > div.arrow ","rule":"color: gray;padding-left: 5px;padding-right: 10px;"}];
-				const css$3 = {
+	const rules$4 = [{"selector":"x-ide-panel-console ","rule":"display: block;position: absolute;top: 0;bottom: 0;left: 0;right: 0;"},{"selector":"x-ide-panel-console div.menu ","rule":"text-align: right;"},{"selector":"x-ide-panel-console > * ","rule":"display: flex;flex-direction: column;height: 100%;"},{"selector":"x-ide-panel-console div[name='log'] ","rule":"display: block;flex: 1;overflow: auto;padding: 10px;box-sizing: border-box;"},{"selector":"x-ide-panel-console div[name='log'] > div ","rule":"display: table-row;margin-bottom: 10px;"},{"selector":"x-ide-panel-console div[name='log'] > div > * ","rule":"display: table-cell;"},{"selector":"x-ide-panel-console div[name='log'] > div > div.arrow ","rule":"color: gray;padding-left: 5px;padding-right: 10px;"}];
+				const css$4 = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
 						if (!cssStyle) {
@@ -4632,7 +4642,7 @@
 							document.head.appendChild(cssStyle);
 						}
 						const cssStyleSheet = cssStyle.sheet;
-						rules$3.forEach(ruleCfg => {
+						rules$4.forEach(ruleCfg => {
 							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
 							//console.log('rule:', ruleCfg.rule);
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
@@ -4686,7 +4696,7 @@
 		}
 	};
 
-	css$3.install();
+	css$4.install();
 
 	const logs = new ObjectLive({value: []});
 
@@ -4776,7 +4786,48 @@
 					};
 					customElements.define('x-tpl_find', Tpl_find);
 
-	const rules$2 = [{"selector":"x-ide-panel-find ","rule":"display: block;padding: 10px;"}];
+	const rules$3 = [{"selector":"x-ide-panel-find ","rule":"display: block;padding: 10px;"}];
+				const css$3 = {
+					install:() => {
+						let cssStyle = document.body.querySelector("style");
+						if (!cssStyle) {
+							cssStyle = document.createElement("style");
+							document.head.appendChild(cssStyle);
+						}
+						const cssStyleSheet = cssStyle.sheet;
+						rules$3.forEach(ruleCfg => {
+							//console.log('%cselector:', 'background:green;color:white;', ruleCfg.selector);
+							//console.log('rule:', ruleCfg.rule);
+							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
+						});
+						//files.push.apply(files, data.files);
+						//console.log('css installed [/srv/sandox/src/components/panels/find/find.css]:', rules);
+					}
+				};
+
+	css$3.install();
+
+
+	class IdePanelFind extends HTMLElement {
+		constructor() {
+			super();
+			let $wrapper = new Tpl_find();
+			this.appendChild($wrapper);
+		}
+
+		connectedCallback() {}
+	}
+	customElements.define('x-ide-panel-find', IdePanelFind);
+
+	let Tpl_settings = class extends RP {
+						constructor(model, logic) {
+							const tree = {"vDom":{"tree":[{"type":"tag","tagName":"div","attrs":{},"childNodes":[{"type":"tag","tagName":"div","attrs":{},"childNodes":[{"type":"textNode","value":"This is the IDE settings panel."}]},{"type":"tag","tagName":"div","attrs":{},"childNodes":[{"type":"textNode","value":"Specific settings of various parameters will appear in ms2 and ms3"}]}]}]}};
+							super(tree, model, logic);
+						}
+					};
+					customElements.define('x-tpl_settings', Tpl_settings);
+
+	const rules$2 = [{"selector":"x-ide-settings ","rule":"padding: 10px;"}];
 				const css$2 = {
 					install:() => {
 						let cssStyle = document.body.querySelector("style");
@@ -4791,23 +4842,24 @@
 							cssStyleSheet.addRule(ruleCfg.selector, ruleCfg.rule, 0);
 						});
 						//files.push.apply(files, data.files);
-						//console.log('css installed [/srv/sandox/src/components/panels/find/find.css]:', rules);
+						//console.log('css installed [/srv/sandox/src/components/tabContents/settings/settings.css]:', rules);
 					}
 				};
 
 	css$2.install();
 
-
-	class IdePanelFind extends HTMLElement {
+	/**
+	 * @description IDE Settings
+	 */
+	class IdeTabContentSettings extends HTMLElement {
 		constructor() {
 			super();
-			let $wrapper = new Tpl_find();
-			this.appendChild($wrapper);
-		}
 
-		connectedCallback() {}
+			this.appendChild(new Tpl_settings());
+		}
 	}
-	customElements.define('x-ide-panel-find', IdePanelFind);
+
+	customElements.define('x-ide-settings', IdeTabContentSettings);
 
 	const rules$1 = [{"selector":"x-menu ","rule":"display: block;margin: 0;padding: 0;background: var(--element-bg-color);width: 100%;white-space: nowrap;"},{"selector":"x-menu x-menu-item ","rule":"position: relative;display: inline-block;font-size: 12px;cursor: default;"},{"selector":"x-menu x-menu-item > div ","rule":"padding: 6px 10px 4px;"},{"selector":"x-menu x-menu-item.expanded ","rule":"background: var(--element-bg-color-selected);"},{"selector":"x-menu x-menu-item submenu ","rule":"display: none;"},{"selector":"x-menu x-menu-item.expanded submenu ","rule":"position: absolute;z-index: 10000;display: block;top: 24px;left: 0;width: 200px;background: var(--element-bg-color);border: var(--element-border);"},{"selector":"x-menu x-menu-item submenu x-menu-item ","rule":"display: block;"},{"selector":"x-menu x-menu-item submenu x-menu-item:hover ","rule":"background: var(--element-bg-color-selected);"},{"selector":"x-menu x-menu-item submenu x-menu-item span ","rule":"display: block;"},{"selector":".line ","rule":"display: block;height: 1px;width: 100%;background-color: #323232;"}];
 				const css$1 = {
@@ -5102,9 +5154,9 @@
 
 	customElements.define('x-tab', Tab);
 
-	css$e.install();
-	css$d.install();
+	css$f.install();
 
+	css$e.install();
 
 
 	const App = class {
@@ -5117,42 +5169,65 @@
 							{
 								title: 'Create project',
 								action: () => {
+									busEvent.fire("projectCreate");
 								}
 							},
-							{title: 'Open project'},
-							{title: 'Close project'},
-							{title: 'Export project'},
-							{title: 'Settings'},
+							{
+								title: 'Open project',
+								action: () => {
+									alert("This functionality will be implemented in ms3");
+								}
+							},
+							{
+								title: 'Close project',
+								action: () => {
+									alert("This functionality will be implemented in ms3");
+								}
+							},
+							{
+								title: 'Export project',
+								action: () => {
+									alert("This functionality will be implemented in ms3");
+								}
+							},
+							{
+								title: 'Settings',
+								action: () => {
+									busEvent.fire("settingsOpen");
+								}
+							},
 						]
 					},
-					{
-						title: 'Edit',
-						childNodes: [
-							{
-								title: 'Cut',
-								action: () => {}
-							},
-							{
-								title: 'Copy',
-								action: () => {}
-							},
-							{
-								title: 'Paste',
-								action: () => {}
-							},
-							{
-								title: 'Delete',
-								action: () => {}
-							}
-						]
-					},
+					/*				{
+										title: 'Edit',
+										childNodes: [
+											{
+												title: 'Cut',
+												action: () => {}
+											},
+											{
+												title: 'Copy',
+												action: () => {}
+											},
+											{
+												title: 'Paste',
+												action: () => {}
+											},
+											{
+												title: 'Delete',
+												action: () => {}
+											}
+										]
+									},*/
 					{
 						title: 'Build',
 						childNodes: [
 							{
 								title: 'Build project',
 								action: () => {
-									projectManager.project.build();
+									if (projectManager.project) {
+										projectManager.project.build();
+									}
 								}
 							}
 						]
@@ -5160,8 +5235,18 @@
 					{
 						title: 'Help',
 						childNodes: [
-							{title: 'Getting Started'},
-							{title: 'Learn IDE Features'},
+							{
+								title: 'Getting Started',
+								action: () => {
+									alert("This functionality will be implemented in future");
+								}
+							},
+							{
+								title: 'Learn IDE Features',
+								action: () => {
+									alert("This functionality will be implemented in future");
+								}
+							},
 						]
 					}
 				]
@@ -5210,6 +5295,10 @@
 				this.$panelSpace.panelSelect(panelName);
 			});
 
+			busEvent.on("settingsOpen", () => {
+				this.settingsOpen();
+			});
+
 			//console.log("this.$panelSpace:", this.$panelSpace);
 		}
 
@@ -5219,7 +5308,6 @@
 				console.log('open tab pid:', tabPid);
 				this.$tabs.select(tabPid);
 			} else {
-
 				let $tabContent = new IdeTabContentCode(filename);
 				this.$tabs.create(tabPid, filename, $tabContent);
 
@@ -5233,6 +5321,16 @@
 				});
 				//console.log('this.$tabs:', this, this.$tabs);
 				colorize($tabContent.isChanged);
+			}
+		}
+
+		settingsOpen() {
+			let tabPid = ':settings';
+			if (this.$tabs.isOpened(tabPid)) {
+				this.$tabs.select(tabPid);
+			} else {
+				let $tabContent = new IdeTabContentSettings();
+				this.$tabs.create(tabPid, 'IDE Settings', $tabContent);
 			}
 		}
 	};
