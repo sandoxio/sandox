@@ -29,4 +29,6 @@ Run the application build command from the project root:
 The compiled project will be in the directory `/dist`
 
 ## Demo
-Here's a short demo video, that shows current progress on the project
+
+Here's a short demo video, that shows current progress on the project:
+[![ms1 preview](https://github-production-user-asset-6210df.s3.amazonaws.com/130372146/252937788-b9df91d2-b65d-4b62-b988-39c2d12b704f.jpg)](https://youtu.be/42MsyZh1HRg)
