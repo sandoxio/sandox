@@ -6,6 +6,15 @@ class Project {
 		this.model = new ObjectLive({
 			struct: projData
 		});
+		this.localSave();
+
+		this.model.addEventListener('change', /^struct.*/, () => {
+			this.localSave();
+		});
+	}
+
+	localSave() {
+		localStorage.setItem('currentProject', JSON.stringify(this.model.data.struct));
 	}
 
 	build() {
@@ -89,5 +98,12 @@ busEvent.on("projectCreate", () => {
 	projectManager.create();
 });
 
+const currentProjectCfg = localStorage.getItem('currentProject');
+if (currentProjectCfg) {
+	projectManager.project = new Project(JSON.parse(currentProjectCfg));
+	setTimeout(() => {		//TODO: replace by global onReady event
+		busEvent.fire('panelOpen', 'projectInfo');
+	}, 100);
+}
 
 export default projectManager;

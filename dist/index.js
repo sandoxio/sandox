@@ -1973,6 +1973,15 @@
 			this.model = new ObjectLive({
 				struct: projData
 			});
+			this.localSave();
+
+			this.model.addEventListener('change', /^struct.*/, () => {
+				this.localSave();
+			});
+		}
+
+		localSave() {
+			localStorage.setItem('currentProject', JSON.stringify(this.model.data.struct));
 		}
 
 		build() {
@@ -2055,6 +2064,14 @@
 		busEvent.fire("panelOpen", "projectInfo");
 		projectManager.create();
 	});
+
+	const currentProjectCfg = localStorage.getItem('currentProject');
+	if (currentProjectCfg) {
+		projectManager.project = new Project(JSON.parse(currentProjectCfg));
+		setTimeout(() => {
+			busEvent.fire('panelOpen', 'projectInfo');
+		}, 100);
+	}
 
 	const rules$8 = [{"selector":"x-aceeditor ","rule":"display: flex;flex-direction: column;height: 100%;border: var(--input-border);"}];
 				const css$8 = {
