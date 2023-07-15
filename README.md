@@ -18,11 +18,13 @@ Personal panels – user defined and customized.
 # How To
 ## Build
 
-Install required project dependencies:
+1) Rollup is used to build the application. This needs to be installed if you don't have it (https://rollupjs.org/introduction/#installation)
+
+2) Install required project dependencies:
 
     npm i
 
-Run the application build command from the project root:
+3) Run the application build command from the project root:
 
     ./cmd/build.sh
 
