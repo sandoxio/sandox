@@ -1,6 +1,9 @@
 import ObjectLive from "object-live";
 import busEvent from "./busEvent.js";
 
+let originConsole = window.console.log;
+const eval2 = eval;
+
 class Project {
 	constructor(projData) {
 		this.model = new ObjectLive({
@@ -22,15 +25,11 @@ class Project {
 		busEvent.fire("panelOpen", "console");
 
 		const code = this.model.data.struct.files['app.js'];
-		new Function("__log, __error", `setTimeout(() => {const console={log: __log}; try {${code}} catch(e) {__error(e+"")}  }, 0);`)(
-			(msg) => {
-				busEvent.fire('logAdd', {text: msg, type: "text", date: new Date()});
-			},
-			(msg) => {
-				busEvent.fire('logAdd', {text: msg, type: "error", date: new Date()});
-			}
-		);
-		console.log('build', );
+		window.console.log = (msg) => {busEvent.fire('logAdd', {text: msg, type: 'text', date: new Date()});};
+		eval2( code );
+		window.console.log = originConsole;
+
+		console.log('build');
 	}
 
 	fileAdd() {
@@ -50,13 +49,18 @@ class Project {
 	}
 }
 
+window.onerror = (msg, url, line, col, error) => {
+	window.console.log = originConsole;
+	busEvent.fire('logAdd', {text: "`" + msg + "`" + "at line " + line, type: "error", date: new Date()});
+	return false;
+};
+
 
 const newProjectStruct = {
 	files: {
 		'app.js': ''
 	},
-	filesCfg: {
-	},
+	filesCfg: {},
 	settings: {}
 }
 
