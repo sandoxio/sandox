@@ -4,7 +4,7 @@ SanDOx is an integrated development environment, that is thought to leverage Pol
 
 ![Sandox ide pic](https://user-images.githubusercontent.com/130372146/234008638-f55a3bde-3482-41c5-9b40-6828128ee33d.png)
 
-SanDOx is an open source IDE built as a browser app that consist of tool panels. SanDOx IDE is supposed to have a built-in base list of tool panels with an ability to add personal panels in the form of plug-ins.
+SanDOx IDE is supposed to have a built-in base list of tool panels with an ability to add personal panels in the form of plug-ins.
 
 Supposed base list of panels:
 Project – shows project structure with catalogues and files.
