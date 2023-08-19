@@ -1,0 +1,20 @@
+x-contextmenu {
+	position: absolute;
+	background: var(--element-bg-color);
+	border: var(--element-border);
+}
+
+x-contextmenu x-menu-item {
+	position: relative;
+	display: block;
+	font-size: 12px;
+	cursor: default;
+}
+
+x-contextmenu x-menu-item > div {
+	padding: 6px 10px 4px;
+}
+
+x-contextmenu x-menu-item:hover {
+	background: var(--element-bg-color-selected);
+}

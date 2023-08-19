@@ -1,0 +1,15 @@
+x-tpl_prompt {
+	display: block;
+	padding: 20px;
+}
+
+x-tpl_prompt > div {
+	height: 60px;
+}
+
+x-tpl_prompt .control {
+	float: right;
+}
+x-tpl_prompt .control button {
+	margin: 20px 0 0 10px;
+}

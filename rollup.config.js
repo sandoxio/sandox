@@ -1,4 +1,4 @@
-//import {uglify} from 'rollup-plugin-uglify';
+//import uglify from '@lopatnov/rollup-plugin-uglify'
 import build from 'rollup-plugin-rp';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -32,7 +32,6 @@ export default {
 		}),
 		commonjs(),
 		build(),
-		//dotenv(),
 		//uglify()
 	]
 };

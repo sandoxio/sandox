@@ -1,4 +1,4 @@
-.ico {
+.ico, .icoColor {
 	display: inline-block;
 	background-size: cover;
 }
@@ -43,6 +43,37 @@
 	width: 16px;
 	height: 16px;
 	background-image: url("../img/ico/arrowDown.svg");
+}
+
+.ico.directRight {
+	width: 14px;
+	height: 14px;
+	background-image: url("../img/ico/directRight.svg");
+}
+
+.ico.directDown {
+	width: 14px;
+	height: 14px;
+	background-image: url("../img/ico/directDown.svg");
+}
+
+.ico.project {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/project.svg");
+}
+
+.icoColor.folder {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/folder.svg");
+	filter: brightness(0) invert(1) brightness(80%);
+}
+
+.icoColor.file_js {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/file_js.svg");
 }
 
 .ico.eye {

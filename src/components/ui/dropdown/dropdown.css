@@ -1,0 +1,84 @@
+x-dropdown {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+}
+
+x-dropdown[disabled="disabled"] {
+	opacity: 0.5;
+}
+
+x-dropdown div[name="selectedName"] {
+	background: var(--input-bg-color);
+	color: var(--element-text-color);
+	border: var(--input-border);
+	border-radius: var(--element-border-radius);
+	padding: 2px 20px 2px 4px;
+	position: relative;
+	box-sizing: border-box;
+	height: 20px;
+}
+
+x-dropdown div[name="selectedName"]::after {
+	position: absolute;
+	right: 3px;
+}
+
+x-dropdown div[name="selectedName"].expanded::after {
+	display: inline-block;
+	content: "↥";
+}
+
+x-dropdown div[name="selectedName"]:not(.expanded)::after {
+	display: inline-block;
+	content: "↧";
+}
+
+x-dropdown div[name="listContainer"] {
+	border: var(--element-border);
+	border-radius: var(--element-border-radius);
+	background: var(--input-bg-color);
+	color: var(--element-text-color);
+	overflow: hidden;
+	position: absolute;
+	margin-top: 1px;
+	left: 0;
+	width: 100%;
+	box-sizing: border-box;
+	z-index: 10000;
+}
+
+x-dropdown div[name="list"] {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 100%;
+	display: block;
+}
+
+x-dropdown div[name="listContainer"]:not(.expanded) {
+	display: none;
+}
+
+x-dropdown div[name="listContainer"].expanded {
+	display: block;
+}
+
+x-dropdown item {
+	display: block;
+	padding: 2px 4px;
+	font-size: 12px;
+	cursor: default;
+}
+
+x-dropdown item:hover {
+	background: var(--element-bg-color-selected);
+}
+
+x-dropdown splitter {
+	display: block;
+	height: 1px;
+	width: 100%;
+	background: var(--element-border-color);
+}

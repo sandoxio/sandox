@@ -53,6 +53,7 @@ window.addEventListener('mouseup', e => {
 
 document.body.addEventListener('mousemove', e => {
 	mouse.pageX = e['pageX'];
+	mouse.pageY = e['pageY'];
 	if (drag.enabled) {
 		drag.target.dispatchEvent(new CustomEvent('mousedrag', {
 			detail: {

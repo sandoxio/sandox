@@ -1,0 +1,12 @@
+<template name="Tpl_createDirectory">
+	<table>
+		<tr>
+			<td>Directory name</td>
+			<td><input value="{{m.name}}" name="name" onkeydown="self.onKeyDown(e);"></td>
+		</tr>
+	</table>
+	<div class="control">
+		<button class="big main" onclick="self.create();">Create directory</button>
+		<button class="big" onclick="self.cancel();">Cancel</button>
+	</div>
+</template>

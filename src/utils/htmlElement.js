@@ -76,6 +76,19 @@ const isIntersecting = (el, area) => {
 };
 
 
+const animate = function (node, className, callback) {
+	node.classList.add(className);
+	let animationEvent = () => {
+		node.removeEventListener('animationend', animationEvent);
+		node.classList.remove(className);
+		if (callback) {
+			callback();
+		}
+	};
+	node.addEventListener('animationend', animationEvent);
+};
+
+
 const animateProperty = ($el, prop, endValue, callback) => {
 	let elStyles = window.getComputedStyle($el, null);
 	let startValue = Number.parseInt(elStyles[prop]);
@@ -144,5 +157,5 @@ const isChildOf = (p, rootNode) => {
 	return (p && p !== b);
 };
 
-export {cumulativeHeight, cumulativeWidth, cumulativeOffsetLeft, cumulativeOffsetTop, isIntersecting, animateProperty, insertAfter, childNodesRemove, isChildOf};
+export {cumulativeHeight, cumulativeWidth, cumulativeOffsetLeft, cumulativeOffsetTop, isIntersecting, animate, animateProperty, insertAfter, childNodesRemove, isChildOf};
 

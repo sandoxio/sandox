@@ -1,0 +1,266 @@
+x-window {
+	position: absolute;
+	display: block;
+	border: 1px solid #515151;
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+	opacity: 1;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+
+x-window.opening {
+	animation: window-opening 0.15s ease-in-out 1;
+}
+@keyframes window-opening {
+	0%		{transform: scale(0.7); opacity: 0}
+	100%	{transform: scale(1); opacity: 1}
+}
+
+x-window.minify {
+	animation: window-minify 0.3s linear 1;
+}
+@keyframes window-minify {
+	0%		{
+		transform: scaleX(1) scaleY(1);
+	}
+	100%	{
+		transform: scaleX(var(--window-minify-scale-w)) scaleY(var(--window-minify-scale-h));
+		left: var(--window-minify-to-x);
+		top: var(--window-minify-to-y);
+	}
+}
+
+x-window.restore {
+	animation: window-restore 0.3s linear 1;
+}
+@keyframes window-restore {
+	0%		{
+		transform: scaleX(var(--window-minify-scale-w)) scaleY(var(--window-minify-scale-h));
+		left: var(--window-minify-to-x);
+		top: var(--window-minify-to-y);
+	}
+	100%	{
+		transform: scaleX(1) scaleY(1);
+	}
+}
+
+x-window.max {
+	animation: window-max-pos 0.2s linear 1;
+}
+
+x-window.max > x-tpl_window > div[name="wrapper"] {
+	animation: window-max-size 0.2s linear 1;
+	width: var(--window-minify-to-w);
+	height: var(--window-minify-to-h);
+}
+
+@keyframes window-max-pos {
+	0%		{}
+	100%	{
+		left: var(--window-minify-to-x);
+		top: var(--window-minify-to-y);
+	}
+}
+@keyframes window-max-size {
+	0%		{
+		width: var(--window-minify-from-w);
+		height: var(--window-minify-from-h);
+	}
+	100%	{
+		width: var(--window-minify-to-w);
+		height: var(--window-minify-to-h);
+	}
+}
+
+x-window.closing {
+	animation: window-closing 0.15s ease-in-out 1;
+}
+@keyframes window-closing {
+	0%		{transform: scale(1); opacity: 1}
+	100%	{transform: scale(0.7); opacity: 0}
+}
+
+
+
+x-window div[name="wrapper"] {
+	display: block;
+}
+
+x-window.created {
+	opacity: 1;
+	transition: opacity 0.6s;
+}
+x-window.removed {
+	opacity: 0;
+	transition: all 0.2s;
+}
+/*
+x-window.max {
+	border-top: 0!important;
+	transition: all 0.2s;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	margin-bottom: 40px;
+}
+x-window.restore {
+	transition: all 0.2s;
+}
+
+ */
+
+x-window.active {
+	border: 1px solid #888;
+}
+x-window.active.highlight {
+	animation: coreWindowHighlight 0.3s infinite;
+	animation-iteration-count: 2;
+	-moz-animation: coreWindowHighlight 0.3s infinite;
+	-moz-animation-iteration-count: 2;
+	-webkit-animation: coreWindowHighlight 0.3s infinite;
+	-webkit-animation-iteration-count: 2;
+}
+x-window.active .window_caption {
+	background: var(--head-background);
+}
+
+.window_caption {
+	display: table-row;
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	color: var(--head-color);
+	cursor: default;
+	background: var(--head-background);
+}
+
+.window_caption div[name="titlebar"] {
+	display: block;
+	position: relative;
+}
+
+.window_caption div[name="title"] {
+	text-align: left;
+	padding-left: 15px;
+	width: 100%;
+	display: inline-block;
+	padding-right: 96px;
+	box-sizing: border-box;
+}
+
+/* window control buttons*/
+.window_caption .window_controlButtons {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 19px;
+	line-height: 19px;
+	border-top-right-radius: 3px;
+	overflow: hidden;
+}
+
+.window_control {
+	width: 30px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+
+.window_control_max {
+	font-size: 12px;
+}
+.window_control:hover {
+	background: var(--element-bg-color-hover);
+
+}
+.window_control_close:hover {
+	background: #ff0067;
+	color: white;
+}
+/* end window control buttons*/
+
+
+.window_content {
+	background: var(--body-bg-color);
+	color: white;
+	display: table-row;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+/*Resizable*/
+.crop {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.crop .crop-line {
+	position: absolute;
+}
+
+.crop .crop-top-line {
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 5px; /* 5px for the mouse cursor update size */
+	margin-top: -3px;
+	cursor: n-resize;
+}
+.crop .crop-bottom-line {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 5px; /* 5px for the mouse cursor update size */
+	margin-bottom: -3px;
+	cursor: s-resize;
+}
+.crop .crop-left-line {
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 5px; /* 5px for the mouse cursor update size */
+	margin-left: -3px;
+	cursor: w-resize;
+}
+.crop .crop-right-line {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 5px; /* 5px for the mouse cursor update size */
+	margin-right: -3px;
+	cursor: e-resize;
+}
+.crop .crop-corner {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+}
+.crop .crop-top-left-corner {
+	top: -3px;
+	left: -3px;
+	cursor: nw-resize;
+}
+.crop .crop-top-right-corner {
+	top: -3px;
+	right: -3px;
+	cursor: ne-resize;
+}
+.crop .crop-bottom-left-corner {
+	bottom: -3px;
+	left: -3px;
+	cursor: sw-resize;
+}
+.crop .crop-bottom-right-corner {
+	bottom: -3px;
+	right: -3px;
+	cursor: se-resize;
+}

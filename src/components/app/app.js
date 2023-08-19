@@ -35,7 +35,7 @@ const App = class {
 						{
 							title: 'Create project',
 							action: () => {
-								busEvent.fire("projectCreate");
+								busEvent.fire("actions.project.create");
 							}
 						},
 						{
@@ -47,7 +47,7 @@ const App = class {
 						{
 							title: 'Close project',
 							action: () => {
-								alert("This functionality will be implemented in ms3");
+								busEvent.fire("actions.project.close");
 							}
 						},
 						{
@@ -59,7 +59,7 @@ const App = class {
 						{
 							title: 'Settings',
 							action: () => {
-								busEvent.fire("settingsOpen");
+								busEvent.fire("actions.settings.open");
 							}
 						},
 					]
@@ -152,30 +152,41 @@ const App = class {
 		this.$tabs = new Tab({closeButton: true, selectOnTabCreate: true});
 		this.$panelSpace.$workspace.appendChild(this.$tabs);
 
-		busEvent.on("fileOpen", (filename) => {
-			console.log('open:', filename);
-			this.fileOpen(filename);
+		busEvent.on("events.file.open", (cfg) => {
+			this.tabFileOpen(cfg);
 		});
 
-		busEvent.on("panelOpen", (panelName) => {
+		busEvent.on("events.file.delete", (cfg) => {
+			this.tabFileClose(cfg);
+		});
+
+		busEvent.on("actions.panel.open", (panelName) => {
 			this.$panelSpace.panelSelect(panelName);
 		});
 
-		busEvent.on("settingsOpen", () => {
-			this.settingsOpen();
+		busEvent.on("actions.settings.open", () => {
+			this.tabSettingsOpen();
 		});
 
 		//console.log("this.$panelSpace:", this.$panelSpace);
 	}
 
-	fileOpen(filename) {
-		let tabPid = ':' + filename;
+	/**
+	 *
+	 * @param cfg
+	 * @param cfg.path
+	 * @param cfg.node
+	 * @param cfg.parentNode
+	 */
+	tabFileOpen(cfg) {
+		//console.log('[app] fileOpen:', cfg);
+		let tabPid = ':' + cfg.path;
 		if (this.$tabs.isOpened(tabPid)) {
 			console.log('open tab pid:', tabPid);
 			this.$tabs.select(tabPid);
 		} else {
-			let $tabContent = new IdeTabContentCode(filename);
-			this.$tabs.create(tabPid, filename, $tabContent);
+			let $tabContent = new IdeTabContentCode(cfg.path);
+			this.$tabs.create(tabPid, cfg.node.title, $tabContent);
 
 			let colorize = (isChanged) => {
 				this.$tabs.colorize(tabPid, isChanged ? 'var(--active-text-color)' : 'var(--text-color)');
@@ -190,7 +201,13 @@ const App = class {
 		}
 	}
 
-	settingsOpen() {
+	tabFileClose(cfg) {
+		let tabPid = ':' + cfg.path;
+		console.log('[app] fileClose:', cfg);
+		this.$tabs.close(tabPid);
+	}
+
+	tabSettingsOpen() {
 		let tabPid = ':settings';
 		if (this.$tabs.isOpened(tabPid)) {
 			this.$tabs.select(tabPid);

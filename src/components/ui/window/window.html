@@ -1,0 +1,28 @@
+<template name="Tpl_window">
+	<div name="wrapper">
+		<div class="crop">
+			<div name="borders">
+				<div class="crop-line crop-top-line" direction="Top"></div>
+				<div class="crop-line crop-right-line" direction="Right"></div>
+				<div class="crop-line crop-bottom-line" direction="Bottom"></div>
+				<div class="crop-line crop-left-line" direction="Left"></div>
+				<div class="crop-corner crop-top-left-corner" direction="TopLeft"></div>
+				<div class="crop-corner crop-top-right-corner" direction="TopRight"></div>
+				<div class="crop-corner crop-bottom-right-corner" direction="BottomRight"></div>
+				<div class="crop-corner crop-bottom-left-corner" direction="BottomLeft"></div>
+			</div>
+			<div style="display: table; width: 100%; height: 100%;">
+				<div class="window_caption">
+					<div name="titlebar" ondblclick="self.max();">
+						<div name="title">{{m.title}}</div>
+						<div class="window_controlButtons">
+							<span class="window_control window_control_max" action="max" onclick="self.max();">◱</span>
+							<span class="window_control window_control_close" action="close" onclick="self.close();">✕</span>
+						</div>
+					</div>
+				</div>
+				<div name="content" class="window_content"></div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,27 @@
+x-tpl_tree_item .item {
+	display: block;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none;
+}
+
+x-tpl_tree_item .item.selected {
+	background: var(--element-bg-color-selected);
+}
+
+x-tpl_tree_item .item > * {
+	display: inline-block;
+	vertical-align: middle;
+	cursor: default;
+}
+
+x-tpl_tree_item .item > span > * {
+	vertical-align: middle;
+}
+
+x-tpl_tree_item .item > span > span {
+	vertical-align: middle;
+	margin-left: 5px;
+}

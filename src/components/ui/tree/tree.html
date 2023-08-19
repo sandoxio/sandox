@@ -1,0 +1,10 @@
+<template name="Tpl_tree_item">
+	<div class="item" name="item" onclick="self.select();" oncontextmenu="self.onContextMenu(); return false;" ondblclick="self.onDoubleClick();">
+		<i class="ico {{m.isExpanded ? 'directDown' : 'directRight'}}" onclick="self.roll(); e.stopPropagation();" style="visibility: {{m.isDirectory && m.childNodes.length ? 'visible' : 'hidden'}}"></i>
+		<span>
+			<i class="icoColor {{m.ico}}"></i>
+			<span class="title">{{m.title}}</span>
+		</span>
+	</div>
+	<div name="children"></div>
+</template>

@@ -1,0 +1,32 @@
+x-tpl_createfile {
+	display: block;
+	padding: 20px;
+}
+
+x-tpl_createfile table {
+	border-collapse: collapse;
+}
+
+x-tpl_createfile table tr td {
+	padding: 0;
+}
+
+x-tpl_createfile table tr td:nth-child(1) {
+	width: 100px;
+}
+
+x-tpl_createfile table tr td:nth-child(2) {
+	font-size: 0;
+}
+
+x-tpl_createfile table tr td:nth-child(2) > * {
+	width: 200px;
+	margin: 5px 0;
+}
+
+x-tpl_createfile .control {
+	float: right;
+}
+x-tpl_createfile .control button {
+	margin: 20px 0 0 10px;
+}

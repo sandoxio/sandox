@@ -2,7 +2,7 @@ import css from "./draggable.css";
 
 css.install();
 
-import {} from "./mouse.js";
+import {} from "../../../utils/mouse.js";
 import {
 	cumulativeHeight,
 	cumulativeWidth,

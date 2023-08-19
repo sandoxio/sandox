@@ -1,0 +1,20 @@
+<template name="Tpl_createProject">
+	<table>
+		<tr>
+			<td>Project name</td>
+			<td><input value="{{m.name}}" name="name" onkeydown="self.onKeyDown(e);"></td>
+		</tr>
+		<tr>
+			<td>Language</td>
+			<td><x-dropdown value:="m.language">
+					<item value='js'>Javascript(console)</item>
+					<item value='ink'>Ink!</item>
+					<item value='sol'>Solidity</item>
+				</x-dropdown></td>
+		</tr>
+	</table>
+	<div class="control">
+		<button class="big main" onclick="self.create();">Create project</button>
+		<button class="big" onclick="self.cancel();">Cancel</button>
+	</div>
+</template>

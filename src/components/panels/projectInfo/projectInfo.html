@@ -5,16 +5,9 @@
 		</item>
 	</div>
 
-	<div name="projectInfo"></div>
+	<x-tree value:="m.tree" selected:="m.selectedFile"></x-tree>
 </template>
 
-
-<template name="Tpl_projectInfo_item">
-	<div class="control">
-		<span name="projectName">{{name}}</span>
-	</div>
-	<ul name="tree"></ul>
-</template>
 
 
 <template name="Tpl_noProject">
