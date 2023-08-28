@@ -134,7 +134,7 @@ class PanelSpace extends HTMLElement {
 	}
 
 	panelSelect(panelName) {
-		console.log('[panelspace] panelSelect:', panelName);
+		//console.log('[panelspace] panelSelect:', panelName);
 		this.#barStates[this.#config.panels[panelName].bar] = panelName;
 		this.#panelContentsReflow();
 	}

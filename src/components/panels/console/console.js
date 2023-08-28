@@ -54,7 +54,7 @@ class IdePanelConsole extends HTMLElement {
 	 */
 	logRowRender(cfg) {
 		cfg.text += "";
-		let color = {error: '#c1544e', success: '#21b20b', text: '#ffffff'}[cfg.type];
+		let color = {error: '#c1544e', warn: '#d9da27',  action: '#3f89fd', success: '#21b20b', text: '#ffffff'}[cfg.type];
 		let $msg = document.createElement('div');
 
 		let $time = document.createElement('div');
@@ -77,7 +77,7 @@ class IdePanelConsole extends HTMLElement {
 	}
 
 	static init() {
-		busEvent.on('logAdd', e => {
+		busEvent.on('actions.log.add', e => {
 			if (typeof e !== "object") {
 				logs.data.value.push({text: e + "", date: new Date(), type: "text"});
 			} else {

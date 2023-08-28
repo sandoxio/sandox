@@ -7,6 +7,6 @@ mkdir -p "${DIR}/dist"
 cp "${DIR}/src/index.html" "${DIR}/dist/index.html"
 touch "${DIR}/dist/worker-javascript.js"
 
-rollup -c "${DIR}/rollup.config.js"
-#node --max-old-space-size=8192 /usr/bin/rollup -c "${DIR}/rollup.config.js"
+"${DIR}/cmd/libsBuild.sh"
 
+rollup -c "${DIR}/rollup.config.js"

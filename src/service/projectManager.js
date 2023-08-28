@@ -6,18 +6,27 @@ import createFile from "../components/modal/project/createFile/createFile.js";
 import createDirectory from "../components/modal/project/createDirectory/createDirectory.js";
 import Prompt from "../components/ui/prompt/prompt.js";
 
-let originConsole = window.console.log;
-const eval2 = eval;
+import PathNavigator from "../utils/PathNavigator.js";
+
+
+window.ideLog = (type, text) => {
+	busEvent.fire('actions.log.add', {text: text, type: type, date: new Date()});
+}
 
 class Project {
+	#buildFrame;
+
 	constructor(projData) {
 		this.model = new ObjectLive({
 			isChanged: false,
 			struct: projData					// {tree: [], settings: {}}
 		});
 
+		this.libRefresh('@polkadot/api', 'polkadot_api.js').then(()=>{});
+		this.libRefresh('@polkadot/util-crypto', 'polkadot_util-crypto.js').then(()=>{});
+
 		this.model.addEventListener('change', /^struct.*/, (cfg) => {
-			console.log('struct changed:', cfg);
+			//console.log('struct changed:', cfg);
 			this.localSave();
 		});
 	}
@@ -26,22 +35,183 @@ class Project {
 		localStorage.setItem('currentProject', JSON.stringify(this.model.data.struct));
 	}
 
+	#fileContentGet(filePath) {
+		return filePath.split('/').reduce((node, childName) => {
+			return node.childNodes.find(item => item.title === childName);
+		}, projectManager.project.model.data.struct.tree[0]).value;
+	}
+
+	#libContentGet(libName) {
+		return this.model.data.struct.tree[1].childNodes.find(lib => lib.title === libName).value;
+	}
+
 	build() {
 		//open console
 		busEvent.fire("actions.panel.open", "console");
 
-		const indexFile = this.model.data.struct.tree[0].childNodes[0].filter(fileNode => fileNode.value === 'app.js')[0];
+		const indexFile = this.model.data.struct.tree[0].childNodes.find(fileNode => fileNode.title === 'app.js');
+		//console.log('indexFile:', indexFile);
 		if (indexFile) {
-			window.console.log = (msg) => {
-				busEvent.fire('logAdd', {text: msg, type: 'text', date: new Date()});
-			};
-			eval2(indexFile.data);	//eval code
-			window.console.log = originConsole;
+			const moduleFileByUrl = {};	// {url: filePath, "blob:http://gitmodules.local/a89230eb-1d98-4dff-8128-25ef15b7228d": "test.js"}
+			const moduleUrlByFile = {};	// {filePath: url, "test.js": "blob:http://gitmodules.local/a89230eb-1d98-4dff-8128-25ef15b7228d"}
 
-			console.log('build');
+			if (this.#buildFrame) {
+				document.body.removeChild(this.#buildFrame);
+			}
+			this.#buildFrame = document.createElement("IFRAME");
+			this.#buildFrame.src = "about:blank";
+			this.#buildFrame.style.visibility = "hidden";
+			document.body.appendChild(this.#buildFrame);
+
+			const scriptAdd = (scp, moduleUrl) => {
+				let mod = document.createElement('script');
+				if (moduleUrl) {
+					mod.type = "module";
+					mod.src = moduleUrl;
+				} else {
+					mod.textContent = scp;
+				}
+				this.#buildFrame.contentWindow.document.body.appendChild(mod);
+			};
+
+			const dependencies = [];
+
+			const moduleInit = (srcFilePath) => {
+				dependencies.push(srcFilePath);
+
+				let srcPathAddr = new PathNavigator(srcFilePath);
+				let srcContent;
+				if (this.model.data.struct.tree[1].childNodes.find(lib => lib.title === srcFilePath)) {
+					srcContent = this.#libContentGet(srcFilePath);
+				} else {
+					try {
+						srcContent = this.#fileContentGet(srcFilePath);
+					} catch (e) {}
+				}
+				if (!srcContent) {
+					return null;
+				}
+
+				/*
+					TODO: ignore imports in single comments '//',	reg = /(?<!^[\p{Zs}\t]*\/\/.*)/g
+				*/
+				srcContent = srcContent.replace(/(?<!\/\*(?:(?!\*\/)[\s\S\r])*?)(import.*? from[\s\t+])(['"])(.*?)\2;/igm, (_, what, quote, relativeModulePath) => {
+					if (this.model.data.struct.tree[1].childNodes.find(lib => lib.title === relativeModulePath)) {		// if lib exist
+						//console.log('%cfind import:', 'background:green;', relativeModulePath, moduleUrlByFile);
+						if (moduleUrlByFile[relativeModulePath]) {						//if already imported early
+							return `${what} "${moduleUrlByFile[relativeModulePath]}";`;
+						} else {
+							const replacedUrl = moduleInit(relativeModulePath);
+							return replacedUrl!==null ? `${what} "${replacedUrl}";` : `${what} "${relativeModulePath}";`;		// code of imports
+						}
+					} else {
+						const moduleFilePath = srcPathAddr.navigate(relativeModulePath);
+						const replacedUrl = moduleInit(moduleFilePath);
+						//console.log('%c moduleFilePath:', 'background:magenta; color:white;', moduleFilePath);
+						return replacedUrl !==null ? `${what} "${replacedUrl}";` : `${what} "${relativeModulePath}";`;
+					}
+				});
+				return depAdd(srcFilePath, srcContent);						// module blob url
+			}
+
+			const depAdd = (moduleFilePath, srcContent) => {
+				const blob = new Blob([srcContent], {type: 'application/javascript'});
+				const moduleUrl = URL.createObjectURL(blob);
+				moduleFileByUrl[moduleUrl] = moduleFilePath
+				moduleUrlByFile[moduleFilePath] = moduleUrl;
+				return moduleUrl;
+			}
+
+			scriptAdd(`top.ideLog('action', 'Launched "app.js"');`);
+			moduleInit('app.js');
+			scriptAdd(`
+				let moduleFileByUrl = ${JSON.stringify(moduleFileByUrl)};
+				const errs = {};
+				const pathsFix = (text) => {
+					return text.replace(/(blob:https?:\\/\\/[^/]+\\/[a-z0-9\\-]{36})/gm, (_, url) => {
+						return moduleFileByUrl[url];
+					});
+				};
+
+				window.addEventListener("error", (event) => {
+					const text = pathsFix(event.error.stack);
+					if (!errs[text]) {
+						errs[text] = 1;
+						top.ideLog('error', text);
+					}
+					event.preventDefault();
+				});
+				window.addEventListener("unhandledrejection", function (e) {
+					top.ideLog('error', pathsFix(e.reason.stack));
+					event.preventDefault();
+				});
+
+				console.log = function() {
+					top.ideLog('text', Array.from(arguments).join(' '));
+				};
+				console.warn = function() {
+					top.ideLog('warn', Array.from(arguments).join(' '));
+				};
+			`);
+
+			dependencies.reverse().forEach(moduleFilePath => {
+				scriptAdd(null, moduleUrlByFile[moduleFilePath]);
+			});
 		} else {
-			busEvent.fire('actions.log.add', {text: 'Index file is missing', type: 'error', date: new Date()});
+			busEvent.fire('actions.log.add', {text: 'Index file "app.js" is missing', type: 'error', date: new Date()});
 		}
+	}
+
+	#getNodeByPath(path) {
+
+	}
+
+	libAdd(title, name) {
+		if (!this.model.data.struct.tree[1].childNodes.find(lib => lib.title === title)) {
+			return new Promise(resolve => {
+				this.libLoad(name).then(content => {
+					this.model.data.struct.tree[1].childNodes.push({
+						ico: 'file_js',
+						title: title,
+						value: content,
+						color: '#fff',
+						isDirectory: false,
+						isVisible: true,
+						readonly: true
+					});
+					resolve();
+				});
+			});
+		} else {
+			return new Promise(resolve => {				//return "dummy promise" if lib already loading
+				resolve();
+			})
+		}
+	}
+
+	libRefresh(title, name) {
+		let libObj = this.model.data.struct.tree[1].childNodes.find(lib => lib.title === title);
+		if (!libObj) {
+			return this.libAdd(title,name);
+		} else {
+			return new Promise(resolve => {
+				this.libLoad(name).then(content => {
+					libObj.value = content;
+					resolve();
+				});
+			});
+		}
+	}
+
+	libLoad(name) {
+		return new Promise(resolve => {
+			const req = new XMLHttpRequest();
+			req.onload = e => {
+				resolve(e.target.response);
+			};
+			req.open("GET", "./libs/" + name);
+			req.send();
+		});
 	}
 
 	/**
@@ -126,15 +296,8 @@ class Project {
 	}
 
 	download() {
-
 	}
 }
-
-window.onerror = (msg, url, line, col, error) => {
-	window.console.log = originConsole;
-	busEvent.fire('logAdd', {text: "`" + msg + "`" + "at line " + line, type: "error", date: new Date()});
-	return false;
-};
 
 
 const newProjectStruct = {
@@ -156,6 +319,15 @@ const newProjectStruct = {
 					isVisible: true
 				}
 			]
+		},
+		{
+			ico: 'project',
+			title: 'External libraries',
+			color: '#fff',
+			isDirectory: true,
+			isVisible: true,
+			isExpanded: true,
+			childNodes: []
 		}
 	],
 	settings: {}
@@ -200,7 +372,7 @@ const projectManager = new (class ProjectManager {
 			/*
 			this.project = new Project(projData);
 			busEvent.fire('events.project.change', this.project);
-			busEvent.fire('logAdd', 'The project was opened');
+			busEvent.fire('actions.log.add', 'The project was opened');
 			resolve(this.project);
 			 */
 		});
@@ -223,9 +395,12 @@ const projectManager = new (class ProjectManager {
 					Object.assign(projectStruct, data);
 					console.log('[PM] projectStruct:', projectStruct);
 					this.project = new Project(projectStruct);
+					//Add libs
+					this.project.libAdd('@polkadot/api', 'polkadot_api.js').then(() => {});
+					this.project.libAdd('@polkadot/util-crypto', 'polkadot_util-crypto.js').then(() => {});
 
 					busEvent.fire('events.project.change', this.project);
-					busEvent.fire('logAdd', 'New project has been created');
+					busEvent.fire('actions.log.add', 'New project has been created');
 					resolve(this.project);
 				}
 			});

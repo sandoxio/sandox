@@ -1,2 +1,4 @@
 /node_modules
 /dist
+/src/libs/polkadot_api/node_modules
+/src/libs/polkadot_util-crypto/node_modules

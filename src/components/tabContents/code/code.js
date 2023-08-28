@@ -14,14 +14,14 @@ class IdeTabContentCode extends HTMLElement {
 
 	constructor(filePath) {
 		super();
-		console.log('[IdeCodeEditor] constructor, filePath:', filePath);
+		//console.log('[IdeCodeEditor] constructor, filePath:', filePath);
 
 		const nodeNames = filePath.split('/');
 		nodeNames.shift();
 		this.#fileNode = nodeNames.reduce((node, name) => {
 			return node.childNodes.find(item => item.title === name);
 		}, projectManager.project.model.data.struct.tree[0]);
-		console.log('fileNode:', this.#fileNode);
+		//console.log('fileNode:', this.#fileNode);
 
 
 		this.#filePath = filePath;
@@ -45,7 +45,7 @@ class IdeTabContentCode extends HTMLElement {
 		//console.log('this.#project.originalFiles:', this.#project.originalFiles, this.#filePath);
 		//console.log('[CodeEditor] files subscribed');
 
-		console.log('this.#$editor:', this.#$editor);
+		//console.log('this.#$editor:', this.#$editor);
 		this.#$editor.addEventListener('change', (e) => {
 			if (e.target === this.#$editor && this.#value !== e.detail.value) {
 				this.#value = e.detail.value;
