@@ -7,6 +7,8 @@ mkdir -p "${DIR}/dist"
 cp "${DIR}/src/index.html" "${DIR}/dist/index.html"
 touch "${DIR}/dist/worker-javascript.js"
 
-"${DIR}/cmd/libsBuild.sh"
 
+npm i --prefix ${DIR}
 rollup -c "${DIR}/rollup.config.js"
+
+"${DIR}/cmd/libsBuild.sh"
