@@ -22,8 +22,8 @@ class Project {
 			struct: projData					// {tree: [], settings: {}}
 		});
 
-		this.libRefresh('@polkadot/api', 'polkadot_api.js').then(()=>{});
-		this.libRefresh('@polkadot/util-crypto', 'polkadot_util-crypto.js').then(()=>{});
+		//this.libRefresh('@polkadot/api', 'polkadot_api.js').then(()=>{});
+		//this.libRefresh('@polkadot/util-crypto', 'polkadot_util-crypto.js').then(()=>{});
 
 		this.model.addEventListener('change', /^struct.*/, (cfg) => {
 			//console.log('struct changed:', cfg);
@@ -313,7 +313,7 @@ const newProjectStruct = {
 				{
 					ico: 'file_js',
 					title: 'app.js',
-					value: "console.log('hello world');",
+					value: "",
 					color: '#fff',
 					isDirectory: false,
 					isVisible: true
