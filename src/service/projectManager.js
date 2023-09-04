@@ -154,9 +154,11 @@ class Project {
 				};
 			`);
 
-			dependencies.reverse().forEach(moduleFilePath => {
-				scriptAdd(null, moduleUrlByFile[moduleFilePath]);
-			});
+			setTimeout(() => {
+				dependencies.reverse().forEach(moduleFilePath => {
+					scriptAdd(null, moduleUrlByFile[moduleFilePath]);
+				});
+			}, 0);
 		} else {
 			busEvent.fire('actions.log.add', {text: 'Index file "app.js" is missing', type: 'error', date: new Date()});
 		}
