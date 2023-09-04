@@ -1,6 +1,6 @@
 # Sandox
 
-SanDOx is an integrated development environment, that is thought to leverage Polkadot development process by providing ecosystem developers with right and convenient components and tools.
+SanDOx is an integrated development environment that is thought to leverage Polkadot development process by providing ecosystem developers with right and convenient components and tools.
 
 ![Sandox ide pic](https://user-images.githubusercontent.com/130372146/234008638-f55a3bde-3482-41c5-9b40-6828128ee33d.png)
 
@@ -24,11 +24,11 @@ Personal panels – user defined and customized.
 
     `npm i`
 
-3) Run the application build command from the project root:
+3) Run the application `build` command from the project root:
 
     `./cmd/build.sh`
 
-The compiled project will be in the directory `/dist`
+The compiled project will be in a `/dist` directory
 
 You can run the application using any http server, such as `http-server` or `nginx`.
 
@@ -38,11 +38,11 @@ Example:
 
 ## Usage
 
-Sandox allows you to develop applications in Javascript. Ide supports es6 modules, you can include them in your project through imports.
+Sandox allows you to develop applications in Javascript. Ide supports es6 modules, you can include them in your project using imports.
 
-The IDE already includes support for polkadot libraries that you can import and use to interact with the blockchain.
+The SanDOx IDE already supports Polkadot libraries that you can import and use to interact with a blockchain.
 
-The examples are fairly trivial, but they are intentionally kept simple to show the modules clearly.
+Examples are fairly trivial, but they are intentionally kept simple to show the modules clearly.
 In this example, we have the following file structure:
 
 ```
@@ -51,11 +51,11 @@ In this example, we have the following file structure:
       blockchain.js
 ```
 
-1)   `app.js` - the main script of the application, which is always run during the build
+1)   `app.js` - the main script of the application, which is always running during the build
 
 ```import {} from "./src/blockchain.js";```
 
-2)   `src/blockchain.js` - a module will be located that will itself use the polkadot modules
+2)   `src/blockchain.js` - for connecting Polkadot modules
 
 ```
 import {ApiPromise, WsProvider} from '@polkadot/api';
@@ -76,5 +76,10 @@ In this example, `app.js` will include the `src/blockchain.js` module, which wil
 
 ## Demo
 
-Here's a short demo video, that shows current progress on the project:
+Here's short demo videos, that show current progress on the project:  
+
+The SanDOx IDE app skeleton with some basic features:  
 [![ms1 preview](https://github-production-user-asset-6210df.s3.amazonaws.com/130372146/252937788-b9df91d2-b65d-4b62-b988-39c2d12b704f.jpg)](https://youtu.be/42MsyZh1HRg)
+
+“Project” panel and compiling feature:  
+[![Demo video](https://img.youtube.com/vi/jkzKwSGnxCg/hqdefault.jpg)](https://youtu.be/jkzKwSGnxCg)
