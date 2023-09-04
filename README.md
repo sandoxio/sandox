@@ -51,9 +51,11 @@ In this example, we have the following file structure:
       blockchain.js
 ```
 
-   `app.js` - the main script of the application, which is always run during the build
+1)   `app.js` - the main script of the application, which is always run during the build
 
-   `src/blockchain.js` - a module will be located that will itself use the polkadot modules
+```import {} from "./src/blockchain.js";```
+
+2)   `src/blockchain.js` - a module will be located that will itself use the polkadot modules
 
 ```
 import {ApiPromise, WsProvider} from '@polkadot/api';
