@@ -22,13 +22,55 @@ Personal panels – user defined and customized.
 
 2) Install required project dependencies:
 
-    npm i
+    `npm i`
 
 3) Run the application build command from the project root:
 
-    ./cmd/build.sh
+    `./cmd/build.sh`
 
 The compiled project will be in the directory `/dist`
+
+You can run the application using any http server, such as `http-server` or `nginx`.
+
+Example: 
+
+   `http-server dist/`
+
+## Usage
+
+Sandox allows you to develop applications in Javascript. Ide supports es6 modules, you can include them in your project through imports.
+
+The IDE already includes support for polkadot libraries that you can import and use to interact with the blockchain.
+
+The examples are fairly trivial, but they are intentionally kept simple to show the modules clearly.
+In this example, we have the following file structure:
+
+```
+   app.js
+   src/
+      blockchain.js
+```
+
+   `app.js` - the main script of the application, which is always run during the build
+
+   `src/blockchain.js` - a module will be located that will itself use the polkadot modules
+
+```
+import {ApiPromise, WsProvider} from '@polkadot/api';
+import {cryptoWaitReady} from '@polkadot/util-crypto';
+
+
+cryptoWaitReady().then(async () => {
+    const wsProvider = new WsProvider('wss://rpc.polkadot.io');
+    const api = await ApiPromise.create({ provider: wsProvider }); 
+
+    const chain = await api.rpc.system.chain();
+    console.log('You are connected to chain ' + chain);
+});
+```
+
+In this example, `app.js` will include the `src/blockchain.js` module, which will connect to the blockchain at `wss://rpc.polkadot.io` and get the name of the network.
+
 
 ## Demo
 
