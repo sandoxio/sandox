@@ -133,17 +133,18 @@ class Project {
 					});
 				};
 
-				window.addEventListener("error", (event) => {
-					const text = pathsFix(event.error.stack);
+				window.addEventListener("error", (e) => {
+					const text = pathsFix(e.message + '\\nat ' + e.filename + ':' + e.lineno + ':' + e.colno);
 					if (!errs[text]) {
 						errs[text] = 1;
 						top.ideLog('error', text);
 					}
-					event.preventDefault();
+					e.preventDefault();
 				});
 				window.addEventListener("unhandledrejection", function (e) {
-					top.ideLog('error', pathsFix(e.reason.stack));
-					event.preventDefault();
+					const text = e.reason.fileName ? ('ReferenceError: ' + e.reason.message + '\\nat ' + e.reason.fileName + ':' + e.reason.lineNumber + ':' + e.reason.columnNumber) : e.reason.stack;
+					top.ideLog('error', pathsFix(text));
+					e.preventDefault();
 				});
 
 				console.log = function() {
