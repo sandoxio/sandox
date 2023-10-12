@@ -12,19 +12,21 @@ import {Tpl_tree_item} from "./tree.html";
  * @param cfg.value	{Object}	//  [{ico, title, value, color, isVisible: boolean, isExpanded:boolean, childNodes: [...] }]
  *
  * @example:
- * 		<x-tree value:="m.tree" selectedPath:="m.selected"></x-tree>
+ * 		<x-tree value:="m.tree" selected:="m.selected"></x-tree>
  */
 
 
 const Tree = class Tree extends HTMLElement {
 	#cfg;								// {onDoubleClick, onContextMenu}
 	#cache;
+	#itemsByPath;
 	#selectedNode;
 	#isChildrenRendered;				// {path: bool}
 
 	constructor(model) {
 		super();
 		this.model = model;
+		this.#itemsByPath = {};
 		this.#cache = {};
 
 		//console.log('[tree] model:', model);
@@ -33,6 +35,16 @@ const Tree = class Tree extends HTMLElement {
 			this.#selectedNode = undefined;
 			this.#isChildrenRendered = {};
 			this.#renderList('', this, this.model.data.value, 1);
+		});
+
+		this.model.addEventListener('change', /^selected$/, cfg => {
+			console.log('[tree] selected changed:', cfg);
+			console.log('this.#itemsByPath', this.#itemsByPath);
+			if (this.#selectedNode) {
+				this.#selectedNode.classList.remove('selected');
+			}
+			this.#selectedNode = this.#itemsByPath[cfg.newValue].querySelector('[name=item]');
+			this.#selectedNode.classList.add('selected');
 		});
 
 		this.#isChildrenRendered = {};
@@ -48,7 +60,7 @@ const Tree = class Tree extends HTMLElement {
 		this.#isChildrenRendered[parentPath] = true;
 
 		Array.from(data).sort((a, b) => a.title > b.title ? 1 : -1).forEach(item => {
-			const itemPath = parentPath ? `${parentPath}/${item.title}` : item.title;
+			const itemPath = parentPath ? `${parentPath}/${item.value ? item.value : item.title}` : (item.value ? item.value : item.title);
 			let $childrenContainer, $itemContainer;
 
 			const logic = {
@@ -62,12 +74,7 @@ const Tree = class Tree extends HTMLElement {
 					}
 				},
 				select: () => {
-					if (this.#selectedNode) {
-						this.#selectedNode.classList.remove('selected');
-					}
-					this.#selectedNode = $item.querySelector('[name=item]');
-					this.#selectedNode.classList.add('selected');
-					this.model.data.selected = itemPath;
+					this.model.data.selected = item.value!==undefined ? item.value : itemPath;
 				},
 				onContextMenu: () => {
 					logic.select();
@@ -83,15 +90,15 @@ const Tree = class Tree extends HTMLElement {
 					}
 				}
 			};
-			const $item = new Tpl_tree_item(item, logic);
+			const $item = this.#itemsByPath[itemPath] = new Tpl_tree_item(item, logic);
 			$childrenContainer = $item.querySelector('[name=children]');
 			$itemContainer = $item.querySelector('[name=item]');
 			$itemContainer.style['padding-left'] = level * 10 + "px";
 
 			if (item.isDirectory) {
-				const fullPath = parentPath ? `${parentPath}/${item.title}` : item.title;
+				const fullPath = parentPath ? `${parentPath}/${item.value ? item.value : item.title}` : (item.value ? item.value : item.title);
 				const modelPath = 'value' + fullPath.split('/').reduce((cfg, name) => {
-					const nodeId = cfg.children.findIndex(child => child.title === name);
+					const nodeId = cfg.children.findIndex(child => child[child.value ? 'value' : 'title'] === name);
 					cfg.nodeNames.push(nodeId);
 					return {
 						nodeNames: cfg.nodeNames,

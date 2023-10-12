@@ -24,6 +24,7 @@ x-ide-panel-console div[name="log"] {
 	overflow: auto;
 	padding: 10px;
 	box-sizing: border-box;
+	background: var(--space-bg-color);
 }
 
 x-ide-panel-console div[name="log"] > div {

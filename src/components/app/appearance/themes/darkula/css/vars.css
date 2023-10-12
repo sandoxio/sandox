@@ -1,0 +1,55 @@
+:root {
+	/* Body */
+	--body-bg-color: #3c3f41;
+	--body-border-color: #353636;
+	--body-hr-color: #515151;
+	--body-text-color: #ccc;
+	--body-text-warning-color: #ff0000;
+	--body-text-description-color: #686868;
+	--body-link-color: #2597ed;
+	--body-link-color-hover: #549bff;
+
+	/* Space */
+	--space-bg-color: #2b2b2b;
+	--space-border: 1px solid var(--body-hr-color);
+
+	/* Sidebar */
+	--sidebar-bg-color: #3e434c;
+
+	/* Head */
+	--head-bg-color: var(--body-bg-color);
+	--head-text-color: var(--body-text-color);
+	--head-hr-color: var(--body-hr-color);
+
+	/* Gutter */
+	--gutter-bg-color: #313335;
+
+	/* Elements */
+	--element-bg-color: #4c5052;
+	--element-bg-color-hover: var(--space-bg-color);
+	--element-border-width: 1px;
+	--element-border-color: #686868;
+	--element-border: var(--element-border-width) solid var(--element-border-color);
+	--element-border-radius: 2px;
+	--element-text-color: #eee;
+	--element-text-color-hover: #eee;
+
+	--element-selected-bg-color: #4b6eae;
+	--element-selected-bg-color-hover: #5e7cb9;
+	--element-selected-text-color: #fff;
+
+	/* Inputs */
+	--input-bg-color: var(--body-bg-color);
+	--input-text-color: var(--body-text-color);
+	--input-border-color: var(--element-border-color);
+	--input-border-width: 1px;
+	--input-border: var(--input-border-width) solid var(--input-border-color);
+	--input-border-radius: 2px;
+
+	/*
+	--inactive-element-text-color: #aaa;
+*/
+
+
+}
+

@@ -2,6 +2,6 @@ x-aceeditor {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	border: var(--input-border);
+	border-top: 1px solid var(--body-border-color);
 	box-sizing: border-box;
 }

@@ -36,6 +36,13 @@ x-draggable[orientation="verticalRight"] x-draggable-item, .x-draggable-phantom-
 	white-space: nowrap;
 }
 
+.x-draggable-phantom-horizontal {
+	padding: 3px 10px;
+}
+.x-draggable-phantom-verticalLeft, .x-draggable-phantom-verticalRight {
+	padding: 10px 3px;
+}
+
 x-draggable[orientation="verticalLeft"] x-draggable-item, .x-draggable-phantom-verticalLeft {
 	transform: rotate(180deg);
 }

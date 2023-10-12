@@ -38,11 +38,11 @@ class Project {
 	#fileContentGet(filePath) {
 		return filePath.split('/').reduce((node, childName) => {
 			return node.childNodes.find(item => item.title === childName);
-		}, projectManager.project.model.data.struct.tree[0]).value;
+		}, projectManager.project.model.data.struct.tree[0]).data;
 	}
 
 	#libContentGet(libName) {
-		return this.model.data.struct.tree[1].childNodes.find(lib => lib.title === libName).value;
+		return this.model.data.struct.tree[1].childNodes.find(lib => lib.title === libName).data;
 	}
 
 	build() {
@@ -176,7 +176,7 @@ class Project {
 					this.model.data.struct.tree[1].childNodes.push({
 						ico: 'file_js',
 						title: title,
-						value: content,
+						data: content,
 						color: '#fff',
 						isDirectory: false,
 						isVisible: true,
@@ -199,7 +199,7 @@ class Project {
 		} else {
 			return new Promise(resolve => {
 				this.libLoad(name).then(content => {
-					libObj.value = content;
+					libObj.data = content;
 					resolve();
 				});
 			});
@@ -241,7 +241,7 @@ class Project {
 				cfg.node.childNodes.push({
 					ico: 'file_js',
 					title: data.name,
-					value: "",
+					data: "",
 					color: '#fff',
 					isDirectory: false,
 					isVisible: true
@@ -316,7 +316,7 @@ const newProjectStruct = {
 				{
 					ico: 'file_js',
 					title: 'app.js',
-					value: "",
+					data: "",
 					color: '#fff',
 					isDirectory: false,
 					isVisible: true

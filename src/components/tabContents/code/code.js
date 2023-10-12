@@ -25,7 +25,7 @@ class IdeTabContentCode extends HTMLElement {
 
 
 		this.#filePath = filePath;
-		this.#value = this.#fileNode.value;
+		this.#value = this.#fileNode.data;
 		//this.lang = project.lang;
 
 		this.#$editor = new AceEditor(this.#value);
@@ -49,7 +49,7 @@ class IdeTabContentCode extends HTMLElement {
 		this.#$editor.addEventListener('change', (e) => {
 			if (e.target === this.#$editor && this.#value !== e.detail.value) {
 				this.#value = e.detail.value;
-				this.#fileNode.value = this.#value;
+				this.#fileNode.data = this.#value;
 				//console.log('this.#project.originalFiles:', this.#project.originalFiles, this.#filePath, 'newValue', e.detail.value);
 				this.#onChange();
 			}

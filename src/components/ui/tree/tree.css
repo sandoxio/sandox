@@ -5,10 +5,12 @@ x-tpl_tree_item .item {
 	-webkit-user-select: none; /* Safari */
 	-ms-user-select: none; /* IE 10 and IE 11 */
 	user-select: none;
+	white-space: nowrap;
 }
 
 x-tpl_tree_item .item.selected {
-	background: var(--element-bg-color-selected);
+	background: var(--element-selected-bg-color);
+	color: var(--element-selected-text-color);
 }
 
 x-tpl_tree_item .item > * {

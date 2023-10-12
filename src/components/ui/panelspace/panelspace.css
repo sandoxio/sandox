@@ -11,38 +11,38 @@ x-panelspace > * {
 
 /**Panels*/
 x-panelspace x-panels-panel[name="left"] {
-	border-right: 1px solid #444;
+	border-right: 1px solid var(--body-border-color);
 }
 
 x-panelspace x-panels-panel[name="leftContent"] {
-	border-right: 1px solid #444;
+	border-right: 1px solid var(--body-border-color);
 	position: relative;
 }
 
 x-panelspace x-panels-panel[name="right"] {
-	border-left: 1px solid #444;
+	border-left: 1px solid var(--body-border-color);
 }
 
 x-panelspace x-panels-panel[name="rightContent"] {
-	border-left: 1px solid #444;
+	border-left: 1px solid var(--body-border-color);
 	position: relative;
 }
 
 x-panelspace x-panels-panel[name="top"] {
-	border-bottom: 1px solid #444;
+	border-bottom: 1px solid var(--body-border-color);
 }
 
 x-panelspace x-panels-panel[name="topContent"] {
-	border-bottom: 1px solid #444;
+	border-bottom: 1px solid var(--body-border-color);
 	position: relative;
 }
 
 x-panelspace x-panels-panel[name="bottom"] {
-	border-top: 1px solid #444;
+	border-top: 1px solid var(--body-border-color);
 }
 
 x-panelspace x-panels-panel[name="bottomContent"] {
-	border-top: 1px solid #444;
+	border-top: 1px solid var(--body-border-color);
 	position: relative;
 }
 
@@ -64,25 +64,27 @@ x-panelspace x-panels-panel x-draggable[orientation="verticalRight"] x-panelspac
 }
 
 x-panelspace x-panels-panel x-draggable x-draggable-item.active {
-	background: var(--active-element-bg-color);
+	background: var(--space-bg-color);
 }
 
+.x-draggable-phantom {
+	background: var(--space-bg-color);
+	border: 1px solid var(--body-border-color);
+}
 
-/** Panel menu */
+	/** Panel menu */
 x-panelspace x-panels-panel .menu {
-	background: var(--element-bg-color-hover);
-	border-bottom: var(--element-bg-color);
-	height: 24px;
-	padding-left: 5px;
+	background: var(--body-bg-color);
+	border-bottom: 1px solid var(--body-border-color);
+	height: 26px;
 	box-sizing: border-box;
 }
 
 x-panelspace x-panels-panel .menu > item {
-	margin-right: 5px;
 	display: inline-block;
 	margin-top: 1px;
-	height: 22px;
-	padding: 3px;
+	height: 26px;
+	padding: 4px 6px;
 	box-sizing: border-box;
 }
 

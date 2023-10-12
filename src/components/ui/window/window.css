@@ -6,8 +6,7 @@ x-window {
 	-ms-user-select: none;
 	-moz-user-select: none;
 	-webkit-user-select: none;
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+	border-radius: 4px;
 	box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
 	opacity: 1;
 	box-sizing: border-box;
@@ -126,23 +125,21 @@ x-window.active.highlight {
 	-webkit-animation: coreWindowHighlight 0.3s infinite;
 	-webkit-animation-iteration-count: 2;
 }
-x-window.active .window_caption {
-	background: var(--head-background);
-}
 
 .window_caption {
 	display: table-row;
-	height: 20px;
-	line-height: 20px;
+	height: 26px;
+	line-height: 26px;
 	font-size: 12px;
-	color: var(--head-color);
+	color: var(--head-text-color);
 	cursor: default;
-	background: var(--head-background);
+	background: var(--head-bg-color);
 }
 
 .window_caption div[name="titlebar"] {
 	display: block;
 	position: relative;
+	border-bottom: 1px solid var(--head-hr-color);
 }
 
 .window_caption div[name="title"] {
@@ -159,8 +156,7 @@ x-window.active .window_caption {
 	position: absolute;
 	right: 0;
 	top: 0;
-	height: 19px;
-	line-height: 19px;
+	line-height: 26px;
 	border-top-right-radius: 3px;
 	overflow: hidden;
 }
@@ -188,7 +184,7 @@ x-window.active .window_caption {
 
 .window_content {
 	background: var(--body-bg-color);
-	color: white;
+	color: var(--body-text-color);
 	display: table-row;
 	position: relative;
 	width: 100%;

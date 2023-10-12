@@ -20,7 +20,7 @@ const createProject = cfg => new (class {
 		this.#$window = new Window({
 			title: 'New project',
 			width: 340,
-			height: 145,
+			height: 160,
 			uiLock: true,
 			$content: this.#$createProject
 		});

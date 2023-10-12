@@ -12,13 +12,13 @@ x-dropdown[disabled="disabled"] {
 
 x-dropdown div[name="selectedName"] {
 	background: var(--input-bg-color);
-	color: var(--element-text-color);
+	color: var(--input-text-color);
 	border: var(--input-border);
 	border-radius: var(--element-border-radius);
-	padding: 2px 20px 2px 4px;
+	padding: 4px 22px 4px 8px;
 	position: relative;
 	box-sizing: border-box;
-	height: 20px;
+	height: 24px;
 }
 
 x-dropdown div[name="selectedName"]::after {
@@ -37,8 +37,8 @@ x-dropdown div[name="selectedName"]:not(.expanded)::after {
 }
 
 x-dropdown div[name="listContainer"] {
-	border: var(--element-border);
-	border-radius: var(--element-border-radius);
+	border: var(--input-border);
+	border-radius: var(--input-border-radius);
 	background: var(--input-bg-color);
 	color: var(--element-text-color);
 	overflow: hidden;
@@ -73,7 +73,7 @@ x-dropdown item {
 }
 
 x-dropdown item:hover {
-	background: var(--element-bg-color-selected);
+	background: var(--element-selected-bg-color);
 }
 
 x-dropdown splitter {

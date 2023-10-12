@@ -5,7 +5,7 @@ input, textarea {
 	border-radius: var(--element-border-radius);
 	font-size: 12px;
 	outline: none;
-	padding: 2px 5px;
+	padding: 4px 10px;
 	box-sizing: border-box;
 }
 

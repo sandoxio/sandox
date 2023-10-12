@@ -1,0 +1,63 @@
+x-tpl_settings {
+	display: grid;
+	height: 100%;
+	width: 100%;
+	grid-template-rows: auto 50px;
+	grid-template-columns: 200px auto;
+	grid-template-areas: 'settingsSidebar settingsEditor' 'settingsControl settingsControl';
+}
+
+
+
+x-tpl_settings x-tree {
+	grid-area: settingsSidebar;
+	padding-top: 20px;
+	box-sizing: border-box;
+	width: 200px;
+	height: 100%;
+	overflow: auto;
+	display: inline-block;
+	background: var(--sidebar-bg-color);
+}
+
+x-tpl_settings [name=content] {
+	grid-area: settingsEditor;
+	display: inline-block;
+	overflow: auto;
+	padding: 20px;
+	flex: 1 1 0;
+}
+
+x-tpl_settings h2 {
+	margin: 0;
+}
+
+x-tpl_settings h3 {
+	display: flex;
+	align-items: center;
+	margin-top: 30px;
+	font-size: 12px;
+}
+
+x-tpl_settings h3::after {
+	content: '';
+	flex: 1;
+	margin-left: 10px;
+	height: 1px;
+	background-color: var(--body-hr-color);
+}
+
+x-tpl_settings h3+div {
+	padding-left: 30px;
+}
+
+x-tpl_settings .control {
+	grid-area: settingsControl;
+	border-top: 1px solid var(--body-hr-color);
+}
+
+x-tpl_settings .control button {
+	float: right;
+	padding: 5px 30px;
+	margin: 10px 20px;
+}

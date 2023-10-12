@@ -1,5 +1,6 @@
 //import uglify from '@lopatnov/rollup-plugin-uglify'
-import build from 'rollup-plugin-rp';
+import build from '../rollup-plugin-rp/src/index.js';
+//import build from 'rollup-plugin-rp';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 

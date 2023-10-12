@@ -14,12 +14,13 @@ button.big {
 }
 
 button.main {
-	background: var(--element-bg-color-selected);
+	background: var(--element-selected-bg-color);
+	color: var(--element-selected-text-color);
 	border: 1px solid #268ce4;
 }
 
 button.main:hover {
-	background: var(--active-text-color);
+	background: var(--element-selected-bg-color-hover);
 }
 
 button[disabled] {

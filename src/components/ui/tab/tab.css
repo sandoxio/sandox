@@ -15,7 +15,9 @@ x-tab div.tabs {
 
 x-tab div.tabs > * {
 	display: inline-block;
-	padding: 3px 10px;
+	padding: 4px 5px 0 10px;
+	height: 25px;
+	box-sizing: border-box;
 	border-bottom: 3px solid var(--head-background);
 }
 
@@ -23,21 +25,29 @@ x-tab div.tabs > * > * {
 	vertical-align: middle;
 }
 
-x-tab div.tabs > html-fragment:not(.selected):hover {
+x-tab div.tabs > x-tpl_head:not(.selected):hover {
 	background: var(--element-bg-color-hover);
 	border-bottom: 1px solid var(--active-element-bg-color);
 	padding-bottom: 5px;
 }
 
 x-tab div.tabs > *.selected {
-	background: var(--active-element-bg-color);
-	border-bottom: 3px solid var(--element-bg-color-selected);
+	background: var(--element-bg-color);
+	border-bottom: 3px solid var(--element-selected-bg-color);
+}
+
+x-tab div.tabs x-tpl_head_removebutton {
+	display: inline-block;
+	height: 16px;
+	margin-left: 5px;
+	opacity: 0.3;
 }
 
 x-tab > div.content {
 	display: block;
 	flex: 1;
 	position: relative;
+	background: var(--space-bg-color);
 }
 
 x-tab > div.content > * {

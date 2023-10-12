@@ -1,11 +1,11 @@
-import theme from "../../themes/darkula/theme.js";
-
-theme.install();
-
 import {Tpl_wrapper} from "./app.html";
 import css from "./app.css";
 
 css.install();
+
+import settings from "../modal/settings/settings.js";
+import {} from "./appearance/appearance.js";
+import {} from "./keymap/keymap.js";
 
 import {} from "../ui/panelspace/panelspace.js";
 
@@ -16,13 +16,13 @@ import IdePanelConsole from "../panels/console/console.js";
 import IdePanelFind from "../panels/find/find.js";
 
 import IdeTabContentCode from "../tabContents/code/code.js";
-import IdeTabContentSettings from "../tabContents/settings/settings.js";
 
 import {} from "../ui/menu/menu.js";
 import Tab from "../ui/tab/tab.js";
 
 import projectManager from "../../service/projectManager.js";
 import busEvent from "../../service/busEvent.js";
+
 
 
 const App = class {
@@ -165,7 +165,7 @@ const App = class {
 		});
 
 		busEvent.on("actions.settings.open", () => {
-			this.tabSettingsOpen();
+			settings();
 		});
 
 		//console.log("this.$panelSpace:", this.$panelSpace);
@@ -205,16 +205,6 @@ const App = class {
 		let tabPid = ':' + cfg.path;
 		console.log('[app] fileClose:', cfg);
 		this.$tabs.close(tabPid);
-	}
-
-	tabSettingsOpen() {
-		let tabPid = ':settings';
-		if (this.$tabs.isOpened(tabPid)) {
-			this.$tabs.select(tabPid);
-		} else {
-			let $tabContent = new IdeTabContentSettings();
-			this.$tabs.create(tabPid, 'IDE Settings', $tabContent);
-		}
 	}
 };
 

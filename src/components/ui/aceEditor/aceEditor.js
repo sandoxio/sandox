@@ -1,14 +1,14 @@
 import css from "./aceEditor.css";
 css.install();
 
+import settingsService from "../../../service/settings.js";
+
 import ace from "./ace/ace.js";
+import {} from "./ace/theme-chrome.js";
 import {} from "./ace/theme-dracula.js";
 import {} from "./ace/ext-searchbox.js";
 import cssSearchbox from "./ace/ext-searchbox.css";
 cssSearchbox.install();
-
-import ObjectLive from "object-live";
-
 
 class AceEditor extends HTMLElement {
 	#editor;
@@ -21,13 +21,24 @@ class AceEditor extends HTMLElement {
 		this.appendChild(this.#$container);
 		this.#editor = ace.edit(this.#$container);
 		this.setMode('ace/mode/javascript');
-		this.#editor.setTheme('ace/theme/dracula');
+
+		this.themeSet(settingsService.model.data.appearance.general.theme);
+		settingsService.model.addEventListener('change', 'appearance.general.theme', cfg => {
+			this.themeSet(cfg.newValue);
+		});
+
 		this.#editor.setOptions({
 			enableBasicAutocompletion: true,
-			enableLiveAutocompletion: true
+			enableLiveAutocompletion: true,
+			displayIndentGuides: settingsService.model.data.appearance.uiOptions.showIndent
 		});
+		settingsService.model.addEventListener('change', 'appearance.uiOptions.showIndent', cfg => {
+			console.log('uiOptions.showIndent:', cfg);
+			this.#editor.setOptions({displayIndentGuides: cfg.newValue});
+		});
+
 		if (value) {
-			this.#editor.setValue(value);
+			this.#editor.setValue(value, -1);
 		}
 
 		this.#editor.on('change', (e) => {
@@ -63,6 +74,11 @@ class AceEditor extends HTMLElement {
 				});
 			}
 		});
+	}
+
+	themeSet(themeName) {
+		let aceThemeName = {'darkula': 'dracula', 'light': 'chrome'}[themeName];
+		this.#editor.setTheme('ace/theme/' + aceThemeName);
 	}
 
 	connectedCallback() {

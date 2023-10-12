@@ -2,7 +2,6 @@ x-menu {
 	display: block;
 	margin: 0;
 	padding: 0;
-	background: var(--element-bg-color);
 	width: 100%;
 	white-space: nowrap;
 }
@@ -10,7 +9,6 @@ x-menu {
 x-menu x-menu-item {
 	position: relative;
 	display: inline-block;
-
 	font-size: 12px;
 	cursor: default;
 }
@@ -20,7 +18,8 @@ x-menu x-menu-item > div {
 }
 
 x-menu x-menu-item.expanded {
-	background: var(--element-bg-color-selected);
+	background: var(--element-selected-bg-color);
+	color: var(--element-selected-text-color);
 }
 
 x-menu x-menu-item submenu {
@@ -34,8 +33,10 @@ x-menu x-menu-item.expanded submenu {
 	top: 24px;
 	left: 0;
 	width: 200px;
-	background: var(--element-bg-color);
-	border: var(--element-border);
+	background: var(--body-bg-color);
+	border: var(--space-border);
+	color: var(--body-text-color);
+	box-shadow: rgb(0,0,0, 0.2) 5px 5px 7px;
 }
 
 x-menu x-menu-item submenu x-menu-item {
@@ -44,7 +45,8 @@ x-menu x-menu-item submenu x-menu-item {
 
 
 x-menu x-menu-item submenu x-menu-item:hover {
-	background: var(--element-bg-color-selected);
+	background: var(--element-selected-bg-color);
+	color: var(--element-selected-text-color);
 }
 
 x-menu x-menu-item submenu x-menu-item span {

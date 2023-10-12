@@ -1,0 +1,26 @@
+<template name="Tpl_setting_appearance">
+	<h2>Appearance</h2>
+
+	<h3>General</h3>
+	<div>
+		<div><input type="checkbox" value:="m.general.syncThemeWithOs"> Sync with OS</div>
+		<div>
+			Theme:
+			<x-dropdown value:="m.general.theme">
+				<item value='darkula'>Darkula</item>
+				<item value='light'>Light</item>
+			</x-dropdown>
+		</div>
+	</div>
+
+	<h3>UI options</h3>
+	<div>
+		<div><input type="checkbox" value:="m.uiOptions.showIndent"> <label onclick="m.uiOptions.showIndent = !m.uiOptions.showIndent">Show tree indent guides</label></div>
+		<div><input type="checkbox" value:="m.uiOptions.showStatusBar"> <label onclick="m.uiOptions.showStatusBar = !m.uiOptions.showStatusBar">Show status bar</label></div>
+	</div>
+
+	<h3>Tool windows</h3>
+	<div>
+		<div><input type="checkbox" value:="m.toolWindows.showToolBar"> <label onclick="m.toolWindows.showToolBar = !m.toolWindows.showToolBar">Show tool window bars</label></div>
+	</div>
+</template>

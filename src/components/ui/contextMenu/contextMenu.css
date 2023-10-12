@@ -16,5 +16,5 @@ x-contextmenu x-menu-item > div {
 }
 
 x-contextmenu x-menu-item:hover {
-	background: var(--element-bg-color-selected);
+	background: var(--element-selected-bg-color);
 }

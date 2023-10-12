@@ -1,13 +1,13 @@
 :root {
-	--bg-color: #3c3f41;
-	--text-color: #bbb;
+	--bg-color: #f1f1f1;
+	--text-color: #252525;
 	--active-text-color: #2597ed;
 	--active-text-color-hover: #549bff;
 	--textDescription-text-color: #686868;
 
 	--element-bg-color: #3c3f41;
-	--element-bg-color-hover: #262833;
-	--element-bg-color-selected: #2373c4;
+	--element-bg-color-hover: #fff;
+	--element-selected-bg-color: #2373c4;
 	--element-border-color: #686868;
 	--element-border: 1px solid var(--element-border-color);
 	--element-border-radius: 2px;
@@ -25,10 +25,12 @@
 	--head-background: #444;
 	--head-color: #ccc;
 
+	--hr-color: #444;
+
 	--body-bg-color: #202025;
 
 	--space-bg-color: #101019;
-	--space-border: 1px solid #444;
+	--space-border: 1px solid var(--hr-color);
 
 	--warning-text-color: #ff0000;
 }

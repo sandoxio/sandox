@@ -4,3 +4,7 @@ x-tpl_wrapper {
 	justify-content: center;
 	height: 100%;
 }
+
+x-tpl_wrapper > x-menu {
+	border-bottom: var(--space-border);
+}

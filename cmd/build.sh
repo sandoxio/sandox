@@ -8,7 +8,7 @@ cp "${DIR}/src/index.html" "${DIR}/dist/index.html"
 touch "${DIR}/dist/worker-javascript.js"
 
 
-npm i --prefix ${DIR}
+#npm i --prefix ${DIR}
 rollup -c "${DIR}/rollup.config.js"
 
-"${DIR}/cmd/libsBuild.sh"
+#"${DIR}/cmd/libsBuild.sh"

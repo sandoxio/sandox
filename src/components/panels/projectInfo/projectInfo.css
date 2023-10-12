@@ -1,3 +1,7 @@
+x-tpl_projectinfo {
+	display: block;
+}
+
 x-tpl_projectinfo .menu item * {
 	cursor: default;
 }
