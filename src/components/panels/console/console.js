@@ -54,7 +54,7 @@ class IdePanelConsole extends HTMLElement {
 	 */
 	logRowRender(cfg) {
 		cfg.text += "";
-		let color = {error: '#c1544e', warn: '#d9da27',  action: '#3f89fd', success: '#21b20b', text: '#ffffff'}[cfg.type];
+		let color = {error: '#c1544e', warn: '#d9da27',  action: '#3f89fd', success: '#21b20b', text: 'var(----body-text-color)'}[cfg.type];
 		let $msg = document.createElement('div');
 
 		let $time = document.createElement('div');

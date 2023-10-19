@@ -28,8 +28,7 @@ class Dropdown extends HTMLElement {
 	constructor(model) {
 		super();
 		this.model = model;
-		console.log('[dd] model:', model);
-
+		//console.log('[dd] model:', model);
 		this.#$wrapper = new Tpl_dropdown(model, this);
 
 		this.#$listContainer = this.#$wrapper.querySelector('div[name="listContainer"]');
@@ -89,7 +88,6 @@ class Dropdown extends HTMLElement {
 		items.forEach(item => {
 			this.#indexedItems[item.value] = item;
 		});
-		console.log('items:', items);
 
 		/*
 		let title;
@@ -109,7 +107,6 @@ class Dropdown extends HTMLElement {
 			}
 		}
 		*/
-		console.log('[dropdown] model:', this.#$wrapper.model);
 		this.#render();
 
 		this.#setValue(this.model.data['value']);		//render selected first item
@@ -162,7 +159,6 @@ class Dropdown extends HTMLElement {
 
 	#render() {
 		childNodesRemove(this.#$list);
-		console.log('this.#items:', this.#items);
 		this.#items.forEach((item) => {
 			let $item;
 			if (item['splitter']) {

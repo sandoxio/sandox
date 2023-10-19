@@ -2,15 +2,18 @@
 	/* Body */
 	--body-bg-color: #f1f1f1;
 	--body-border-color: #e4e4e4;
+	--body-border: 1px solid var(--body-border-color);
 	--body-hr-color: #d6d6d6;
+	--body-font-size: 12px;
 	--body-text-color: #020305;
 	--body-text-warning-color: #ff0000;
-	--body-text-description-color: #686868;
+	--body-text-description-color: #676767;
 	--body-link-color: #2597ed;
 	--body-link-color-hover: #549bff;
 
 	/* Space */
 	--space-bg-color: #fff;
+	--space-bg-color-hover: #d9d9d9;
 	--space-border: 1px solid var(--body-hr-color);
 
 	/* Sidebar */
@@ -25,8 +28,8 @@
 	--gutter-bg-color: #f1f1f1;
 
 	/* Elements */
-	--element-bg-color: #3c3f41;
-	--element-bg-color-hover: #262833;
+	--element-bg-color: var(--space-bg-color);
+	--element-bg-color-hover: var(--space-bg-color-hover);
 	--element-border-width: 1px;
 	--element-border-color: #686868;
 	--element-border: var(--element-border-width) solid var(--element-border-color);
@@ -41,6 +44,7 @@
 
 	/* Inputs */
 	--input-bg-color: var(--space-bg-color);
+	--input-font-size: var(--body-font-size);
 	--input-text-color: var(--body-text-color);
 	--input-border-color: var(--element-border-color);
 	--input-border-width: 1px;

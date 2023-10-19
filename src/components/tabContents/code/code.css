@@ -1,25 +1,41 @@
-x-ide-code > * {
-	position: absolute;
+x-ide-code {
 	display: block;
 	width: 100%;
 	height: 100%;
 }
 
-x-ide-code > * > x-aceeditor {
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
+x-ide-code > x-aceeditor {
 }
 
-x-ide-code > * > x-aceeditor:not(.readOnly) {
-	bottom: 45px;
+x-ide-code > x-aceeditor:has(+ x-tpl_tabcontents_code_statusbar.enabled) {
+	padding-bottom: 24px;
+	margin-bottom: -24px;
 }
 
-x-ide-code > * > x-aceeditor.readOnly {
-	bottom: 0;
+x-ide-code > x-tpl_tabcontents_code_statusbar:not(.enabled) {
+	display: none;
 }
 
+x-ide-code > x-tpl_tabcontents_code_statusbar.enabled {
+	display: block;
+	height: 24px;
+	line-height: 22px;
+	text-align: right;
+	padding: 1px 20px;
+	box-sizing: border-box;
+	background: var(--gutter-bg-color);
+	border-top: var(--body-border);
+	color: var(--body-text-description-color);
+}
+
+x-ide-code > x-tpl_tabcontents_code_statusbar .filePath {
+	float: left;
+}
+
+x-ide-code > x-tpl_tabcontents_code_statusbar .position {
+	float: right;
+}
+
+x-ide-code > x-tpl_tabcontents_code_statusbar .position span {
+	margin-left: 10px;
+}

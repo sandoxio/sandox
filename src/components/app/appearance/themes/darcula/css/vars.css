@@ -2,15 +2,18 @@
 	/* Body */
 	--body-bg-color: #3c3f41;
 	--body-border-color: #353636;
+	--body-border: 1px solid var(--body-border-color);
 	--body-hr-color: #515151;
+	--body-font-size: 12px;
 	--body-text-color: #ccc;
 	--body-text-warning-color: #ff0000;
-	--body-text-description-color: #686868;
+	--body-text-description-color: #858585;
 	--body-link-color: #2597ed;
 	--body-link-color-hover: #549bff;
 
 	/* Space */
 	--space-bg-color: #2b2b2b;
+	--space-bg-color-hover: #2b2b2b;
 	--space-border: 1px solid var(--body-hr-color);
 
 	/* Sidebar */
@@ -40,6 +43,7 @@
 
 	/* Inputs */
 	--input-bg-color: var(--body-bg-color);
+	--input-font-size: var(--body-font-size);
 	--input-text-color: var(--body-text-color);
 	--input-border-color: var(--element-border-color);
 	--input-border-width: 1px;

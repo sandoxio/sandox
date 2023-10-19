@@ -9,7 +9,7 @@ x-tpl_settings {
 
 
 
-x-tpl_settings x-tree {
+x-tpl_settings > x-tree {
 	grid-area: settingsSidebar;
 	padding-top: 20px;
 	box-sizing: border-box;

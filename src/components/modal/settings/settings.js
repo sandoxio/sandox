@@ -131,7 +131,7 @@ const settings = () => new (class {
 
 		this.#$settings.model.addEventListener('change', 'selectedCategory', (e) => {
 			childNodesRemove(this.#$settingsContainer);
-			console.log('selectedCategory cahnge:', e);
+			//console.log('selectedCategory cahnge:', e);
 			const $page = settingsService.editorGet(e.newValue);
 			this.#$settingsContainer.appendChild($page);
 		});

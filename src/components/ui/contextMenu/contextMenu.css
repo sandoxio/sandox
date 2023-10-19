@@ -2,6 +2,7 @@ x-contextmenu {
 	position: absolute;
 	background: var(--element-bg-color);
 	border: var(--element-border);
+	z-index: 10000;
 }
 
 x-contextmenu x-menu-item {

@@ -133,6 +133,16 @@ class PanelSpace extends HTMLElement {
 		this.#panelContentsReflow();
 	}
 
+	barsShow(value) {
+		Object.values(this.#barContainers).forEach($container => {
+			if (value && this.#barContainers[$container.name].childNodes.length) {
+				this.#$panels.panels[$container.name].show();
+			} else {
+				this.#$panels.panels[$container.name].hide();
+			}
+		});
+	}
+
 	panelSelect(panelName) {
 		//console.log('[panelspace] panelSelect:', panelName);
 		this.#barStates[this.#config.panels[panelName].bar] = panelName;

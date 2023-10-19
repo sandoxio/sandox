@@ -3,6 +3,7 @@ import css from "./app.css";
 
 css.install();
 
+
 import settings from "../modal/settings/settings.js";
 import {} from "./appearance/appearance.js";
 import {} from "./keymap/keymap.js";
@@ -22,7 +23,8 @@ import Tab from "../ui/tab/tab.js";
 
 import projectManager from "../../service/projectManager.js";
 import busEvent from "../../service/busEvent.js";
-
+import settingsService from "../../service/settings.js";
+import Command from "../../service/command.js";
 
 
 const App = class {
@@ -51,12 +53,14 @@ const App = class {
 							}
 						},
 						{
-							title: 'Export project',
+							hr: true,
+							title: 'Export project as zip',
 							action: () => {
-								alert("This functionality will be implemented in ms3");
+								busEvent.fire("actions.project.export");
 							}
 						},
 						{
+							hr: true,
 							title: 'Settings',
 							action: () => {
 								busEvent.fire("actions.settings.open");
@@ -64,27 +68,48 @@ const App = class {
 						},
 					]
 				},
-				/*				{
-									title: 'Edit',
-									childNodes: [
-										{
-											title: 'Cut',
-											action: () => {}
-										},
-										{
-											title: 'Copy',
-											action: () => {}
-										},
-										{
-											title: 'Paste',
-											action: () => {}
-										},
-										{
-											title: 'Delete',
-											action: () => {}
-										}
-									]
-								},*/
+				{
+					title: 'Edit',
+					childNodes: [
+						{
+							title: 'Undo',
+							action: () => {
+								Command.exec("editor.undo");
+							}
+						},
+						{
+							title: 'Redo',
+							action: () => {
+								Command.exec("editor.redo");
+							}
+						},
+						{
+							hr: true,
+							title: 'Cut',
+							action: () => {
+								Command.exec("editor.cut");
+							}
+						},
+						{
+							title: 'Copy',
+							action: () => {
+								Command.exec("editor.copy");
+							}
+						},
+						{
+							title: 'Paste',
+							action: () => {
+								Command.exec("editor.paste");
+							}
+						},
+						{
+							title: 'Delete',
+							action: () => {
+								Command.exec("editor.del");
+							}
+						}
+					]
+				},
 				{
 					title: 'Build',
 					childNodes: [
@@ -119,7 +144,6 @@ const App = class {
 		};
 		const $wrapper = new Tpl_wrapper({menu: menuConfig});
 		this.$panelSpace = $wrapper.querySelector("x-panelspace");
-		document.body.appendChild($wrapper);
 
 		const config = {
 			barSize: {
@@ -148,9 +172,15 @@ const App = class {
 				find: IdePanelFind,
 			}
 		});
+		this.$panelSpace.barsShow(settingsService.model.data.appearance.toolWindows.showToolBar);
+		settingsService.model.addEventListener('change', 'appearance.toolWindows.showToolBar', (cfg) => {
+			this.$panelSpace.barsShow(cfg.newValue);
+		});
 
 		this.$tabs = new Tab({closeButton: true, selectOnTabCreate: true});
 		this.$panelSpace.$workspace.appendChild(this.$tabs);
+
+		document.body.appendChild($wrapper);
 
 		busEvent.on("events.file.open", (cfg) => {
 			this.tabFileOpen(cfg);

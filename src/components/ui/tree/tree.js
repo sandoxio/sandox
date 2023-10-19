@@ -28,6 +28,7 @@ const Tree = class Tree extends HTMLElement {
 		this.model = model;
 		this.#itemsByPath = {};
 		this.#cache = {};
+		this.#cfg = {};
 
 		//console.log('[tree] model:', model);
 		this.model.addEventListener('change', /^value\.(.*)/, cfg => {
@@ -38,21 +39,29 @@ const Tree = class Tree extends HTMLElement {
 		});
 
 		this.model.addEventListener('change', /^selected$/, cfg => {
-			console.log('[tree] selected changed:', cfg);
-			console.log('this.#itemsByPath', this.#itemsByPath);
+			//console.log('[tree] selected changed:', cfg);
+			//console.log('[tree] this.#itemsByPath', this.#itemsByPath);
 			if (this.#selectedNode) {
 				this.#selectedNode.classList.remove('selected');
 			}
-			this.#selectedNode = this.#itemsByPath[cfg.newValue].querySelector('[name=item]');
-			this.#selectedNode.classList.add('selected');
+			if (cfg.newValue) {
+				this.#selectedNode = this.#itemsByPath[cfg.newValue].querySelector('[name=item]');
+				this.#selectedNode.classList.add('selected');
+			}
 		});
 
 		this.#isChildrenRendered = {};
-		this.#renderList('', this, this.model.data.value, 1);
+		this.reflow();
 	}
 
 	configure(cfg) {
 		this.#cfg = cfg;
+	}
+
+	reflow() {
+		this.#selectedNode = undefined;
+		this.model.data.selected = undefined;
+		this.#renderList('', this, this.model.data.value, 1);
 	}
 
 	#renderList(parentPath, $container, data, level) {
@@ -74,11 +83,13 @@ const Tree = class Tree extends HTMLElement {
 					}
 				},
 				select: () => {
-					this.model.data.selected = item.value!==undefined ? item.value : itemPath;
+					this.model.data.selected = itemPath;
 				},
 				onContextMenu: () => {
 					logic.select();
-					if (this.#cfg.onContextMenu) {
+					if (item.onContextMenu) {
+						item.onContextMenu(itemPath);
+					} else if (this.#cfg.onContextMenu) {
 						this.#cfg.onContextMenu(itemPath);
 					}
 				},
@@ -94,6 +105,15 @@ const Tree = class Tree extends HTMLElement {
 			$childrenContainer = $item.querySelector('[name=children]');
 			$itemContainer = $item.querySelector('[name=item]');
 			$itemContainer.style['padding-left'] = level * 10 + "px";
+			if (item.hint) {
+				if (typeof item.hint === 'function') {
+					let $hint = item.hint();
+					if ($hint) {
+						$hint.classList.add('hint');
+						$itemContainer.appendChild($hint);
+					}
+				}
+			}
 
 			if (item.isDirectory) {
 				const fullPath = parentPath ? `${parentPath}/${item.value ? item.value : item.title}` : (item.value ? item.value : item.title);

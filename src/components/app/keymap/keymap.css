@@ -1,0 +1,17 @@
+x-tpl_setting_keymap x-tree {
+	overflow: auto;
+	max-height: 320px;
+	display: block;
+	border: 1px solid var(--body-hr-color);
+}
+
+x-tpl_setting_keymap x-tree x-tpl_tree_item .hint {
+	float: right;
+	margin-right: 20px;
+}
+x-tpl_setting_keymap x-tree x-tpl_tree_item .hint span {
+	background: var(--element-bg-color);
+	border: var(--element-border);
+	margin-left: 5px;
+	padding: 1px 3px;
+}

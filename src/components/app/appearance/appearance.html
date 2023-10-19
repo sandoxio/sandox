@@ -3,11 +3,11 @@
 
 	<h3>General</h3>
 	<div>
-		<div><input type="checkbox" value:="m.general.syncThemeWithOs"> Sync with OS</div>
+		<div style="display: none;"><input type="checkbox" value:="m.general.syncThemeWithOs"> Sync with OS</div>
 		<div>
 			Theme:
 			<x-dropdown value:="m.general.theme">
-				<item value='darkula'>Darkula</item>
+				<item value='darcula'>Darcula</item>
 				<item value='light'>Light</item>
 			</x-dropdown>
 		</div>
@@ -15,6 +15,8 @@
 
 	<h3>UI options</h3>
 	<div>
+		<div><input type="checkbox" value:="m.uiOptions.showGutter"> <label onclick="m.uiOptions.showGutter = !m.uiOptions.showGutter">Show gutter</label></div>
+		<div><input type="checkbox" value:="m.uiOptions.showLineNumbers"> <label onclick="m.uiOptions.showLineNumbers = !m.uiOptions.showLineNumbers">Show line numbers</label></div>
 		<div><input type="checkbox" value:="m.uiOptions.showIndent"> <label onclick="m.uiOptions.showIndent = !m.uiOptions.showIndent">Show tree indent guides</label></div>
 		<div><input type="checkbox" value:="m.uiOptions.showStatusBar"> <label onclick="m.uiOptions.showStatusBar = !m.uiOptions.showStatusBar">Show status bar</label></div>
 	</div>

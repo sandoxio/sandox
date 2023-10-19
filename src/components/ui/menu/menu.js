@@ -30,13 +30,16 @@ class Menu extends HTMLElement {
 
 	#render(data, container, path) {
 		//console.log('[menu] render data:', data, container, path);
-		data.forEach((value) => {
+		data.forEach(value => {
 			let nodeId = this.#nodes.length;
 			let nodePath = (path !== '' ? path + '/' : '') + nodeId;
 			let $item = document.createElement('x-menu-item');
 			let $title = document.createElement('div');
 			$title.innerText = value.title;
 			$item.appendChild($title);
+			if (value.hr) {
+				$item.classList.add('hr');
+			}
 			let $submenu;
 			if (value.childNodes && value.childNodes.length) {
 				$title.addEventListener('mouseover', this.#onOver.bind(this, nodeId, nodePath));

@@ -1,0 +1,15 @@
+x-tpl_addkeymap {
+	display: block;
+	padding: 20px;
+}
+
+x-tpl_addkeymap .key {
+	margin-top: 10px;
+}
+
+x-tpl_addkeymap .control {
+	float: right;
+}
+x-tpl_addkeymap .control button {
+	margin: 20px 0 0 10px;
+}

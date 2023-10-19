@@ -4,14 +4,18 @@ css.install();
 import settingsService from "../../../service/settings.js";
 
 import ace from "./ace/ace.js";
-import {} from "./ace/theme-chrome.js";
-import {} from "./ace/theme-dracula.js";
+import {} from "./ace/mode-javascript.js";
+import {} from "./ace/theme-light.js";
+import {} from "./ace/theme-darcula.js";
 import {} from "./ace/ext-searchbox.js";
 import cssSearchbox from "./ace/ext-searchbox.css";
 cssSearchbox.install();
 
+import Command from "../../../service/command.js";
+import editorService from "../../../service/editor.js";
+
 class AceEditor extends HTMLElement {
-	#editor;
+	editor;
 	#$container;
 
 	constructor(value) {
@@ -19,71 +23,115 @@ class AceEditor extends HTMLElement {
 		this.#$container = document.createElement('div');
 		this.#$container.style['flex'] = '1';
 		this.appendChild(this.#$container);
-		this.#editor = ace.edit(this.#$container);
+		this.editor = ace.edit(this.#$container);
 		this.setMode('ace/mode/javascript');
 
-		this.themeSet(settingsService.model.data.appearance.general.theme);
-		settingsService.model.addEventListener('change', 'appearance.general.theme', cfg => {
-			this.themeSet(cfg.newValue);
+		this.editor.setOptions({
+			tabSize: 4,
+			useSoftTabs: false
 		});
 
-		this.#editor.setOptions({
-			enableBasicAutocompletion: true,
-			enableLiveAutocompletion: true,
-			displayIndentGuides: settingsService.model.data.appearance.uiOptions.showIndent
+		//set theme
+		this.themeSet(settingsService.model.data.appearance.general.theme);
+		Command.on('editor.setTheme', (value) => {
+			this.themeSet(value);
 		});
-		settingsService.model.addEventListener('change', 'appearance.uiOptions.showIndent', cfg => {
-			console.log('uiOptions.showIndent:', cfg);
-			this.#editor.setOptions({displayIndentGuides: cfg.newValue});
+
+		//show Gutter
+		this.editor.renderer.setShowGutter(settingsService.model.data.appearance.uiOptions.showGutter);
+		Command.on('editor.showGutter', (value) => {
+			this.editor.renderer.setShowGutter(value);
 		});
+
+		//show Line numbers
+		this.editor.setOptions({showLineNumbers: settingsService.model.data.appearance.uiOptions.showLineNumbers});
+		Command.on('editor.showLineNumbers', (value) => {
+			this.editor.setOptions({showLineNumbers: value});
+		});
+
+		//show Indent
+		this.editor.setOptions({displayIndentGuides: settingsService.model.data.appearance.uiOptions.showIndent});
+		Command.on('editor.showIndent', (value) => {
+			this.editor.setOptions({displayIndentGuides: value});
+		});
+
+		//set fontSize
+		this.editor.setOptions({fontSize: settingsService.model.data.appearance.general.fontSize + "px"});
+		this.addEventListener('mousewheel', (e) => {
+			if (e.ctrlKey) {
+				let fontSize = settingsService.model.data.appearance.general.fontSize + (e.deltaY > 0 ? -1: 1);
+				if (fontSize < 10) {
+					fontSize = 10;
+				}
+				if (fontSize > 30) {
+					fontSize = 30;
+				}
+				Command.exec('editor.fontSize', fontSize);
+				e.preventDefault();
+			}
+		}, true);
+		Command.on('editor.fontSize', value => {
+			this.editor.setOptions({fontSize: value + "px"});
+		});
+
 
 		if (value) {
-			this.#editor.setValue(value, -1);
+			this.editor.setValue(value, -1);
+			this.editor.getSession().setUndoManager(new ace.UndoManager());
 		}
 
-		this.#editor.on('change', (e) => {
-			if (e.action === 'insert' || e.action === 'remove') {
-				let newValue = this.#editor.getValue();
-				//console.log('%c[Ace] change', 'background:red;', 'value:', this.#editor.getValue(), e);
-				this.dispatchEvent(
-					new CustomEvent('change',
-						{
-							detail: {
-								value: newValue
+		(() => {
+			const onChange = (e) => {
+				if (e.action === 'insert' || e.action === 'remove') {
+					let newValue = this.editor.getValue();
+					//console.log('%c[Ace] change', 'background:red;', 'value:', this.editor.getValue(), e);
+					this.dispatchEvent(
+						new CustomEvent('change',
+							{
+								detail: {
+									value: newValue
+								}
 							}
-						}
-					)
-				);
-			}
-		});
+						)
+					);
+				}
+			};
 
-		this.#editor.commands.addCommand({
-			name: 'replace',
-			bindKey: {win: 'Ctrl-R', mac: 'Command-Option-F'},
-			exec: function(editor) {
-				ace.require('ace/config').loadModule('ace/ext/searchbox', function(e) {
-					e.Search(editor, true);
-					// take care of keybinding inside searchbox
-					// this is too hacky :(
-					let kb = editor.searchBox.$searchBarKb;
-					let command = kb.commandKeyBinding['ctrl-h'];
-					if (command && command.bindKey.indexOf('Ctrl-R') === -1) {
-						command.bindKey += '|Ctrl-R';
-						kb.addCommand(command);
+			let throttle;
+			this.editor.on('change', (e) => {
+				if (throttle) {
+					clearTimeout(throttle);
+					throttle = undefined;
+				}
+				throttle = setTimeout(() => {
+					onChange(e);
+				}, 20);
+			});
+		})();
+
+		this.editor.selection.on('changeCursor', (e) => {
+			const pos = this.editor.getCursorPosition();
+			this.dispatchEvent(
+				new CustomEvent('changeCursor',
+					{
+						detail: {
+							line: pos.row + 1,
+							col: pos.column
+						}
 					}
-				});
-			}
+				)
+			);
 		});
 	}
 
 	themeSet(themeName) {
-		let aceThemeName = {'darkula': 'dracula', 'light': 'chrome'}[themeName];
-		this.#editor.setTheme('ace/theme/' + aceThemeName);
+		console.log('editor set theme:', themeName);
+		this.editor.setTheme('ace/theme/' + themeName);
 	}
 
 	connectedCallback() {
 		let attrObserver = new ResizeObserver(() => {
-			this.#editor.resize();
+			this.editor.resize();
 		});
 		attrObserver.observe(this);
 
@@ -94,13 +142,13 @@ class AceEditor extends HTMLElement {
 
 	/*
 	get value() {
-		return this.#editor.getValue();
+		return this.editor.getValue();
 	}
 
 	set value(value) {
 		//console.log('%c[Ace] set', 'background:red;', 'value:', value);
-		this.#editor.setValue(value);
-		this.#editor.clearSelection();
+		this.editor.setValue(value);
+		this.editor.clearSelection();
 	}
 	*/
 
@@ -109,7 +157,7 @@ class AceEditor extends HTMLElement {
 	}
 
 	set readOnly(value) {
-		this.#editor.setReadOnly(value);
+		this.editor.setReadOnly(value);
 		if (value) {
 			this.classList.add('readOnly');
 		} else {
@@ -118,10 +166,24 @@ class AceEditor extends HTMLElement {
 	}
 
 	setMode(mode) {
-		this.#editor.getSession().setMode(mode);
+		this.editor.getSession().setMode(mode);
 	}
 }
 
 customElements.define('x-aceeditor', AceEditor);
+
+
+
+//Set commands for editor
+const cmds = ["showSettingsMenu","goToNextError","goToPreviousError","selectall","centerselection","gotoline","fold","unfold","toggleFoldWidget","toggleParentFoldWidget","foldall","foldAllComments","foldOther","unfoldall","findnext","findprevious","selectOrFindNext","selectOrFindPrevious","find","overwrite","selecttostart","gotostart","selectup","golineup","selecttoend","gotoend","selectdown","golinedown","selectwordleft","gotowordleft","selecttolinestart","gotolinestart","selectleft","gotoleft","selectwordright","gotowordright","selecttolineend","gotolineend","selectright","gotoright","selectpagedown","pagedown","gotopagedown","selectpageup","pageup","gotopageup","scrollup","scrolldown","selectlinestart","selectlineend","togglerecording","replaymacro","jumptomatching","selecttomatching","expandToMatching","passKeysToBrowser","copy","cut","paste","removeline","duplicateSelection","sortlines","togglecomment","toggleBlockComment","modifyNumberUp","modifyNumberDown","replace","undo","redo","copylinesup","movelinesup","copylinesdown","movelinesdown","del","backspace","cut_or_delete","removetolinestart","removetolineend","removetolinestarthard","removetolineendhard","removewordleft","removewordright","outdent","indent","blockoutdent","blockindent","insertstring","inserttext","splitline","transposeletters","touppercase","tolowercase","autoindent","expandtoline","openlink","joinlines","invertSelection","addLineAfter","addLineBefore","openCommandPallete","modeSelect","foldToLevel"];
+
+cmds.forEach(commandName => {
+	new Command('editor.' + commandName, () => {
+		if (editorService.editor) {
+			editorService.editor.commands.exec(commandName, editorService.editor);
+		}
+	});
+});
+
 
 export default AceEditor;

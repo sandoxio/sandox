@@ -12,6 +12,7 @@ x-dropdown[disabled="disabled"] {
 
 x-dropdown div[name="selectedName"] {
 	background: var(--input-bg-color);
+	font-size: var(--input-font-size);
 	color: var(--input-text-color);
 	border: var(--input-border);
 	border-radius: var(--element-border-radius);

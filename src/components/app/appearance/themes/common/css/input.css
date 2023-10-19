@@ -1,4 +1,4 @@
-input, textarea {
+input, textarea, .input {
 	background: var(--input-bg-color);
 	color: var(--element-text-color);
 	border: var(--input-border);
@@ -7,6 +7,15 @@ input, textarea {
 	outline: none;
 	padding: 4px 10px;
 	box-sizing: border-box;
+}
+
+input, .input {
+	height: 24px;
+	vertical-align: middle;
+}
+
+input+label, .input+label {
+	vertical-align: middle;
 }
 
 input:disabled, textarea:disabled {

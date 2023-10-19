@@ -1,6 +1,15 @@
 import AceEditor from "../../ui/aceEditor/aceEditor.js";
 import projectManager from "../../../service/projectManager.js";
 
+import css from "./code.css";
+css.install();
+
+import settingsService from "../../../service/settings.js";
+import editorService from "../../../service/editor.js";
+
+import {Tpl_tabContents_code_statusBar} from "./code.html";
+import Command from "../../../service/command.js";
+
 /**
  * @description Code editor
  * @param filePath	{String}
@@ -31,6 +40,28 @@ class IdeTabContentCode extends HTMLElement {
 		this.#$editor = new AceEditor(this.#value);
 		this.appendChild(this.#$editor);
 
+		this.$statusBar = new Tpl_tabContents_code_statusBar({
+			filePath: filePath,
+			line: 0,
+			col: 0,
+			lineBreak: 'CR',
+			indent: 'Tab',
+			size: ''
+		});
+		this.#fileSizeUpdate();
+		this.appendChild(this.$statusBar);
+		this.#$editor.addEventListener('changeCursor', e => {
+			this.$statusBar.model.data.line = e.detail.line;
+			this.$statusBar.model.data.col = e.detail.col;
+		});
+
+		//show statusbar
+		this.#sideBarUpdate(settingsService.model.data.appearance.uiOptions.showStatusBar);
+		Command.on('editor.showStatusBar', (value) => {
+			this.#sideBarUpdate(value);
+		});
+
+
 		//console.log('[IdeCodeEditor] this.#project.originalFiles:', this.#project.originalFiles, 'project:', project, 'this.#filePath:', this.#filePath);
 		/*
 		this.#project.struct.files._.eventAdd('change', this.#filePath, e => {
@@ -51,9 +82,11 @@ class IdeTabContentCode extends HTMLElement {
 				this.#value = e.detail.value;
 				this.#fileNode.data = this.#value;
 				//console.log('this.#project.originalFiles:', this.#project.originalFiles, this.#filePath, 'newValue', e.detail.value);
+				this.#fileSizeUpdate();
 				this.#onChange();
 			}
 		});
+
 
 		if (this.#fileNode.readOnly) {
 			this.#$editor.readOnly = true;
@@ -64,6 +97,20 @@ class IdeTabContentCode extends HTMLElement {
 
 	reflow() {
 		this.#formReflow();
+		editorService.activeSet(this.#$editor);
+	}
+
+	#sideBarUpdate(value) {
+		if (value) {
+			this.$statusBar.classList.add('enabled');
+		} else {
+			this.$statusBar.classList.remove('enabled');
+		}
+	}
+
+	#fileSizeUpdate() {
+		const size = this.#value.length;
+		this.$statusBar.model.data.size = size > 1000 ? (size/1000).toFixed(1) + ' kB' : size + ' B';
 	}
 
 	#onChange() {

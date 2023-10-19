@@ -1,8 +1,13 @@
+import css from "./appearance.css";
+css.install();
+
 import {Tpl_setting_appearance} from "./appearance.html";
+import Command from "../../../service/command.js";
 import settings from "../../../service/settings.js";
 
-import darkula from "./themes/darkula/theme.js";
+import darcula from "./themes/darcula/theme.js";
 import light from "./themes/light/theme.js";
+import settingsService from "../../../service/settings.js";
 
 /** Settings */
 const Appearance = class extends HTMLElement {
@@ -12,7 +17,21 @@ const Appearance = class extends HTMLElement {
 		super();
 		this.#$content = new Tpl_setting_appearance(settings.model.data.appearance);
 		this.appendChild(this.#$content);
-		this.#$content.model.bridgeChanges('', settings.model, 'appearance');
+
+		//Run commands for changes
+		const cmds = [
+			['editor.setTheme', 'general.theme'],
+			['editor.showGutter', 'uiOptions.showGutter'],
+			['editor.showLineNumbers', 'uiOptions.showLineNumbers'],
+			['editor.showIndent', 'uiOptions.showIndent'],
+			['editor.showStatusBar', 'uiOptions.showStatusBar']
+		];
+
+		cmds.forEach(([commandName, settingsPath]) => {
+			this.#$content.model.addEventListener('change', settingsPath, (cfg) => {
+				Command.exec(commandName, cfg.newValue);
+			});
+		});
 	}
 }
 
@@ -24,9 +43,12 @@ settings.define({
 	struct: {
 		general: {
 			syncThemeWithOs: false,
-			theme: 'darkula'
+			theme: 'darcula',
+			fontSize: 14
 		},
 		uiOptions: {
+			showGutter: true,
+			showLineNumbers: true,
 			showIndent: true,
 			showStatusBar: true,
 		},
@@ -38,18 +60,54 @@ settings.define({
 });
 
 
-/** Set theme */
-const themes = {darkula, light};
-let currentTheme;
-const setTheme = (themeName) => {
-	console.warn('set theme:', themeName);
-	currentTheme = themes[themeName];
-	themes[themeName].install();
-};
+/** Set current theme */
+(() => {
+	let currentThemeCss;
+	new Command('editor.setTheme', themeName => {
+		if (currentThemeCss) {
+			currentThemeCss.remove();
+		}
+		currentThemeCss = {darcula, light}[themeName];
+		currentThemeCss.install();
+		settings.model.data.appearance.general.theme = themeName;
+	});
+	Command.exec('editor.setTheme', settings.model.data.appearance.general.theme);
+})();
 
-settings.model.addEventListener('change', 'appearance.general.theme', (cfg) => {
-	currentTheme.remove();
-	setTheme(cfg.newValue);
+new Command('editor.fontSize', value => {
+	settingsService.model.data.appearance.general.fontSize = value;
+});
+
+new Command('editor.showGutter', value => {
+	if (value !== true && value !== false) {
+		value = !settingsService.model.data.appearance.uiOptions.showGutter;			//invert value
+	}
+	settingsService.model.data.appearance.uiOptions.showGutter = value;
+	return value;
+});
+
+new Command('editor.showLineNumbers', value => {
+	if (value !== true && value !== false) {
+		value = !settingsService.model.data.appearance.uiOptions.showLineNumbers;		//invert value
+	}
+	settingsService.model.data.appearance.uiOptions.showLineNumbers = value;
+	return value;
+});
+
+new Command('editor.showIndent', value => {
+	if (value !== true && value !== false) {
+		value = !settingsService.model.data.appearance.uiOptions.showIndent;			//invert value
+	}
+	settingsService.model.data.appearance.uiOptions.showIndent = value;
+	return value;
+});
+
+new Command('editor.showStatusBar', value => {
+	if (value !== true && value !== false) {
+		value = !settingsService.model.data.appearance.uiOptions.showStatusBar;			//invert value
+	}
+	settingsService.model.data.appearance.uiOptions.showStatusBar = value;
+	return value;
 });
 
 /*
@@ -64,4 +122,4 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
 });
  */
 
-setTheme(settings.model.data.appearance.general.theme);
+

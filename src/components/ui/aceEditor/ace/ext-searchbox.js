@@ -1,3 +1,5 @@
+import ace from "./ace.js";
+
 ace.define("ace/ext/searchbox", function(require, exports) {
 	"use strict";
 
@@ -168,6 +170,24 @@ ace.define("ace/ext/searchbox", function(require, exports) {
 			},
 			"Tab": function(sb) {
 				(sb.activeInput === sb.replaceInput ? sb.searchInput : sb.replaceInput).focus();
+			}
+		});
+
+		this.$searchBarKb.addCommand({
+			name: 'replace',
+			//bindKey: {win: 'Ctrl-R', mac: 'Command-Option-F'},
+			exec: function(editor) {
+				ace.require('ace/config').loadModule('ace/ext/searchbox', function(e) {
+					e.Search(editor, true);
+					// take care of keybinding inside searchbox
+					// this is too hacky :(
+					let kb = editor.searchBox.$searchBarKb;
+					let command = kb.commandKeyBinding['ctrl-h'];
+					if (command && command.bindKey.indexOf('Ctrl-R') === -1) {
+						command.bindKey += '|Ctrl-R';
+						kb.addCommand(command);
+					}
+				});
 			}
 		});
 

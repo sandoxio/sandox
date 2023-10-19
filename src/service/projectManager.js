@@ -1,4 +1,5 @@
 import ObjectLive from "object-live";
+import JSZip from "jszip";
 import busEvent from "./busEvent.js";
 
 import createProject from "../components/modal/project/createProject/createProject.js";
@@ -7,6 +8,8 @@ import createDirectory from "../components/modal/project/createDirectory/createD
 import Prompt from "../components/ui/prompt/prompt.js";
 
 import PathNavigator from "../utils/PathNavigator.js";
+import file from "../utils/file.js";
+import {forEachRecursive} from "../utils/object";
 
 
 window.ideLog = (type, text) => {
@@ -165,9 +168,6 @@ class Project {
 		}
 	}
 
-	#getNodeByPath(path) {
-
-	}
 
 	libAdd(title, name) {
 		if (!this.model.data.struct.tree[1].childNodes.find(lib => lib.title === title)) {
@@ -216,6 +216,29 @@ class Project {
 			req.send();
 		});
 	}
+
+	export() {
+		console.log('[Project] export');
+		const zip = new JSZip();
+
+		const nodeAdd = (path, node) => {
+			if (node.isDirectory) {
+				zip.folder(path);
+				node.childNodes.forEach(childNode => {
+					nodeAdd( (path  ? path + '/': '') + childNode.title, childNode);
+				});
+			} else {
+				zip.file(path, node.data);
+			}
+		}
+		nodeAdd('', projectManager.project.model.data.struct.tree[0]);
+
+		zip.generateAsync({type:"blob"}).then(function(content) {
+			file.download(content, projectManager.project.model.data.struct.tree[0].title + '.zip');
+		});
+	}
+
+
 
 	/**
 	 * @description open file
@@ -353,6 +376,10 @@ const projectManager = new (class ProjectManager {
 			localStorage.setItem('currentProject', JSON.stringify(this.project.model.data.struct));
 		});
 
+		busEvent.on("actions.project.export", () => {
+			this.export();
+		});
+
 
 		const currentProjectCfg = localStorage.getItem('currentProject');
 		if (currentProjectCfg) {
@@ -415,6 +442,12 @@ const projectManager = new (class ProjectManager {
 	 */
 	close() {
 		busEvent.fire('events.project.change', undefined);
+	}
+
+	export() {
+		if (this.project) {
+			this.project.export();
+		}
 	}
 })();
 

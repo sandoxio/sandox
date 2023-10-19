@@ -9,8 +9,8 @@ html, body {
 	overflow: hidden;
 }
 
-body, div, span, th, td {
-	font-size: 12px;
+body {
+	font-size: var(--body-font-size);
 }
 
 body.cursorResizeRow {

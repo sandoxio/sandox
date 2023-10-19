@@ -13,6 +13,10 @@ x-menu x-menu-item {
 	cursor: default;
 }
 
+x-menu x-menu-item.hr {
+	border-top: 1px solid var(--body-hr-color);
+}
+
 x-menu x-menu-item > div {
 	padding: 6px 10px 4px;
 }

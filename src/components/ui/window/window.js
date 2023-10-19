@@ -26,11 +26,12 @@ let Window = (() => {
 		 * @param cfg.width		{Number}
 		 * @param cfg.height	{Number}
 		 * @param cfg.uiLock	{Boolean=}
+		 * @param cfg.onClose	{Boolean=}
 		 * @param cfg.$content	{Boolean=}
 		 */
 		constructor(cfg) {
 			super();
-			console.log('[window] cfg:', cfg);
+			//console.log('[window] cfg:', cfg);
 			this.#cfg = cfg;
 			this.#cfg.height += 20;	//TODO: сейчас шапка включается в высоту, поэтому увеличиваем. Нужно сделать по нормальному
 
@@ -141,7 +142,6 @@ let Window = (() => {
 
 			this.$windowContent = this.#$window.querySelector('div[name="content"]');
 			//console.log('this.$windowContent:', this.$windowContent);
-			console.log('content:', this.#cfg.$content, typeof this.#cfg.$content);
 			this.$windowContent.appendChild(this.#cfg.$content);
 			animate(this, 'opening');
 
@@ -265,6 +265,9 @@ let Window = (() => {
 			animate(this, 'closing', () => {
 				this.parentNode.removeChild(this);
 			});
+			if (this.#cfg.onClose) {
+				this.#cfg.onClose();
+			}
 		}
 	};
 

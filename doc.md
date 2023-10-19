@@ -27,3 +27,16 @@ Settings
 Log
 
     actions.log.add({msg, text, date})
+
+
+--------------------------------------------
+Commands/Events:
+
+    editor.setTheme
+    editor.showGutter
+    editor.showLineNumbers
+    editor.showIndent
+    editor.showStatusBar
+
+    editor.openFindPanel
+    editor.openReplacePanel

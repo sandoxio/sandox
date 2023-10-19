@@ -1,0 +1,12 @@
+<template name="Tpl_addKeymap">
+	<div>
+		<div>Press any key to set a hotkey for the action</div>
+		<div>`{{m.title}}`</div>
+		<div class="input key">{{m.key}}</div>
+	</div>
+	<div class="control">
+		<button class="big main" onclick="self.create();">OK</button>
+		<button class="big" onclick="self.cancel();">Cancel</button>
+	</div>
+</template>
+
