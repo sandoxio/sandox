@@ -18,7 +18,6 @@ const keymap = new (class {
 	constructor() {
 		document.body.addEventListener('keydown', e => {
 			let keyHash = this.#keyHash({code: e.code, ctrl: e.ctrlKey, alt: e.altKey, shift: e.shiftKey});
-			console.log(e);
 			if (e.ctrlKey || e.code.match(/^F\d+$/) || e.code === 'Tab') {
 				if (['INPUT', 'TEXTAREA'].indexOf(e.target.tagName) === -1 || e.target.className.indexOf('ace_text') !==-1) {
 					//console.log('preventDefault');
