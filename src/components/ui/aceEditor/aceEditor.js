@@ -175,7 +175,7 @@ customElements.define('x-aceeditor', AceEditor);
 
 
 //Set commands for editor
-const cmds = ["showSettingsMenu","goToNextError","goToPreviousError","selectall","centerselection","gotoline","fold","unfold","toggleFoldWidget","toggleParentFoldWidget","foldall","foldAllComments","foldOther","unfoldall","findnext","findprevious","selectOrFindNext","selectOrFindPrevious","find","overwrite","selecttostart","gotostart","selectup","golineup","selecttoend","gotoend","selectdown","golinedown","selectwordleft","gotowordleft","selecttolinestart","gotolinestart","selectleft","gotoleft","selectwordright","gotowordright","selecttolineend","gotolineend","selectright","gotoright","selectpagedown","pagedown","gotopagedown","selectpageup","pageup","gotopageup","scrollup","scrolldown","selectlinestart","selectlineend","togglerecording","replaymacro","jumptomatching","selecttomatching","expandToMatching","passKeysToBrowser","copy","cut","paste","removeline","duplicateSelection","sortlines","togglecomment","toggleBlockComment","modifyNumberUp","modifyNumberDown","replace","undo","redo","copylinesup","movelinesup","copylinesdown","movelinesdown","del","backspace","cut_or_delete","removetolinestart","removetolineend","removetolinestarthard","removetolineendhard","removewordleft","removewordright","outdent","indent","blockoutdent","blockindent","insertstring","inserttext","splitline","transposeletters","touppercase","tolowercase","autoindent","expandtoline","openlink","joinlines","invertSelection","addLineAfter","addLineBefore","openCommandPallete","modeSelect","foldToLevel"];
+const cmds = ["showSettingsMenu","goToNextError","goToPreviousError","selectall","centerselection","gotoline","fold","unfold","toggleFoldWidget","toggleParentFoldWidget","foldall","foldAllComments","foldOther","unfoldall","findnext","findprevious","selectOrFindNext","selectOrFindPrevious","find","overwrite","selecttostart","gotostart","selectup","golineup","selecttoend","gotoend","selectdown","golinedown","selectwordleft","gotowordleft","selecttolinestart","gotolinestart","selectleft","gotoleft","selectwordright","gotowordright","selecttolineend","gotolineend","selectright","gotoright","selectpagedown","pagedown","gotopagedown","selectpageup","pageup","gotopageup","scrollup","scrolldown","selectlinestart","selectlineend","togglerecording","replaymacro","jumptomatching","selecttomatching","expandToMatching","passKeysToBrowser", "cut","removeline","duplicateSelection","sortlines","togglecomment","toggleBlockComment","modifyNumberUp","modifyNumberDown","replace","undo","redo","copylinesup","movelinesup","copylinesdown","movelinesdown","del","backspace","cut_or_delete","removetolinestart","removetolineend","removetolinestarthard","removetolineendhard","removewordleft","removewordright","outdent","indent","blockoutdent","blockindent","insertstring","inserttext","splitline","transposeletters","touppercase","tolowercase","autoindent","expandtoline","openlink","joinlines","invertSelection","addLineAfter","addLineBefore","openCommandPallete","modeSelect","foldToLevel"];
 
 cmds.forEach(commandName => {
 	new Command('editor.' + commandName, () => {
@@ -185,5 +185,16 @@ cmds.forEach(commandName => {
 	});
 });
 
+let buffer = '';
+
+new Command('editor.copy', () => {
+	buffer = editorService.editor.getCopyText();
+	console.log('copy:', buffer);
+});
+
+new Command('editor.paste', () => {
+	console.log('insert:', buffer);
+	editorService.editor.session.insert(editorService.editor.getCursorPosition(), buffer);
+});
 
 export default AceEditor;

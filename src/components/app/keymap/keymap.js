@@ -18,7 +18,8 @@ const keymap = new (class {
 	constructor() {
 		document.body.addEventListener('keydown', e => {
 			let keyHash = this.#keyHash({code: e.code, ctrl: e.ctrlKey, alt: e.altKey, shift: e.shiftKey});
-			if (e.ctrlKey) {
+			console.log(e);
+			if (e.ctrlKey || e.code.match(/^F\d+$/) || e.code === 'Tab') {
 				if (['INPUT', 'TEXTAREA'].indexOf(e.target.tagName) === -1 || e.target.className.indexOf('ace_text') !==-1) {
 					//console.log('preventDefault');
 					e.preventDefault();
@@ -52,12 +53,11 @@ const keymap = new (class {
 			this.add('ctrl+KeyZ', "editor.undo");
 			this.add('ctrl+shift+KeyZ', "editor.redo");
 			this.add('ctrl+KeyF', "editor.find");
-			this.add('ctrl+KeyG', "editor.find");
 			this.add('ctrl+KeyR', "editor.replace");
 			this.add('ctrl+KeyD', "editor.copylinesdown");
 			this.add('shift+Delete', "editor.removeline");
-			this.add('alt+shift+ArrowDown', "editor.movelinesdown");
-			this.add('alt+shift+ArrowUp', "editor.movelinesup");
+			this.add('shift+alt+ArrowDown', "editor.movelinesdown");
+			this.add('shift+alt+ArrowUp', "editor.movelinesup");
 			this.add('ArrowLeft', "editor.gotoleft");
 			this.add('ArrowRight', "editor.gotoright");
 			this.add('ArrowUp', "editor.golineup");
@@ -74,6 +74,15 @@ const keymap = new (class {
 			this.add('ctrl+ArrowRight', "editor.gotowordright");
 			this.add('ctrl+shift+ArrowLeft', "editor.selectwordleft");
 			this.add('ctrl+shift+ArrowRight', "editor.selectwordright");
+
+			this.add('ctrl+KeyA', "editor.selectall");
+			this.add('ctrl+KeyC', "editor.copy");
+			this.add('ctrl+KeyX', "editor.cut");
+			this.add('ctrl+KeyV', "editor.paste");
+			this.add('shift+ArrowLeft', "editor.selectleft");
+			this.add('shift+ArrowRight', "editor.selectright");
+			this.add('shift+ArrowUp', "editor.selectup");
+			this.add('shift+ArrowDown', "editor.selectdown");
 		}
 	}
 
