@@ -58,7 +58,7 @@ class AceEditor extends HTMLElement {
 
 		//set fontSize
 		this.editor.setOptions({fontSize: settingsService.model.data.appearance.general.fontSize + "px"});
-		this.addEventListener('mousewheel', (e) => {
+		this.addEventListener('wheel', (e) => {
 			if (e.ctrlKey) {
 				let fontSize = settingsService.model.data.appearance.general.fontSize + (e.deltaY > 0 ? -1: 1);
 				if (fontSize < 10) {
@@ -69,6 +69,7 @@ class AceEditor extends HTMLElement {
 				}
 				Command.exec('editor.fontSize', fontSize);
 				e.preventDefault();
+				return false;
 			}
 		}, true);
 		Command.on('editor.fontSize', value => {
