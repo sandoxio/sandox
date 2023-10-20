@@ -24,7 +24,8 @@ const Appearance = class extends HTMLElement {
 			['editor.showGutter', 'uiOptions.showGutter'],
 			['editor.showLineNumbers', 'uiOptions.showLineNumbers'],
 			['editor.showIndent', 'uiOptions.showIndent'],
-			['editor.showStatusBar', 'uiOptions.showStatusBar']
+			['editor.showStatusBar', 'uiOptions.showStatusBar'],
+			['editor.showToolBar', 'toolWindows.showToolBar']
 		];
 
 		cmds.forEach(([commandName, settingsPath]) => {
@@ -109,6 +110,15 @@ new Command('editor.showStatusBar', value => {
 	settingsService.model.data.appearance.uiOptions.showStatusBar = value;
 	return value;
 });
+
+new Command('editor.showToolBar', value => {
+	if (value !== true && value !== false) {
+		value = !settingsService.model.data.appearance.toolWindows.showToolBar;			//invert value
+	}
+	settingsService.model.data.appearance.toolWindows.showToolBar = value;
+	return value;
+});
+
 
 /*
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {

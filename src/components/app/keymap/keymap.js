@@ -19,7 +19,10 @@ const keymap = new (class {
 		document.body.addEventListener('keydown', e => {
 			let keyHash = this.#keyHash({code: e.code, ctrl: e.ctrlKey, alt: e.altKey, shift: e.shiftKey});
 			if (e.ctrlKey || e.code.match(/^F\d+$/) || e.code === 'Tab') {
-				if (['INPUT', 'TEXTAREA'].indexOf(e.target.tagName) === -1 || e.target.className.indexOf('ace_text') !==-1) {
+				if (
+					['INPUT', 'TEXTAREA'].indexOf(e.target.tagName) === -1 ||
+					(e.target.className.indexOf('ace_text') !==-1 && ['ctrl+KeyX', 'ctrl+KeyC', 'ctrl+KeyV'].indexOf(keyHash) ===-1)
+				) {
 					//console.log('preventDefault');
 					e.preventDefault();
 				}
@@ -75,9 +78,11 @@ const keymap = new (class {
 			this.add('ctrl+shift+ArrowRight', "editor.selectwordright");
 
 			this.add('ctrl+KeyA', "editor.selectall");
+			/*
 			this.add('ctrl+KeyC', "editor.copy");
 			this.add('ctrl+KeyX', "editor.cut");
 			this.add('ctrl+KeyV', "editor.paste");
+			*/
 			this.add('shift+ArrowLeft', "editor.selectleft");
 			this.add('shift+ArrowRight', "editor.selectright");
 			this.add('shift+ArrowUp', "editor.selectup");
@@ -164,7 +169,18 @@ let editorCommands = [
 			["Go to page up", "editor.gotopageup"],
 			["Go to page down", "editor.gotopagedown"],
 			["Go to start", "editor.gotostart"],
-			["Go to end", "editor.gotoend"]
+			["Go to end", "editor.gotoend"],
+			["Select all", "editor.selectall"],
+			/*
+			["Copy", "editor.copy"],
+			["Cut", "editor.cut"],
+			["Paste", "editor.paste"],
+			 */
+
+			["Select left", "editor.selectleft"],
+			["Select right", "editor.selectright"],
+			["Select up", "editor.selectup"],
+			["Select down", "editor.selectdown"]
 		]
 	}
 ];

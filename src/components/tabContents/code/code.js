@@ -102,8 +102,10 @@ class IdeTabContentCode extends HTMLElement {
 
 	#sideBarUpdate(value) {
 		if (value) {
+			this.#$editor.classList.add('withStatusBar');
 			this.$statusBar.classList.add('enabled');
 		} else {
+			this.#$editor.classList.remove('withStatusBar');
 			this.$statusBar.classList.remove('enabled');
 		}
 	}

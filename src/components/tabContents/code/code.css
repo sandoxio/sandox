@@ -4,10 +4,8 @@ x-ide-code {
 	height: 100%;
 }
 
-x-ide-code > x-aceeditor {
-}
 
-x-ide-code > x-aceeditor:has(+ x-tpl_tabcontents_code_statusbar.enabled) {
+x-ide-code > x-aceeditor.withStatusBar {
 	padding-bottom: 24px;
 	margin-bottom: -24px;
 }

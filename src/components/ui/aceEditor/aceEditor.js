@@ -28,7 +28,8 @@ class AceEditor extends HTMLElement {
 
 		this.editor.setOptions({
 			tabSize: 4,
-			useSoftTabs: false
+			useSoftTabs: false,
+			scrollPastEnd: 0.7
 		});
 
 		//set theme
@@ -185,16 +186,5 @@ cmds.forEach(commandName => {
 	});
 });
 
-let buffer = '';
-
-new Command('editor.copy', () => {
-	buffer = editorService.editor.getCopyText();
-	console.log('copy:', buffer);
-});
-
-new Command('editor.paste', () => {
-	console.log('insert:', buffer);
-	editorService.editor.session.insert(editorService.editor.getCursorPosition(), buffer);
-});
 
 export default AceEditor;

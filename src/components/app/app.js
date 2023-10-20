@@ -68,6 +68,7 @@ const App = class {
 						},
 					]
 				},
+				/*
 				{
 					title: 'Edit',
 					childNodes: [
@@ -110,6 +111,7 @@ const App = class {
 						}
 					]
 				},
+				 */
 				{
 					title: 'Build',
 					childNodes: [
@@ -173,8 +175,8 @@ const App = class {
 			}
 		});
 		this.$panelSpace.barsShow(settingsService.model.data.appearance.toolWindows.showToolBar);
-		settingsService.model.addEventListener('change', 'appearance.toolWindows.showToolBar', (cfg) => {
-			this.$panelSpace.barsShow(cfg.newValue);
+		Command.on('editor.showToolBar', (value) => {
+			this.$panelSpace.barsShow(value);
 		});
 
 		this.$tabs = new Tab({closeButton: true, selectOnTabCreate: true});
