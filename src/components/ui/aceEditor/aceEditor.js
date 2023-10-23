@@ -29,7 +29,8 @@ class AceEditor extends HTMLElement {
 		this.editor.setOptions({
 			tabSize: 4,
 			useSoftTabs: false,
-			scrollPastEnd: 0.7
+			scrollPastEnd: 0.7,
+			newLineMode: 'unix'
 		});
 
 		//set theme
@@ -54,6 +55,12 @@ class AceEditor extends HTMLElement {
 		this.editor.setOptions({displayIndentGuides: settingsService.model.data.appearance.uiOptions.showIndent});
 		Command.on('editor.showIndent', (value) => {
 			this.editor.setOptions({displayIndentGuides: value});
+		});
+
+		//show Indent
+		this.editor.setOptions({showInvisibles: settingsService.model.data.appearance.uiOptions.showWhiteSpaces});
+		Command.on('editor.showWhiteSpaces', (value) => {
+			this.editor.setOptions({showInvisibles: value});
 		});
 
 		//set fontSize
@@ -177,7 +184,7 @@ customElements.define('x-aceeditor', AceEditor);
 
 
 //Set commands for editor
-const cmds = ["showSettingsMenu","goToNextError","goToPreviousError","selectall","centerselection","gotoline","fold","unfold","toggleFoldWidget","toggleParentFoldWidget","foldall","foldAllComments","foldOther","unfoldall","findnext","findprevious","selectOrFindNext","selectOrFindPrevious","find","overwrite","selecttostart","gotostart","selectup","golineup","selecttoend","gotoend","selectdown","golinedown","selectwordleft","gotowordleft","selecttolinestart","gotolinestart","selectleft","gotoleft","selectwordright","gotowordright","selecttolineend","gotolineend","selectright","gotoright","selectpagedown","pagedown","gotopagedown","selectpageup","pageup","gotopageup","scrollup","scrolldown","selectlinestart","selectlineend","togglerecording","replaymacro","jumptomatching","selecttomatching","expandToMatching","passKeysToBrowser", "cut","removeline","duplicateSelection","sortlines","togglecomment","toggleBlockComment","modifyNumberUp","modifyNumberDown","replace","undo","redo","copylinesup","movelinesup","copylinesdown","movelinesdown","del","backspace","cut_or_delete","removetolinestart","removetolineend","removetolinestarthard","removetolineendhard","removewordleft","removewordright","outdent","indent","blockoutdent","blockindent","insertstring","inserttext","splitline","transposeletters","touppercase","tolowercase","autoindent","expandtoline","openlink","joinlines","invertSelection","addLineAfter","addLineBefore","openCommandPallete","modeSelect","foldToLevel"];
+const cmds = ["showSettingsMenu","goToNextError","goToPreviousError","centerselection","gotoline","fold","unfold","toggleFoldWidget","toggleParentFoldWidget","foldall","foldAllComments","foldOther","unfoldall","findnext","findprevious","selectOrFindNext","selectOrFindPrevious","find","overwrite","selecttostart","gotostart","selectup","golineup","selecttoend","gotoend","selectdown","golinedown","selectwordleft","gotowordleft","selecttolinestart","gotolinestart","selectleft","selectwordright","gotowordright","selecttolineend","gotolineend","selectright","selectpagedown","pagedown","gotopagedown","selectpageup","pageup","gotopageup","scrollup","scrolldown","selectlinestart","selectlineend","togglerecording","replaymacro","jumptomatching","selecttomatching","expandToMatching","passKeysToBrowser", "removeline","duplicateSelection","sortlines","togglecomment","toggleBlockComment","modifyNumberUp","modifyNumberDown","replace","undo","redo","copylinesup","movelinesup","copylinesdown","movelinesdown","cut_or_delete","removetolinestart","removetolineend","removetolinestarthard","removetolineendhard","removewordleft","removewordright","outdent","indent","blockoutdent","blockindent","insertstring","inserttext","splitline","transposeletters","touppercase","tolowercase","autoindent","expandtoline","openlink","joinlines","invertSelection","addLineAfter","addLineBefore","openCommandPallete","modeSelect","foldToLevel"];
 
 cmds.forEach(commandName => {
 	new Command('editor.' + commandName, () => {
@@ -187,5 +194,18 @@ cmds.forEach(commandName => {
 	});
 });
 
+const navigateCommands = {
+	"gotoleft": "navigateLeft",
+	"gotoright": "navigateRight"
+};
+Object.entries(navigateCommands).forEach(([editorCommand, navigateCommand]) => {
+	new Command('editor.' + editorCommand, () => {
+		if (editorService.editor) {
+			setTimeout(() => {
+				editorService.editor[navigateCommand]();
+			}, 10);
+		}
+	});
+});
 
 export default AceEditor;

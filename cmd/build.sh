@@ -11,4 +11,4 @@ touch "${DIR}/dist/worker-javascript.js"
 #npm i --prefix ${DIR}
 rollup -c "${DIR}/rollup.config.js"
 
-#"${DIR}/cmd/libsBuild.sh"
+[ ! -d "${DIR}/dist/libs" ] && "${DIR}/cmd/libsBuild.sh"

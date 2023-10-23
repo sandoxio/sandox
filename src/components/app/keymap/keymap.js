@@ -21,7 +21,7 @@ const keymap = new (class {
 			if (e.ctrlKey || e.code.match(/^F\d+$/) || e.code === 'Tab') {
 				if (
 					['INPUT', 'TEXTAREA'].indexOf(e.target.tagName) === -1 ||
-					(e.target.className.indexOf('ace_text') !==-1 && ['ctrl+KeyX', 'ctrl+KeyC', 'ctrl+KeyV'].indexOf(keyHash) ===-1)
+					(e.target.className.indexOf('ace_text') !==-1 && ['ctrl+KeyA', 'ctrl+KeyX', 'ctrl+KeyC', 'ctrl+KeyV'].indexOf(keyHash) ===-1)
 				) {
 					//console.log('preventDefault');
 					e.preventDefault();
@@ -70,19 +70,11 @@ const keymap = new (class {
 			this.add('End', "editor.gotoend");
 			this.add('Tab', "editor.indent");
 			this.add('shift+Tab', "editor.outdent");
-			this.add('Delete', "editor.del");
-			this.add('Backspace', "editor.backspace");
 			this.add('ctrl+ArrowLeft', "editor.gotowordleft");
 			this.add('ctrl+ArrowRight', "editor.gotowordright");
 			this.add('ctrl+shift+ArrowLeft', "editor.selectwordleft");
 			this.add('ctrl+shift+ArrowRight', "editor.selectwordright");
 
-			this.add('ctrl+KeyA', "editor.selectall");
-			/*
-			this.add('ctrl+KeyC', "editor.copy");
-			this.add('ctrl+KeyX', "editor.cut");
-			this.add('ctrl+KeyV', "editor.paste");
-			*/
 			this.add('shift+ArrowLeft', "editor.selectleft");
 			this.add('shift+ArrowRight', "editor.selectright");
 			this.add('shift+ArrowUp', "editor.selectup");
@@ -148,6 +140,7 @@ let editorCommands = [
 			["Show gutter", "editor.showGutter"],
 			["Show line numbers", "editor.showLineNumbers"],
 			["Show tree indent guides", "editor.showIndent"],
+			["Show white spaces", "editor.showWhiteSpaces"],
 			["Show status bar", "editor.showStatusBar"]
 		]
 	},
@@ -171,12 +164,6 @@ let editorCommands = [
 			["Go to start", "editor.gotostart"],
 			["Go to end", "editor.gotoend"],
 			["Select all", "editor.selectall"],
-			/*
-			["Copy", "editor.copy"],
-			["Cut", "editor.cut"],
-			["Paste", "editor.paste"],
-			 */
-
 			["Select left", "editor.selectleft"],
 			["Select right", "editor.selectright"],
 			["Select up", "editor.selectup"],

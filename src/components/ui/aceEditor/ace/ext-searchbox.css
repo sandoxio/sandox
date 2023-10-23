@@ -94,7 +94,7 @@
 }
 
 .ace_button.checked {
-	color: var(--active-text-color);
+	color: var(--body-link-color);
 	opacity: 1;
 }
 

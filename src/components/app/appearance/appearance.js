@@ -24,6 +24,7 @@ const Appearance = class extends HTMLElement {
 			['editor.showGutter', 'uiOptions.showGutter'],
 			['editor.showLineNumbers', 'uiOptions.showLineNumbers'],
 			['editor.showIndent', 'uiOptions.showIndent'],
+			['editor.showWhiteSpaces', 'uiOptions.showWhiteSpaces'],
 			['editor.showStatusBar', 'uiOptions.showStatusBar'],
 			['editor.showToolBar', 'toolWindows.showToolBar']
 		];
@@ -51,6 +52,7 @@ settings.define({
 			showGutter: true,
 			showLineNumbers: true,
 			showIndent: true,
+			showWhiteSpaces: false,
 			showStatusBar: true,
 		},
 		toolWindows: {
@@ -100,6 +102,14 @@ new Command('editor.showIndent', value => {
 		value = !settingsService.model.data.appearance.uiOptions.showIndent;			//invert value
 	}
 	settingsService.model.data.appearance.uiOptions.showIndent = value;
+	return value;
+});
+
+new Command('editor.showWhiteSpaces', value => {
+	if (value !== true && value !== false) {
+		value = !settingsService.model.data.appearance.uiOptions.showWhiteSpaces;		//invert value
+	}
+	settingsService.model.data.appearance.uiOptions.showWhiteSpaces = value;
 	return value;
 });
 
