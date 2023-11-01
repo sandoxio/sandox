@@ -1,4 +1,7 @@
-# Sandox
+<p align="center">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/130372146/279723964-56be4efe-9203-40bc-8116-ed0464f069ed.jpg" />
+</p>
+
 
 SanDOx is an integrated development environment that is thought to leverage Polkadot development process by providing ecosystem developers with right and convenient components and tools.
 
