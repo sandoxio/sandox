@@ -34,10 +34,19 @@ const createFile = cfg => new (class {
 	}
 
 	create() {
-		if (this.#cfg.node.childNodes.find(item => item.title === this.#$createFile.model.data.name)) {
-			alert('already exist');
+		let error;
+		if (!this.#$createFile.model.data.name) {
+			error = 'File name required';
+		} else if (!(/^[a-zA-Z0-9.]+$/).test(this.#$createFile.model.data.name)) {
+			error = "The file name can only contain letters, numbers numbers and following characters: ._-+";
+		} else if (this.#cfg.node.childNodes.find(item => item.title === this.#$createFile.model.data.name)) {
+			error = 'already exist';
+		}
+		if (error) {
+			alert(error);
 			return;
 		}
+
 		this.#$window.close();
 		this.#cfg.onCreate({
 			name: this.#$createFile.model.data.name

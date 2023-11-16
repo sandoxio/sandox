@@ -16,6 +16,8 @@ File
     events.file.create({parentNode, filepath})
     events.file.delete({parentNode, filepath})
 
+    actions.file.closeAll()
+
 Folder
 
     events.folder.create(folderpath)

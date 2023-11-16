@@ -8,3 +8,9 @@ x-tpl_wrapper {
 x-tpl_wrapper > x-menu {
 	border-bottom: var(--space-border);
 }
+
+x-panelspace {
+	padding-top: 24px;
+	margin-top: -24px;
+	box-sizing: border-box;
+}

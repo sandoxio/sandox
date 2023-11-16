@@ -43,7 +43,7 @@ const App = class {
 						{
 							title: 'Open project',
 							action: () => {
-								alert("This functionality will be implemented in ms3");
+								busEvent.fire("actions.project.import");
 							}
 						},
 						{
@@ -200,6 +200,10 @@ const App = class {
 			settings();
 		});
 
+		busEvent.on("actions.file.closeAll", () => {
+			this.tabFileCloseAll();
+		});
+
 		//console.log("this.$panelSpace:", this.$panelSpace);
 	}
 
@@ -237,6 +241,10 @@ const App = class {
 		let tabPid = ':' + cfg.path;
 		console.log('[app] fileClose:', cfg);
 		this.$tabs.close(tabPid);
+	}
+
+	tabFileCloseAll() {
+		this.$tabs.closeAll();
 	}
 };
 

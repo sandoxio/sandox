@@ -102,7 +102,7 @@ class IdePanelProjectInfo extends HTMLElement {
 		} else {
 			let $noProject = new Tpl_noProject({}, {
 				open() {
-					projectManager.open();
+					projectManager.import();
 				},
 				create() {
 					//popup create

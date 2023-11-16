@@ -76,6 +76,13 @@
 	background-image: url("../img/ico/file_js.svg");
 }
 
+.icoColor.file_code {
+	width: 16px;
+	height: 16px;
+	background-image: url("../img/ico/file_code.svg");
+	filter: brightness(0) invert(1) brightness(80%);
+}
+
 .ico.eye {
 	width: 16px;
 	height: 16px;

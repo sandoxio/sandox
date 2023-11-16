@@ -1,18 +1,18 @@
-x-tpl_projectinfo {
+x-ide-panel-projectinfo {
 	display: block;
 }
 
-x-tpl_projectinfo .menu item * {
+x-ide-panel-projectinfo .menu item * {
 	cursor: default;
 }
 
-x-tpl_projectinfo > * {
+x-ide-panel-projectinfo > * {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 }
 
-x-tpl_projectinfo > x-tree {
+x-ide-panel-projectinfo > x-tree {
 	margin-top: 10px;
 	box-sizing: border-box;
 }

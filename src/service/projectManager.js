@@ -217,6 +217,15 @@ class Project {
 		});
 	}
 
+	open() {
+
+	}
+
+	import() {
+
+
+	}
+
 	export() {
 		console.log('[Project] export');
 		const zip = new JSZip();
@@ -262,13 +271,13 @@ class Project {
 			onCreate: (data) => {
 				console.log('create in folder:', cfg, data);
 				cfg.node.childNodes.push({
-					ico: 'file_js',
+					ico: /\.js$/.test(data.name) ? 'file_js' : 'file_code',
 					title: data.name,
 					data: "",
 					color: '#fff',
 					isDirectory: false,
 					isVisible: true
-				})
+				});
 			}
 		});
 	}
@@ -304,7 +313,7 @@ class Project {
 					isVisible: true,
 					isExpanded: true,
 					childNodes: []
-				})
+				});
 			}
 		});
 	}
@@ -321,7 +330,52 @@ class Project {
 		})
 	}
 
-	download() {
+	/**
+	 *
+	 * @param path
+	 * @param cfg			{Object}
+	 * @param cfg.content	{String}
+	 */
+	fileAdd(path, cfg) {
+		const nodes = path.split('/');
+		const fileName = nodes.pop();
+		const dirPath = nodes.join('/');
+		const dirNode = dirPath ? this.directoryAdd(dirPath).childNodes : projectManager.project.model.data.struct.tree[0].childNodes;
+		let existedFile = dirNode.findIndex(item => item.title === fileName);
+		if (existedFile !== -1) {
+			dirNode.splice(existedFile, 1);
+		}
+		//console.log('add file:', dirPath, fileName);
+		dirNode.push({
+			ico: /\.js$/.test(fileName) ? 'file_js' : 'file_code',
+			title: fileName,
+			data: cfg.content,
+			color: '#fff',
+			isDirectory: false,
+			isVisible: true
+		});
+	}
+
+	directoryAdd(path) {
+		return path.split('/').reduce((node, childName) => {
+			let child = node.childNodes.find(item => item.title === childName);
+			if (child) {
+				return child;
+			} else {
+				child = {
+					ico: 'folder',
+					title: childName,
+					color: '#fff',
+					isDirectory: true,
+					isVisible: true,
+					isExpanded: true,
+					childNodes: []
+				};
+				//console.log('create dir:', path, child, node);
+				node.childNodes.push(child);
+				return child;
+			}
+		}, projectManager.project.model.data.struct.tree[0]);
 	}
 }
 
@@ -373,7 +427,15 @@ const projectManager = new (class ProjectManager {
 		});
 
 		busEvent.on("events.project.change", () => {
-			localStorage.setItem('currentProject', JSON.stringify(this.project.model.data.struct));
+			if (this.project) {
+				localStorage.setItem('currentProject', JSON.stringify(this.project.model.data.struct));
+			} else {
+				localStorage.removeItem('currentProject');
+			}
+		});
+
+		busEvent.on("actions.project.import", () => {
+			this.import();
 		});
 
 		busEvent.on("actions.project.export", () => {
@@ -388,24 +450,6 @@ const projectManager = new (class ProjectManager {
 				busEvent.fire('actions.panel.open', 'projectInfo');
 			}, 100);
 		}
-	}
-
-	/**
-	 * @description Open project from projData
-	 * @param projData
-	 * @returns {Promise}
-	 */
-	open(projData) {
-		//console.log('[IdeProject] opening:', projectId);
-		return new Promise(resolve => {
-			alert("This functionality will be implemented in ms3");
-			/*
-			this.project = new Project(projData);
-			busEvent.fire('events.project.change', this.project);
-			busEvent.fire('actions.log.add', 'The project was opened');
-			resolve(this.project);
-			 */
-		});
 	}
 
 	/**
@@ -431,6 +475,7 @@ const projectManager = new (class ProjectManager {
 
 					busEvent.fire('events.project.change', this.project);
 					busEvent.fire('actions.log.add', 'New project has been created');
+					busEvent.fire('actions.file.closeAll');
 					resolve(this.project);
 				}
 			});
@@ -441,13 +486,63 @@ const projectManager = new (class ProjectManager {
 	 * @description Close project
 	 */
 	close() {
+		this.project = undefined;
 		busEvent.fire('events.project.change', undefined);
+		busEvent.fire('actions.file.closeAll');
 	}
 
 	export() {
 		if (this.project) {
 			this.project.export();
 		}
+	}
+
+	import() {
+		console.log('[Project] export');
+
+		let input = document.createElement('input');
+		input.type = 'file';
+		input.click();
+		input.onchange = e => {
+			let file = e.target.files[0];
+			if (file.type !== "application/x-zip-compressed") {
+				alert('The project must be packaged in a zip archive');
+			} else {
+				const reader = new FileReader();
+				reader.onload = () => {
+					const defaultName = 'app';
+					const projectStruct = Object.assign({}, newProjectStruct);
+					projectStruct.tree[0].title = defaultName;
+					Object.assign(projectStruct, {name: defaultName, language: 'js'});
+					console.log('[PM] projectStruct:', projectStruct);
+					this.project = new Project(projectStruct);
+					//Add libs
+					this.project.libAdd('@polkadot/api', 'polkadot_api.js').then(() => {});
+					this.project.libAdd('@polkadot/util-crypto', 'polkadot_util-crypto.js').then(() => {});
+					busEvent.fire('events.project.change', this.project);
+					busEvent.fire('actions.log.add', 'New project has been opened');
+					busEvent.fire('actions.file.closeAll');
+
+					const zip = new JSZip();
+					zip.loadAsync(reader.result)
+						.then(zipContent => {
+							Object.entries(zipContent.files).forEach(([path, value]) => {
+								//console.log('file:', path, value);
+								if (path[path.length-1] === '/') {	//isDirectory
+									this.project.directoryAdd(path.slice(0, -1));
+								} else {
+									value.async("string").then(content => {
+										this.project.fileAdd(path, {content: content});
+									});
+								}
+							});
+						});
+				};
+				reader.readAsArrayBuffer(file);
+			}
+			console.log('file:', file);
+		}
+
 	}
 })();
 

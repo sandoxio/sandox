@@ -34,6 +34,17 @@ const createProject = cfg => new (class {
 	}
 
 	create() {
+		let error;
+		if (!this.#$createProject.model.data.name) {
+			error = 'Project name name required';
+		} else if (!(/^[a-zA-Z0-9.]+$/).test(this.#$createProject.model.data.name)) {
+			error = "The project name can only contain letters, numbers numbers and following characters: ._-+";
+		}
+		if (error) {
+			alert(error);
+			return;
+		}
+
 		this.#$window.close();
 		this.#onCreate({
 			name: this.#$createProject.model.data.name,

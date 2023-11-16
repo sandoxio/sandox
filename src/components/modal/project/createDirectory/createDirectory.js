@@ -34,10 +34,19 @@ const createDirectory = cfg => new (class {
 	}
 
 	create() {
-		if (this.#cfg.node.childNodes.find(item => item.title === this.#$createDirectory.model.data.name)) {
-			alert('already exist');
+		let error;
+		if (!this.#$createDirectory.model.data.name) {
+			error = 'Directory name required';
+		} else if (!(/^[a-zA-Z0-9.]+$/).test(this.#$createDirectory.model.data.name)) {
+			error = "The directory name can only contain letters, numbers and following characters: ._-+";
+		} else if (this.#cfg.node.childNodes.find(item => item.title === this.#$createDirectory.model.data.name)) {
+			error = 'Directory already exist';
+		}
+		if (error) {
+			alert(error);
 			return;
 		}
+
 		this.#$window.close();
 		this.#cfg.onCreate({
 			name: this.#$createDirectory.model.data.name
