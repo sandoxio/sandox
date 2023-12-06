@@ -89,3 +89,7 @@ The SanDOx IDE app skeleton with some basic features:
 
 Themes, settings and project local storage:  
 [![3 Demo video](http://i3.ytimg.com/vi/feuukkLKpY0/hqdefault.jpg)](https://youtu.be/feuukkLKpY0)
+
+## Contribute
+
+For bugs reports, usability issues or any contribution proposals feel free to write us: [contribute@sandox.io](mailto:contribute@sandox.io). We'd be happy to get your thoughts on the Sandox IDE.
